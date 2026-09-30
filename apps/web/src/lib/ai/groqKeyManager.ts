@@ -1,5 +1,3 @@
-import { redis } from "@/lib/redis";
-
 export interface GroqKeyHealth {
   status: "HEALTHY" | "COOLDOWN" | "FAILED";
   consecutiveFailures: number;
@@ -15,14 +13,16 @@ export interface GroqKeyConfig {
 }
 
 const DEFAULT_COOLDOWN_MS = 60000; // 1 minute
-const RR_COUNTER_KEY = "groq:key-rr-index"; // Redis key tracking round-robin position
 
 export class GroqKeyManager {
+  // Instance-local advisory state
+  private static localHealthMap = new Map<string, GroqKeyHealth>();
+  private static localRrIndex = 0;
+
   private static getConfiguredKeys(): GroqKeyConfig[] {
     const keys: GroqKeyConfig[] = [];
 
     // Supports up to 5 keys: GROQ_API_KEY, GROQ_API_KEY_1 … GROQ_API_KEY_4
-    // Set all 5 in your .env.local / Vercel environment variables.
     if (process.env.GROQ_API_KEY)   keys.push({ id: "groq-1", value: process.env.GROQ_API_KEY });
     if (process.env.GROQ_API_KEY_1) keys.push({ id: "groq-2", value: process.env.GROQ_API_KEY_1 });
     if (process.env.GROQ_API_KEY_2) keys.push({ id: "groq-3", value: process.env.GROQ_API_KEY_2 });
@@ -33,7 +33,19 @@ export class GroqKeyManager {
   }
 
   private static async getKeyHealth(keyId: string): Promise<GroqKeyHealth> {
-    const defaultHealth: GroqKeyHealth = {
+    const data = this.localHealthMap.get(keyId);
+    
+    if (data) {
+      // Auto-recover from COOLDOWN once the cooldown window has passed locally
+      if (data.status === "COOLDOWN" && Date.now() > data.cooldownUntil) {
+        data.status = "HEALTHY";
+        data.consecutiveFailures = 0;
+        await this.saveKeyHealth(keyId, data);
+      }
+      return data;
+    }
+
+    return {
       status: "HEALTHY",
       consecutiveFailures: 0,
       rateLimitCount: 0,
@@ -41,75 +53,47 @@ export class GroqKeyManager {
       lastSuccessAt: 0,
       lastFailureAt: 0
     };
-
-    try {
-      const data = await redis.get<GroqKeyHealth>(`groq:key-health:${keyId}`);
-      if (data) {
-        // Auto-recover from COOLDOWN once the cooldown window has passed
-        if (data.status === "COOLDOWN" && Date.now() > data.cooldownUntil) {
-          data.status = "HEALTHY";
-          data.consecutiveFailures = 0;
-          await this.saveKeyHealth(keyId, data);
-        }
-        return data;
-      }
-    } catch (e) {
-      console.warn(`[GroqKeyManager] Failed to read health for ${keyId}`, e);
-    }
-    return defaultHealth;
   }
 
   private static async saveKeyHealth(keyId: string, health: GroqKeyHealth): Promise<void> {
-    try {
-      await redis.set(`groq:key-health:${keyId}`, health, "EX", 86400);
-    } catch (e) {
-      console.warn(`[GroqKeyManager] Failed to save health for ${keyId}`, e);
-    }
+    // Save to bounded local map. 
+    // The map will never grow beyond the number of configured keys (max 5).
+    this.localHealthMap.set(keyId, health);
   }
 
   /**
-   * Round-robin key selection.
+   * Instance-local round-robin key selection.
    *
-   * Maintains a Redis counter that advances by 1 on every call so the load
-   * is distributed evenly across all configured keys from the very first request.
+   * Maintains an instance-local integer counter.
    * If the next key in the rotation is in COOLDOWN or FAILED, the selector walks
    * forward through the ring until it finds a HEALTHY key.
-   * Returns null only when every key is unavailable.
+   * Returns null when every key is locally unavailable.
+   * 
+   * Note: Instance-local health is advisory, not globally authoritative.
    */
   static async getAvailableKey(): Promise<GroqKeyConfig | null> {
     const keys = this.getConfiguredKeys();
     if (keys.length === 0) return null;
 
-    // Fetch health for all keys in parallel
+    // Fetch local health for all keys
     const healths = await Promise.all(keys.map(k => this.getKeyHealth(k.id)));
 
     // Fast path: if all keys are unhealthy, return null immediately
     const anyHealthy = healths.some(h => h.status === "HEALTHY");
     if (!anyHealthy) return null;
 
-    // Read and advance the round-robin counter atomically
-    let rrIndex = 0;
-    try {
-      // INCR returns the value AFTER incrementing — gives us the next position
-      const newIndex = await redis.incr(RR_COUNTER_KEY);
-      // Set a TTL so the counter doesn't linger forever after a deploy
-      await redis.expire(RR_COUNTER_KEY, 86400);
-      rrIndex = newIndex % keys.length;
-    } catch (e) {
-      // Redis unavailable — fall back to index 0
-      console.warn("[GroqKeyManager] Could not read RR counter, defaulting to index 0");
-      rrIndex = 0;
-    }
+    // Instance-local atomic round-robin increment
+    const currentIndex = this.localRrIndex++;
 
-    // Walk the ring starting at rrIndex, find first HEALTHY key
+    // Walk the ring starting at currentIndex, find first HEALTHY key
     for (let i = 0; i < keys.length; i++) {
-      const idx = (rrIndex + i) % keys.length;
+      const idx = (currentIndex + i) % keys.length;
       if (healths[idx].status === "HEALTHY") {
         return keys[idx];
       }
     }
 
-    return null; // All keys unavailable (should not reach here due to fast-path above)
+    return null;
   }
 
   static async markSuccess(keyId: string): Promise<void> {
@@ -137,7 +121,7 @@ export class GroqKeyManager {
     health.consecutiveFailures += 1;
 
     console.warn(
-      `[GroqKeyManager] Key ${keyId} rate-limited. ` +
+      `[GroqKeyManager] Key ${keyId} rate-limited locally. ` +
       `Cooldown for ${Math.round(cooldownMs / 1000)}s ` +
       `(rateLimitCount=${health.rateLimitCount})`
     );
@@ -151,7 +135,7 @@ export class GroqKeyManager {
 
     if (health.consecutiveFailures >= 5) {
       health.status = "FAILED";
-      console.error(`[GroqKeyManager] Key ${keyId} marked FAILED (5 consecutive failures).`);
+      console.error(`[GroqKeyManager] Key ${keyId} marked FAILED (5 consecutive failures locally).`);
     } else {
       health.status = "COOLDOWN";
       health.cooldownUntil = Date.now() + 10000; // 10 s short cooldown
@@ -186,13 +170,10 @@ export class GroqKeyManager {
     return { totalKeys: keys.length, healthy, cooldown, failed, totalRateLimits, details };
   }
 
-  /** Reset all key health state (useful after replacing API keys). */
+  /** Reset all local key health state */
   static async resetAllHealth(): Promise<void> {
-    const keys = this.getConfiguredKeys();
-    await Promise.all([
-      ...keys.map(k => redis.del(`groq:key-health:${k.id}`)),
-      redis.del(RR_COUNTER_KEY)
-    ]);
-    console.log("[GroqKeyManager] All key health state reset.");
+    this.localHealthMap.clear();
+    this.localRrIndex = 0;
+    console.log("[GroqKeyManager] All local key health state reset.");
   }
 }

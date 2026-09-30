@@ -29,31 +29,17 @@ export class GroqProvider implements IAIProvider {
       signal
     } = options;
 
-    const MAX_RETRY_DURATION_MS = 180000; // 3 minutes maximum retry duration
+    const MAX_RETRY_DURATION_MS = 60000; // 1 minute maximum retry duration
+    const MAX_ATTEMPTS = 6; // Bounded attempts to prevent infinite loops (enough to try 5 keys)
     const globalStart = Date.now();
     let attempts = 0;
     
-    while (true) {
-      if (Date.now() - globalStart > MAX_RETRY_DURATION_MS) {
-        throw new Error(`RateLimitTimeout: Exhausted retry budget of ${MAX_RETRY_DURATION_MS}ms waiting for healthy API keys.`);
-      }
-
+    while (attempts < MAX_ATTEMPTS && (Date.now() - globalStart < MAX_RETRY_DURATION_MS)) {
       attempts++;
-      let keyConfig = await GroqKeyManager.getAvailableKey();
-      let waitAttempts = 0;
+      const keyConfig = await GroqKeyManager.getAvailableKey();
       
-      while (!keyConfig) {
-        if (Date.now() - globalStart > MAX_RETRY_DURATION_MS) {
-          throw new Error(`RateLimitTimeout: Exhausted retry budget of ${MAX_RETRY_DURATION_MS}ms waiting for healthy API keys.`);
-        }
-        console.warn(`[GroqProvider] No healthy Groq API keys available. Sleeping 10s... (Wait Attempt ${waitAttempts + 1})`);
-        await new Promise(r => setTimeout(r, 10000));
-        keyConfig = await GroqKeyManager.getAvailableKey();
-        waitAttempts++;
-      }
-
       if (!keyConfig) {
-        throw new Error("No healthy Groq API keys available after waiting.");
+        throw new RateLimitError("All API keys are currently exhausted or in cooldown.");
       }
 
       const client = new Groq({ apiKey: keyConfig.value });
@@ -132,26 +118,23 @@ export class GroqProvider implements IAIProvider {
         throw e;
       }
     }
+    
+    throw new RateLimitError(`Exhausted retry budget of ${MAX_ATTEMPTS} attempts or ${MAX_RETRY_DURATION_MS}ms.`);
   }
 
   async generateRaw(options: any): Promise<{ text: string; usage?: { promptTokens: number; completionTokens: number; totalTokens: number; } }> {
     const { model, systemPrompt, userPrompt, temperature = 0, maxTokens = 8000, signal } = options;
-    const MAX_RETRY_DURATION_MS = 180000;
+    const MAX_RETRY_DURATION_MS = 60000;
+    const MAX_ATTEMPTS = 6;
     const globalStart = Date.now();
     let attempts = 0;
 
-    while (true) {
-      if (Date.now() - globalStart > MAX_RETRY_DURATION_MS) {
-        throw new Error(`RateLimitTimeout: Exhausted retry budget of ${MAX_RETRY_DURATION_MS}ms.`);
-      }
+    while (attempts < MAX_ATTEMPTS && (Date.now() - globalStart < MAX_RETRY_DURATION_MS)) {
       attempts++;
-      let keyConfig = await GroqKeyManager.getAvailableKey();
-      while (!keyConfig) {
-        if (Date.now() - globalStart > MAX_RETRY_DURATION_MS) {
-          throw new Error(`RateLimitTimeout: Exhausted retry budget waiting for healthy keys.`);
-        }
-        await new Promise(r => setTimeout(r, 10000));
-        keyConfig = await GroqKeyManager.getAvailableKey();
+      const keyConfig = await GroqKeyManager.getAvailableKey();
+      
+      if (!keyConfig) {
+        throw new RateLimitError("All API keys are currently exhausted or in cooldown.");
       }
 
       const client = new Groq({ apiKey: keyConfig.value });
@@ -193,6 +176,8 @@ export class GroqProvider implements IAIProvider {
         throw e;
       }
     }
+    
+    throw new RateLimitError(`Exhausted retry budget of ${MAX_ATTEMPTS} attempts or ${MAX_RETRY_DURATION_MS}ms.`);
   }
 
   getProviderName(): string {

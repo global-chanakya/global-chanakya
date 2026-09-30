@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import NextAuth from 'next-auth';
 import { authConfig } from '@/auth.config';
-import { ratelimit } from '@/lib/rate-limit';
+import { MemoryRateLimiter } from '@/lib/rate-limit';
 
 const { auth } = NextAuth(authConfig);
 
@@ -24,25 +24,27 @@ export default auth(async (req) => {
       }
     }
 
-    // Rate Limiting
-    if (ratelimit) {
-      const ip = req.headers.get('x-forwarded-for') ?? '127.0.0.1';
-      const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip);
-      if (!success) {
-        return new NextResponse('Too Many Requests', {
-          status: 429,
-          headers: {
-            'X-RateLimit-Limit': limit.toString(),
-            'X-RateLimit-Remaining': remaining.toString(),
-            'X-RateLimit-Reset': reset.toString(),
-          },
-        });
-      }
+    // Best-effort local Rate Limiting (replaces global Upstash)
+    const ip = req.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    // Conservative limit: 300 requests per 60 seconds per IP
+    const { success } = await MemoryRateLimiter.checkLimit(ip, 'global_api', 300, 60000);
+    if (!success) {
+      return new NextResponse('Too Many Requests', {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': '300',
+        },
+      });
     }
   }
 
   // 1. Admin Route Protection
-  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+  if (
+    pathname === '/admin' || 
+    pathname.startsWith('/admin/') || 
+    pathname === '/gc-control-9x7k' || 
+    pathname.startsWith('/gc-control-9x7k/')
+  ) {
     if (!session?.user) {
       const url = new URL('/api/auth/signin', req.url);
       url.searchParams.set('callbackUrl', req.nextUrl.pathname);
@@ -73,6 +75,7 @@ export default auth(async (req) => {
 export const config = {
   matcher: [
     '/admin/:path*',
+    '/gc-control-9x7k/:path*',
     '/dashboard/:path*',
     '/profile/:path*',
     '/api/admin/:path*',

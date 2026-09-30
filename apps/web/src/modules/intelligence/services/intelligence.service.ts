@@ -26,6 +26,8 @@ export class AIValidationError extends Error {
 }
 
 class IntelligenceService {
+  private inFlightGenerations = new Map<string, Promise<{ data: AskChanakyaZodResponse; usage: any }>>();
+
   async askChanakya(
     query: string, 
     context?: string,
@@ -41,6 +43,7 @@ class IntelligenceService {
     let groq429 = false;
     let fallbackUsed = false;
     let ragGrounded = false;
+    let coalescedRequest = false;
     let liveRetrieved = 0;
     let liveSelected = 0;
     let liveGrounded = false;
@@ -85,17 +88,42 @@ class IntelligenceService {
       const cached = await redisCache.get<{ data: AskChanakyaZodResponse; usage: any }>(cacheKey);
       timing.cache = performance.now() - tCacheStart;
       
-      if (cached) {
-        timing.total = performance.now() - tStart;
-        cacheHit = true;
-        this.logTelemetry(timing, retryCount, retryWaitMs, retrievedChunksCount, selectedChunksCount, cacheHit, groq429, fallbackUsed, cached.data.metadata?.ragGrounded || false);
-        return cached;
+      if (cached && cached.data) {
+        // Phase 4B.1 Cache Hardening: Validate structure before accepting cache hit
+        const validation = askChanakyaResponseSchema.safeParse(cached.data);
+        if (validation.success) {
+          // Re-assign validated data back to ensure we drop malicious/spurious fields
+          cached.data = validation.data;
+          timing.total = performance.now() - tStart;
+          cacheHit = true;
+          this.logTelemetry(timing, retryCount, retryWaitMs, retrievedChunksCount, selectedChunksCount, cacheHit, groq429, fallbackUsed, cached.data.metadata?.ragGrounded || false, liveRetrieved, liveSelected, liveGrounded, liveSearchMs, coalescedRequest);
+          return cached;
+        } else {
+          console.warn("[IntelligenceService] Malformed cache data detected, treating as MISS:", validation.error.message);
+        }
       }
     } catch (err) {
-      console.warn("[IntelligenceService] Cache read failed, proceeding without cache");
+      console.warn("[IntelligenceService] Cache read failed, proceeding without cache", err);
     }
 
-    // 4. RAG Pipeline: Retrieve Internal Context
+    // 4. Single-Flight Coalescing Check
+    const inFlight = this.inFlightGenerations.get(cacheKey);
+    if (inFlight) {
+      coalescedRequest = true;
+      try {
+        const result = await inFlight;
+        timing.total = performance.now() - tStart;
+        this.logTelemetry(timing, 0, 0, 0, 0, false, false, false, result.data.metadata?.ragGrounded || false, 0, 0, false, 0, coalescedRequest);
+        return result;
+      } catch (err) {
+        // If the in-flight promise failed, we fall through and retry ourselves
+        console.warn("[IntelligenceService] In-flight coalesced request failed, retrying independently.");
+      }
+    }
+
+    // 5. Wrap RAG and Generation in an executing promise for others to coalesce onto
+    const generationPromise = (async () => {
+      // RAG Pipeline: Retrieve Internal Context
     let ragContextText = "";
     let ragSources: any[] = [];
     
@@ -112,12 +140,12 @@ class IntelligenceService {
       // Execute both Internal RAG and Live Event RAG concurrently based on mode
       const [allMatches, liveMatches] = await Promise.all([
         (mode === 'INTERNAL' || mode === 'HYBRID') ? Promise.race([
-          findSemanticMatches(queryEmbedding, 10, 0),
+          findSemanticMatches(queryEmbedding, 4, 0),
           new Promise<RetrievedKnowledge[]>((_, reject) => setTimeout(() => reject(new Error("Vector Search Timeout")), 5000))
         ]) : Promise.resolve([] as RetrievedKnowledge[]),
         
         (mode === 'LIVE' || mode === 'HYBRID') ? Promise.race([
-          findLiveSemanticMatches(queryEmbedding, 10, 0.65), // Stricter threshold for live events
+          findLiveSemanticMatches(queryEmbedding, 4, 0.65), // Stricter threshold for live events
           new Promise<RetrievedKnowledge[]>((_, reject) => setTimeout(() => reject(new Error("Live Vector Search Timeout")), 5000))
         ]).catch(err => {
           console.warn("[IntelligenceService] Live Vector Search failed, continuing:", err.message);
@@ -288,7 +316,7 @@ Analyze the <USER_QUERY> using the available contexts.
         timing.total = performance.now() - tStart;
         this.logTelemetry(
           timing, retryCount, retryWaitMs, retrievedChunksCount, selectedChunksCount, 
-          cacheHit, groq429, fallbackUsed, ragGrounded, liveRetrieved, liveSelected, liveGrounded, liveSearchMs
+          cacheHit, groq429, fallbackUsed, ragGrounded, liveRetrieved, liveSelected, liveGrounded, liveSearchMs, coalescedRequest
         );
 
         return result;
@@ -337,16 +365,35 @@ Analyze the <USER_QUERY> using the available contexts.
     timing.total = performance.now() - tStart;
     this.logTelemetry(
       timing, retryCount, retryWaitMs, retrievedChunksCount, selectedChunksCount, 
-      cacheHit, groq429, fallbackUsed, ragGrounded, liveRetrieved, liveSelected, liveGrounded, liveSearchMs
+      cacheHit, groq429, fallbackUsed, ragGrounded, liveRetrieved, liveSelected, liveGrounded, liveSearchMs, coalescedRequest
     );
     
     console.error("[IntelligenceService] All retries exhausted or budget exceeded.", lastError?.message);
     throw new AIProviderError("Intelligence service is temporarily unavailable. " + (lastError?.message || ""));
+    })();
+
+    this.inFlightGenerations.set(cacheKey, generationPromise);
+    try {
+      const result = await generationPromise;
+      return result;
+    } finally {
+      // CRITICAL: Clean up to prevent poisoning the cache key on failure
+      this.inFlightGenerations.delete(cacheKey);
+    }
   }
 
   private generateCacheKey(prefix: string, query: string, context?: string): string {
     const model = process.env.GROQ_DEFAULT_MODEL || "openai/gpt-oss-120b";
-    const data = `${prefix}:${model}:${query}:${context || ""}`;
+    
+    // Conservative syntactic normalization (lowercase, remove punctuation, collapse whitespace)
+    // using Unicode property escapes (\p{L} and \p{N}) to preserve non-English/Unicode text.
+    const normalizedQuery = query
+      .trim()
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, '')
+      .replace(/\s+/g, ' ');
+
+    const data = `${prefix}:${model}:${normalizedQuery}:${context || ""}`;
     const hash = crypto.createHash('sha256').update(data).digest('hex');
     return `${prefix}:${hash}`;
   }
@@ -354,7 +401,7 @@ Analyze the <USER_QUERY> using the available contexts.
   private logTelemetry(
     timing: any, retryCount: number, retryWaitMs: number, retrievedChunks: number, 
     selectedChunks: number, cacheHit: boolean, groq429: boolean, fallbackUsed: boolean, ragGrounded: boolean,
-    liveRetrieved: number = 0, liveSelected: number = 0, liveGrounded: boolean = false, liveSearchMs: number = 0
+    liveRetrieved: number = 0, liveSelected: number = 0, liveGrounded: boolean = false, liveSearchMs: number = 0, coalescedRequest: boolean = false
   ) {
     const telemetry = {
       total: Math.round(timing.total),
@@ -375,7 +422,8 @@ Analyze the <USER_QUERY> using the available contexts.
       liveRetrieved,
       liveSelected,
       liveGrounded,
-      liveSearchMs: Math.round(liveSearchMs)
+      liveSearchMs: Math.round(liveSearchMs),
+      coalescedRequest
     };
     console.log(`[AI_LATENCY] \n${JSON.stringify(telemetry, null, 2)}`);
   }

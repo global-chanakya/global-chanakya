@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { z } from "zod";
 import * as Sentry from "@sentry/nextjs";
-import { ratelimit, MemoryRateLimiter } from "@/lib/rate-limit";
+import { ratelimit, MemoryRateLimiter, TokenBucketRateLimiter, useLocalQuota } from "@/lib/rate-limit";
 import { 
   intelligenceService, 
   AIProviderError, 
@@ -35,19 +35,44 @@ export const POST = auth(async function POST(req) {
     const ip = req.headers.get("x-forwarded-for") || "unknown-ip";
     
     let isRateLimited = false;
-    if (ratelimit) {
-      // 5 requests per 1 minute per user
-      const { success } = await ratelimit.limit(`ask_chanakya_${userId}`);
-      isRateLimited = !success;
+    let retryAfter = 0;
+
+    
+    if (useLocalQuota) {
+      // 5B-4: Local Token Bucket Soft Quota
+      // Synchronous critical section
+      const limitResult = TokenBucketRateLimiter.checkLimit(userId);
+      isRateLimited = !limitResult.success;
+      if (isRateLimited) {
+        retryAfter = limitResult.retryAfter || 1;
+        if (limitResult.reason === "CAPACITY_EXCEEDED") {
+          return NextResponse.json(
+            { error: { code: "SERVICE_UNAVAILABLE", message: "System is currently at maximum capacity. Please try again later." } },
+            { status: 503, headers: { "Retry-After": "10" } }
+          );
+        }
+      }
     } else {
-      const { success } = await MemoryRateLimiter.checkLimit(ip, "ask_chanakya", 5, 60000);
-      isRateLimited = !success;
+      // Legacy Redis path (Rollback)
+      if (ratelimit) {
+        try {
+          const { success } = await ratelimit.limit(`ask_chanakya_${userId}`);
+          isRateLimited = !success;
+        } catch (redisError: any) {
+          console.warn("[AskChanakya] Upstash Redis error, falling back to MemoryRateLimiter:", redisError.message);
+          const { success } = await MemoryRateLimiter.checkLimit(ip, "ask_chanakya_fallback", 5, 60000);
+          isRateLimited = !success;
+        }
+      } else {
+        const { success } = await MemoryRateLimiter.checkLimit(ip, "ask_chanakya", 5, 60000);
+        isRateLimited = !success;
+      }
     }
 
     if (isRateLimited) {
       return NextResponse.json(
         { error: { code: "RATE_LIMITED", message: "You have exceeded your AI request limit. Please try again later." } },
-        { status: 429 }
+        { status: 429, headers: retryAfter > 0 ? { "Retry-After": retryAfter.toString() } : undefined }
       );
     }
 
