@@ -55,6 +55,10 @@ export function generateSeoMetadata({
     if (publishedTime) openGraph.publishedTime = publishedTime;
     if (modifiedTime) openGraph.modifiedTime = modifiedTime;
     if (authorName) openGraph.authors = [authorName];
+    if (category) openGraph.section = category;
+    if (keywords) {
+      openGraph.tags = keywords.split(",").map(k => k.trim()).filter(Boolean);
+    }
   }
 
   const metadata: any = {

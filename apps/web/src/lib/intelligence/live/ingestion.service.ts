@@ -317,7 +317,7 @@ Extract the structured intelligence fields from the source data above.
         
         const response = await Promise.race([
           groqProvider.generateStructured({
-            model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+            model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
             systemPrompt,
             userPrompt,
             schema: liveEventEnrichmentJsonSchema as Record<string, unknown>,

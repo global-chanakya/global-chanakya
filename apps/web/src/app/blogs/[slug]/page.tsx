@@ -44,58 +44,8 @@ const getCachedBlog = unstable_cache(
 const getCachedRelatedBlogs = unstable_cache(
   async (blog: any) => {
     await dbConnect();
-    
-    // Collect all semantic relationship IDs
-    const relatedEntityIds = [
-      ...(blog.topics?.map((t: any) => t._id || t) || []),
-      ...(blog.countries?.map((c: any) => c._id || c) || []),
-      ...(blog.leaders?.map((l: any) => l._id || l) || []),
-      ...(blog.regions?.map((r: any) => r._id || r) || []),
-      ...(blog.conflicts?.map((c: any) => c._id || c) || [])
-    ].filter(Boolean);
-
-    let semanticBlogs: any[] = [];
-
-    // Find blogs sharing these semantic entities
-    if (relatedEntityIds.length > 0) {
-      const query = {
-        status: "published",
-        _id: { $ne: blog._id },
-        $or: [
-          { topics: { $in: relatedEntityIds } },
-          { countries: { $in: relatedEntityIds } },
-          { leaders: { $in: relatedEntityIds } },
-          { regions: { $in: relatedEntityIds } },
-          { conflicts: { $in: relatedEntityIds } },
-          { tags: { $in: blog.tags || [] } }
-        ]
-      };
-      
-      const newest = await Blog.find(query).sort({ publishAt: -1 }).limit(4).lean();
-      const oldest = await Blog.find(query).sort({ publishAt: 1 }).limit(4).lean();
-      
-      const map = new Map();
-      [...newest, ...oldest].forEach(b => map.set(b._id.toString(), b));
-      semanticBlogs = Array.from(map.values()).slice(0, 6);
-    }
-
-    const semanticIds = semanticBlogs.map(b => b._id);
-    const needMore = 6 - semanticBlogs.length;
-
-    let fallbackBlogs: any[] = [];
-    if (needMore > 0) {
-      // Fallback to category if we don't have enough semantic matches
-      fallbackBlogs = await Blog.find({
-        status: "published",
-        _id: { $ne: blog._id, $nin: semanticIds },
-        category: blog.category
-      })
-      .sort({ publishAt: -1 })
-      .limit(needMore)
-      .lean();
-    }
-
-    const related = [...semanticBlogs, ...fallbackBlogs];
+    const { RelatedArticleService } = await import("@/modules/seo/services/related-article.service");
+    const related = await RelatedArticleService.getHighlyRelevantArticles(blog, 6);
     return JSON.parse(JSON.stringify(related));
   },
   ["related-blogs-cache-v2"],
@@ -219,6 +169,31 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
     toc.push({ id, level, text: cleanText });
     return `<h${level} id="${id}"${attrs} style="scroll-margin-top: 100px;">${text}</h${level}>`;
   });
+
+  if (relatedBlogs.length > 0) {
+    let pCount = 0;
+    sanitizedContent = sanitizedContent.replace(/<\/p>/gi, (match) => {
+      pCount++;
+      if (pCount === 2 || (pCount === 6 && relatedBlogs.length > 1)) {
+        const relatedLink = pCount === 2 ? relatedBlogs[0] : relatedBlogs[1];
+        return `${match}
+          <div class="my-8 p-5 glass-card rounded-md border-l-4 border-[var(--gold)] bg-[var(--surface)] transition-colors w-full relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-[var(--gold)]/5 to-transparent pointer-events-none"></div>
+            <div class="relative z-10">
+              <div class="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] mb-1.5 flex items-center gap-1.5">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-4 4v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Related Intelligence
+              </div>
+              <a href="/blogs/${relatedLink.slug}" class="text-[16px] md:text-[18px] font-heading font-bold text-white hover:text-[var(--gold)] !border-none inline-block">
+                ${relatedLink.title}
+              </a>
+            </div>
+          </div>
+        `;
+      }
+      return match;
+    });
+  }
 
   const jsonLd = generateArticleSchema(blog);
 

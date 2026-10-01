@@ -54,8 +54,8 @@ export async function GET() {
 
     return new NextResponse(rss, {
       headers: {
-        "Content-Type": "application/xml",
-        "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400", // Revalidate every hour
+        "Content-Type": "application/xml; charset=utf-8",
+        "Cache-Control": "public, s-maxage=600, stale-while-revalidate=86400",
       },
     });
   } catch (error) {

@@ -16,6 +16,7 @@ export const navItems = [
   // Platform SEO
   { href: "/gc-control-9x7k/platform-seo", label: "All Platform SEO", icon: Globe, group: "Platform SEO" },
   { href: "/gc-control-9x7k/platform-seo/new", label: "Create Platform SEO", icon: PenTool, group: "Platform SEO" },
+  { href: "/gc-control-9x7k/platform-seo/gsc", label: "GSC Intelligence", icon: Activity, group: "Platform SEO" },
 
   // Intelligence
   { href: "/gc-control-9x7k/intelligence", label: "Live Events", icon: Zap, group: "Intelligence" },

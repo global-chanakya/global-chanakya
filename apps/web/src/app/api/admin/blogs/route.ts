@@ -7,6 +7,8 @@ import { createBlogSchema } from "@/lib/validators/blog.schema";
 import { ragIndexerService } from "@/modules/intelligence/services/ragIndexer.service";
 import { PushService } from "@/lib/notifications/push.service";
 import { revalidateTag, revalidatePath } from "next/cache";
+import { SeoPreflightService } from "@/modules/seo/services/seo-preflight.service";
+import { PublishPipelineService } from "@/modules/seo/services/publish-pipeline.service";
 
 // Give Vercel 30s before cutting off the function
 export const maxDuration = 30;
@@ -107,9 +109,21 @@ export async function POST(req: NextRequest) {
           },
           publishAt: publishAt ? new Date(publishAt as string) : new Date(),
         };
+        if (updateData.status === "published") {
+          const seoErrors = SeoPreflightService.validateForPublishing(updateData as any);
+          if (seoErrors.length > 0) {
+            return NextResponse.json({ error: "SEO Pre-flight failed", details: seoErrors }, { status: 400 });
+          }
+        }
+        
         const updated = await BlogService.updateBlog(existing._id.toString(), updateData);
         if (updated?.status === "published") {
           revalidateTag("blogs");
+          revalidatePath("/", "page");
+          revalidatePath("/blogs", "page");
+          if (updated.category) {
+            revalidatePath(`/categories/${updated.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, "page");
+          }
           revalidatePath("/sitemap.xml", "layout");
           revalidatePath("/sitemap-index.xml");
           ragIndexerService.indexBlog(updated._id.toString()).catch(e => console.error("RAG Indexing Failed:", e));
@@ -123,7 +137,7 @@ export async function POST(req: NextRequest) {
       finalSlug = `${slug}-${Date.now()}`;
     }
 
-    const blog = await BlogService.createBlog({
+    const newBlogData = {
       title,
       slug: finalSlug,
       excerpt,
@@ -160,14 +174,25 @@ export async function POST(req: NextRequest) {
       author: authorObjectId,
       publishAt: publishAt ? new Date(publishAt as string) : new Date(),
       analytics: { views: 0, likes: 0, bookmarks: 0, readTime: 0, ctr: 0 },
-    });
+    };
+
+    if (newBlogData.status === "published") {
+      const seoErrors = SeoPreflightService.validateForPublishing(newBlogData as any);
+      if (seoErrors.length > 0) {
+        return NextResponse.json({ error: "SEO Pre-flight failed", details: seoErrors }, { status: 400 });
+      }
+    }
+
+    const blog = await BlogService.createBlog(newBlogData as any);
 
     if (blog.status === "published") {
-      revalidateTag("blogs");
-      revalidatePath("/sitemap.xml", "layout");
-      revalidatePath("/sitemap-index.xml");
-      ragIndexerService.indexBlog(blog._id.toString()).catch(e => console.error("RAG Indexing Failed:", e));
-      await PushService.notifyBlog(blog).catch(e => console.error("[PushService] Failed:", e));
+      const { waitUntil } = require("@vercel/functions");
+      waitUntil(
+        PublishPipelineService.execute(blog._id.toString()).catch(e =>
+          console.error("[PublishPipeline] POST failed:", e)
+        )
+      );
+      waitUntil(PushService.notifyBlog(blog).catch(e => console.error("[PushService] Failed:", e)));
     }
 
     return NextResponse.json({ success: true, id: blog._id.toString(), slug: blog.slug }, { status: 201 });
@@ -225,19 +250,31 @@ export async function PATCH(req: NextRequest) {
     const existing = await BlogService.getBlogById(id);
     const wasDraft = existing?.status === "draft";
 
+    const isPublishing = updateData.status === "published" || (updateData.status === undefined && existing?.status === "published");
+    if (isPublishing) {
+      const mergedData = { ...existing, ...updateData };
+      const seoErrors = SeoPreflightService.validateForPublishing(mergedData as any);
+      if (seoErrors.length > 0) {
+        return NextResponse.json({ error: "SEO Pre-flight failed", details: seoErrors }, { status: 400 });
+      }
+    }
+
     const updated = await BlogService.updateBlog(id, updateData);
     if (!updated) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
 
     if (updated.status === "published") {
-      revalidateTag("blogs");
-      revalidatePath("/sitemap.xml", "layout");
-      revalidatePath("/sitemap-index.xml");
-      ragIndexerService.indexBlog(id).catch(e => console.error("RAG Indexing Failed:", e));
+      const { waitUntil } = require("@vercel/functions");
+      waitUntil(
+        PublishPipelineService.execute(id).catch(e =>
+          console.error("[PublishPipeline] PATCH failed:", e)
+        )
+      );
       if (wasDraft) {
-        await PushService.notifyBlog(updated).catch(e => console.error("[PushService] Failed:", e));
+        waitUntil(PushService.notifyBlog(updated).catch(e => console.error("[PushService] Failed:", e)));
       }
     } else {
-      ragIndexerService.unindexBlog(id).catch(e => console.error("RAG Unindexing Failed:", e));
+      const { waitUntil } = require("@vercel/functions");
+      waitUntil(ragIndexerService.unindexBlog(id).catch(e => console.error("RAG Unindexing Failed:", e)));
     }
 
     return NextResponse.json({ success: true });
@@ -257,10 +294,19 @@ export async function DELETE(req: NextRequest) {
     const id = req.nextUrl.searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Blog ID required" }, { status: 400 });
 
+    const blogToDelete = await BlogService.getBlogById(id);
+    if (!blogToDelete) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+
     await ragIndexerService.unindexBlog(id).catch(e => console.error("RAG Unindexing Failed:", e));
     const deleted = await BlogService.deleteBlog(id);
-    if (!deleted) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    if (!deleted) return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
+    
     revalidateTag("blogs");
+    revalidatePath("/", "page");
+    revalidatePath("/blogs", "page");
+    if (blogToDelete.category) {
+      revalidatePath(`/categories/${blogToDelete.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, "page");
+    }
     revalidatePath("/sitemap.xml", "layout");
     revalidatePath("/sitemap-index.xml");
 

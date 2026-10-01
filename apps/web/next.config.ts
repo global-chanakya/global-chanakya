@@ -47,6 +47,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/blog/:slug',
+        destination: '/blogs/:slug',
+        permanent: true,
+      },
+      {
+        source: '/articles/:slug',
+        destination: '/blogs/:slug',
+        permanent: true,
+      },
+      {
         source: '/blogs/%20australia-strategic-role-against-china-2026',
         destination: '/blogs/australia-strategic-role-against-china-2026',
         permanent: true,

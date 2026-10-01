@@ -9,7 +9,7 @@ import { getPlatformSeoSitemaps } from '@/modules/seo/sitemap-platformseo';
 import { getEntitySitemaps } from '@/modules/seo/sitemap-entity';
 
 const BLOGS_PER_SITEMAP = 1000;
-export const revalidate = 3600;
+export const revalidate = 600;
 
 export async function generateSitemaps() {
   try {

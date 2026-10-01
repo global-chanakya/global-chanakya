@@ -19,7 +19,6 @@ export class GroqProvider implements IAIProvider {
     };
   }> {
     const { 
-      model, 
       systemPrompt, 
       userPrompt, 
       schema, 
@@ -28,6 +27,11 @@ export class GroqProvider implements IAIProvider {
       maxTokens = 4000,
       signal
     } = options;
+
+    const model = process.env.GROQ_MODEL;
+    if (!model) {
+      throw new Error("GROQ_MODEL is not configured in the environment.");
+    }
 
     const MAX_RETRY_DURATION_MS = 60000; // 1 minute maximum retry duration
     const MAX_ATTEMPTS = 6; // Bounded attempts to prevent infinite loops (enough to try 5 keys)
@@ -123,7 +127,11 @@ export class GroqProvider implements IAIProvider {
   }
 
   async generateRaw(options: any): Promise<{ text: string; usage?: { promptTokens: number; completionTokens: number; totalTokens: number; } }> {
-    const { model, systemPrompt, userPrompt, temperature = 0, maxTokens = 8000, signal } = options;
+    const { systemPrompt, userPrompt, temperature = 0, maxTokens = 8000, signal } = options;
+    const model = process.env.GROQ_MODEL;
+    if (!model) {
+      throw new Error("GROQ_MODEL is not configured in the environment.");
+    }
     const MAX_RETRY_DURATION_MS = 60000;
     const MAX_ATTEMPTS = 6;
     const globalStart = Date.now();

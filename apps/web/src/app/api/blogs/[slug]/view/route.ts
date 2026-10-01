@@ -35,11 +35,31 @@ export async function POST(
     if (isPing) {
       blog = await Blog.findOne({ slug, status: "published", contentType: { $ne: "platform-seo" } }).lean();
     } else {
-      blog = await Blog.findOneAndUpdate(
-        { slug, status: "published", contentType: { $ne: "platform-seo" } },
-        { $inc: { "analytics.views": 1 } },
-        { new: true, timestamps: false }
-      ).lean();
+      const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+      const ua = request.headers.get("user-agent") || "unknown";
+      const isBot = /bot|crawler|spider|crawling|googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|whatsapp|telegram/i.test(ua);
+
+      blog = await Blog.findOne({ slug, status: "published", contentType: { $ne: "platform-seo" } }).lean();
+      
+      if (blog && !isBot) {
+        // Implement Deduplication using redis
+        const crypto = require("crypto");
+        const { redis } = require("@/lib/redis");
+        
+        const hash = crypto.createHash("sha256").update(`${ip}-${ua}-${slug}`).digest("hex");
+        const dedupKey = `view:dedup:${slug}:${hash}`;
+        const isDuplicate = await redis.get(dedupKey);
+
+        if (!isDuplicate) {
+          blog = await Blog.findOneAndUpdate(
+            { slug, status: "published", contentType: { $ne: "platform-seo" } },
+            { $inc: { "analytics.views": 1 } },
+            { new: true, timestamps: false }
+          ).lean();
+          
+          await redis.set(dedupKey, "1", "EX", 3600); // 1 hour deduplication
+        }
+      }
     }
 
     if (!blog) {

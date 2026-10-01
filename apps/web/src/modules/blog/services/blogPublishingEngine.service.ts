@@ -262,7 +262,7 @@ export class BlogPublishingEngine {
     const externalContext = searchRes.results.map(r => `- ${r.title}\n  ${r.content.substring(0, 200)}...`).join('\n\n');
 
     const data = await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: `You are a Senior Intelligence Director. Select exactly 3 distinct, high-impact current events topics for a new report in: "${category}". Topics MUST be grounded in REAL CURRENT EVENTS from provided contexts.`,
       userPrompt: `Internal Context:\n${internalContext}\n\nExternal Context:\n${externalContext}`,
       schema: TopicDiscoveryJsonSchema,
@@ -294,7 +294,7 @@ export class BlogPublishingEngine {
   private async stage3_VerifiedFacts(candidate: any, sources: TavilySearchResponse) {
     const sourceContext = sources.results.map((r, i) => `SOURCE [${i+1}]: ${r.title}\nURL: ${r.url}\nCONTENT:\n${r.content.substring(0, 1000)}...`).join('\n\n');
     const data = await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Extract verifiable claims from sources. Classify as FACT, CONFIRMED, REPORTED, DISPUTED. sourceType is PRIMARY if from gov/mil/org, else SECONDARY. Do not invent facts. STRICT LIMIT: Extract MAXIMUM 10 most critical facts to save space.",
       userPrompt: `Topic: ${candidate.title}\n\nSources:\n${sourceContext}`,
       schema: FactExtractionJsonSchema,
@@ -325,7 +325,7 @@ export class BlogPublishingEngine {
   /** STAGE 4: Strategic Drivers */
   private async stage4_StrategicDrivers(candidate: any, facts: any) {
     return await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Analyze the provided facts. Identify strategic significance, historical continuity, power centers, and hidden drivers.",
       userPrompt: `Topic: ${candidate.title}\nFacts:\n${JSON.stringify(facts.verifiedFacts)}`,
       schema: StrategicDriversActorAnalysisSchema,
@@ -336,7 +336,7 @@ export class BlogPublishingEngine {
   /** STAGE 5: Order Effects */
   private async stage5_OrderEffects(candidate: any, facts: any, drivers: any) {
     return await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Determine the 2nd and 3rd order knock-on effects based on the evidence and drivers.",
       userPrompt: `Topic: ${candidate.title}\nDrivers: ${JSON.stringify(drivers)}`,
       schema: OrderEffectsSchema,
@@ -347,7 +347,7 @@ export class BlogPublishingEngine {
   /** STAGE 6: Regional Implications */
   private async stage6_RegionalImplications(candidate: any, effects: any) {
     return await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Analyze implications for India and the broader Global South.",
       userPrompt: `Topic: ${candidate.title}\nEffects: ${JSON.stringify(effects)}`,
       schema: RegionalImplicationsSchema,
@@ -358,7 +358,7 @@ export class BlogPublishingEngine {
   /** STAGE 7: Strategic Thesis */
   private async stage7_StrategicThesis(candidate: any, drivers: any) {
     return await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Write a single powerful sentence summarizing the ultimate strategic judgment.",
       userPrompt: `Topic: ${candidate.title}\nDrivers: ${JSON.stringify(drivers)}`,
       schema: StrategicThesisSchema,
@@ -369,7 +369,7 @@ export class BlogPublishingEngine {
   /** STAGE 8: Scenario Analysis */
   private async stage8_ScenarioAnalysis(candidate: any, thesis: any) {
     return await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Develop base, bull, and bear scenarios based on the thesis.",
       userPrompt: `Topic: ${candidate.title}\nThesis: ${thesis.strategicThesis}`,
       schema: ScenarioAnalysisSchema,
@@ -380,7 +380,7 @@ export class BlogPublishingEngine {
   /** STAGE 9: Intelligence Forecast */
   private async stage9_IntelligenceForecast(candidate: any, scenarios: any) {
     return await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Provide a 6-to-24 month forecast and exact indicators to monitor.",
       userPrompt: `Topic: ${candidate.title}\nScenarios: ${JSON.stringify(scenarios)}`,
       schema: IntelligenceForecastSchema,
@@ -393,7 +393,7 @@ export class BlogPublishingEngine {
     const gStart = Date.now();
     // 10A: Outline
     const outline = await this.trackGroqCall<any>({
-      model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+      model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
       systemPrompt: "Create a detailed section-by-section outline for a 5000+ word premium intelligence article. To optimize API throughput, you MUST group logically related content into EXACTLY 6 to 8 large combined sections. Do NOT create more than 8 sections. Each grouped section MUST have a targetWordCount of at least 800 to ensure the total exceeds 5000 words. Example groupings: 'Executive Summary & Strategic Background', 'Power Center & Actor Analysis', 'Military & Economic Impact', 'Scenario Analysis & Intelligence Forecast'.",
       userPrompt: `Topic: ${candidate.title}`,
       schema: ArticleOutlineSchema,
@@ -453,7 +453,7 @@ Section Focus: ${section.focusTopics?.join(', ') || 'None'}
       while (!valid && retries < 4) {
         try {
           const rawHtml = await this.trackGroqCallRaw({
-            model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+            model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
             systemPrompt: `You are an elite intelligence analyst writing a large, grouped section of a 5000+ word intelligence report. You MUST write at least 700 words for this section — do not stop until you have written at least 700 words of substantive prose.
 Your section is: ${section.headerText}.
 Target word count for this section: ~${section.targetWordCount} words.
@@ -526,7 +526,7 @@ Return ONLY raw HTML starting with <h2> and ending with </p>. Do NOT return JSON
     while (attempts < 3) {
       attempts++;
       seoData = await this.trackGroqCall<any>({
-        model: process.env.GROQ_DEFAULT_MODEL || "llama3-8b-8192",
+        model: process.env.GROQ_DEFAULT_MODEL || "llama-3.1-8b-instant",
         systemPrompt: `Generate strict SEO metadata. 
 CRITICAL CONSTRAINTS: 
 - metaTitle MUST be <= 60 characters.

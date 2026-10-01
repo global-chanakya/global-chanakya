@@ -36,6 +36,8 @@ export interface IBlog extends Document {
   reportType?: string;
   tags: string[];
   featuredImage?: string;
+  featuredImageWidth?: number;
+  featuredImageHeight?: number;
   visibility: "public" | "premium" | "private";
   publishAt: Date;
   earlyAccessUntil?: Date; // publishAt + 24 hours for non-premium users
@@ -74,7 +76,14 @@ export interface IBlog extends Document {
   isDeleted: boolean;
   deletedAt?: Date;
   deletedBy?: mongoose.Types.ObjectId;
-  contentType: "standard" | "platform-seo";
+  contentType: "standard" | "platform-seo" | "breaking_news" | "geopolitical_analysis" | "defence_analysis" | "economic_analysis" | "strategic_analysis" | "explainer" | "country_analysis" | "conflict_update" | "trade_energy_analysis";
+  timeSensitivity?: "high" | "medium" | "low";
+  searchIntent?: "informational" | "transactional" | "navigational" | "commercial";
+  primaryTopic?: mongoose.Types.ObjectId;
+  primaryEntity?: mongoose.Types.ObjectId;
+  seoStatus?: "PUBLISHED" | "SITEMAP_INCLUDED" | "DISCOVERABLE" | "INDEXING_CHECK_REQUIRED" | "INDEXED" | "LOW_IMPRESSION" | "LOW_CTR" | "NEEDS_REVIEW";
+  embedding?: number[];
+  embeddingContentHash?: string;
 }
 
 const BlogRevisionSchema = new Schema<IBlogRevision>(
@@ -110,6 +119,8 @@ const BlogSchema = new Schema<IBlog>(
     reportType: { type: String },
     tags: [{ type: String }],
     featuredImage: { type: String },
+    featuredImageWidth: { type: Number },
+    featuredImageHeight: { type: Number },
     visibility: {
       type: String,
       enum: ["public", "premium", "private"],
@@ -166,10 +177,20 @@ const BlogSchema = new Schema<IBlog>(
     organizations: [{ type: Schema.Types.ObjectId, ref: "Organization" }],
     contentType: {
       type: String,
-      enum: ["standard", "platform-seo"],
       default: "standard",
       index: true,
     },
+    timeSensitivity: { type: String, enum: ["high", "medium", "low"] },
+    searchIntent: { type: String },
+    primaryTopic: { type: Schema.Types.ObjectId, ref: "Topic" },
+    primaryEntity: { type: Schema.Types.ObjectId, ref: "Country" }, // Simplification
+    seoStatus: { 
+      type: String, 
+      enum: ["PUBLISHED", "SITEMAP_INCLUDED", "DISCOVERABLE", "INDEXING_CHECK_REQUIRED", "INDEXED", "LOW_IMPRESSION", "LOW_CTR", "NEEDS_REVIEW"],
+      default: "NEEDS_REVIEW"
+    },
+    embedding: { type: [Number] },
+    embeddingContentHash: { type: String },
 
   },
   { timestamps: true }

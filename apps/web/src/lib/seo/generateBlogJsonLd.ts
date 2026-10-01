@@ -66,6 +66,16 @@ export function generateArticleSchema(blog: any) {
 
   const mainImage = sanitizeOgImageUrl(blog.featuredImage || blog.ogImage);
 
+  // Google Discover: NewsArticle needs image at least 1200px wide. Flag that in schema.
+  const imageObject: any = {
+    "@type": "ImageObject",
+    url: mainImage,
+    // We can't know actual dimensions without a lookup, but we declare
+    // what we know so Google can validate. Editors should upload 1200x630+ images.
+  };
+  if (blog.featuredImageWidth) imageObject.width = blog.featuredImageWidth;
+  if (blog.featuredImageHeight) imageObject.height = blog.featuredImageHeight;
+
   const jsonLd: any[] = [
     {
       "@context": "https://schema.org",
@@ -73,10 +83,7 @@ export function generateArticleSchema(blog: any) {
       headline: blog.seo?.title || blog.title,
       description: blog.seo?.description || blog.excerpt,
       articleBody: rawText || undefined,
-      image: {
-        "@type": "ImageObject",
-        url: mainImage
-      },
+      image: imageObject,
       datePublished: blog.publishAt ? new Date(blog.publishAt).toISOString() : undefined,
       dateModified: blog.updatedAt ? new Date(blog.updatedAt).toISOString() : (blog.publishAt ? new Date(blog.publishAt).toISOString() : undefined),
       author: authorData,
@@ -90,7 +97,12 @@ export function generateArticleSchema(blog: any) {
       ...(blog.category && { articleSection: blog.category }),
       inLanguage: "en-US",
       isAccessibleForFree: blog.visibility !== "premium",
-      ...(aboutEntities.length > 0 && { about: aboutEntities })
+      ...(aboutEntities.length > 0 && { about: aboutEntities }),
+      // Speakable: headline + description are speakable — improves voice assistant discovery
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", ".article-excerpt"]
+      },
     },
     {
       "@context": "https://schema.org",
