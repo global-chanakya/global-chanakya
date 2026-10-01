@@ -110,10 +110,6 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <div className="swg-preferred-sources-button" data-theme="dark"></div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-[#111827]/50 border border-[#111827] text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--muted)]">
-              <div className="w-1.5 h-1.5 rounded-full bg-[var(--cyan)] animate-pulse shadow-[0_0_8px_var(--cyan)]" />
-              LIVE STATUS • OPERATIONAL
-            </div>
           </div>
         </div>
 
