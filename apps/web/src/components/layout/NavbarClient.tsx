@@ -66,10 +66,10 @@ export default function NavbarClient({ session }: NavbarClientProps) {
             className={`rounded-lg md:rounded-sm group-hover:scale-105 transition-transform duration-300 ${scrolled ? 'w-8 h-8 md:w-10 md:h-10' : 'w-8 h-8 md:w-12 md:h-12'}`}
           />
           <div className="flex flex-col leading-none gap-0.5 md:gap-1">
-            <span className="text-[16px] md:text-[28px] font-bold tracking-[-0.03em] text-white">
+            <span className="text-[16px] md:text-[28px] font-bold tracking-[-0.03em] text-[var(--cream)]">
               Global Chanakya
             </span>
-            <span className="text-[8px] md:text-[11px] font-bold text-[var(--gold)] tracking-[0.22em] uppercase">
+            <span className="text-[8px] md:text-[11px] font-bold text-[var(--sage)] tracking-[0.22em] uppercase">
               Intelligence
             </span>
           </div>
@@ -83,8 +83,8 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative inline-flex items-center py-2 text-sm font-semibold tracking-[0.06em] uppercase transition-colors duration-200 group after:absolute after:left-0 after:bottom-[-8px] after:h-[2px] after:w-full after:bg-[#D4AF37] after:scale-x-0 hover:after:scale-x-100 active:after:scale-x-100 after:transition-transform after:origin-left after:duration-300 ${
-                  isActive ? "text-[var(--gold)] after:scale-x-100" : "text-[var(--secondary)] hover:text-white"
+                className={`relative inline-flex items-center py-2 text-sm font-semibold tracking-[0.06em] uppercase transition-colors duration-200 group after:absolute after:left-0 after:bottom-[-8px] after:h-[2px] after:w-full after:bg-[var(--sage)] after:scale-x-0 hover:after:scale-x-100 active:after:scale-x-100 after:transition-transform after:origin-left after:duration-300 ${
+                  isActive ? "text-[var(--sage)] after:scale-x-100" : "text-[var(--secondary)] hover:text-white"
                 }`}
               >
                 {link.label}
@@ -112,7 +112,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-[var(--gold)] bg-[var(--gold)]/10 border border-[var(--accent)] rounded-md hover:bg-[var(--gold)]/20 transition-colors uppercase tracking-wider"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-[var(--sage)] bg-[var(--sage)]/10 border border-[var(--sage)] rounded-md hover:bg-[var(--sage)]/20 transition-colors uppercase tracking-wider"
                 >
                   <LayoutDashboard className="w-3 h-3" />
                   Admin
@@ -124,7 +124,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
                 onClick={(e) => { e.stopPropagation(); setProfileOpen(!profileOpen); }}
                 className="flex items-center gap-2.5 px-2 py-1 rounded-md hover:bg-[var(--surface)] transition-colors"
               >
-                <div className="w-8 h-8 rounded-full bg-[var(--blue)] flex items-center justify-center text-[12px] font-bold text-white">
+                <div className="w-8 h-8 rounded-full bg-[var(--sage-dark)] flex items-center justify-center text-[12px] font-bold text-white">
                   {(session.user?.name || "U")[0].toUpperCase()}
                 </div>
               </button>
@@ -171,7 +171,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               </Link>
               <Link
                 href="/auth/signup"
-                className="px-7 py-3 bg-[var(--gold)] text-[var(--bg)] text-sm font-bold uppercase tracking-wider rounded-sm hover:opacity-90 transition-opacity"
+                className="px-7 py-3 bg-[var(--amber)] text-[var(--cream)] text-sm font-bold uppercase tracking-wider rounded-sm hover:bg-[var(--amber-dark)] transition-colors"
               >
                 Get Started
               </Link>
@@ -211,7 +211,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
                 onClick={() => setMobileOpen(false)}
                 className={`block px-4 py-3 rounded-md text-[14px] font-bold uppercase tracking-wider transition-colors ${
                   pathname === link.href
-                    ? "text-[var(--gold)] bg-[var(--surface)]"
+                    ? "text-[var(--sage)] bg-[var(--surface)]"
                     : "text-[var(--secondary)] hover:text-white hover:bg-[var(--surface)]"
                 }`}
               >
@@ -223,7 +223,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               {session ? (
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 px-4">
-                    <div className="w-10 h-10 rounded-full bg-[var(--blue)] flex items-center justify-center text-sm font-bold text-white">
+                    <div className="w-10 h-10 rounded-full bg-[var(--sage-dark)] flex items-center justify-center text-sm font-bold text-white">
                       {(session.user?.name || "U")[0].toUpperCase()}
                     </div>
                     <div>
@@ -261,7 +261,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
                   <Link
                     href="/auth/signup"
                     onClick={() => setMobileOpen(false)}
-                    className="block w-full px-4 py-3 text-center rounded-sm bg-[var(--gold)] text-[var(--bg)] text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
+                    className="block w-full px-4 py-3 text-center rounded-sm bg-[var(--amber)] text-[var(--cream)] text-[14px] font-bold uppercase tracking-wider hover:bg-[var(--amber-dark)] transition-colors"
                   >
                     Get Started
                   </Link>

@@ -271,14 +271,14 @@ export default async function Home() {
             
             {/* Left */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 md:px-4 md:py-2 rounded border border-[var(--accent)] bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] w-fit mb-6 shadow-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 md:px-4 md:py-2 rounded border border-[var(--sage)] bg-[var(--sage)]/10 text-[var(--sage)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] w-fit mb-6 shadow-sm">
+                <div className="w-1.5 h-1.5 rounded-full bg-[var(--sage)]" />
                 Independent Strategic Analysis
               </div>
 
-              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-white max-w-[760px] mb-6 md:mb-8">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-[var(--cream)] max-w-[760px] mb-6 md:mb-8">
                 Understand the Forces <br className="hidden sm:block" />
-                <span className="text-[var(--gold)]">Shaping the World.</span>
+                <span className="text-[var(--sage-light)]">Shaping the World.</span>
               </h1>
 
               <p className="text-lg md:text-xl text-[var(--muted)] leading-[1.7] max-w-[620px] mb-8 md:mb-10">
@@ -288,14 +288,14 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto">
                 <Link
                   href="/blogs"
-                  className="w-full sm:w-auto px-8 py-4 bg-[var(--gold)] text-[var(--bg)] text-sm font-extrabold uppercase tracking-[0.06em] rounded-md hover:bg-[var(--gold-hover)] transition-all flex items-center justify-center gap-3 shadow-md"
+                  className="w-full sm:w-auto px-8 py-4 bg-[var(--amber)] text-[var(--cream)] text-sm font-extrabold uppercase tracking-[0.06em] rounded-md hover:bg-[var(--amber-dark)] transition-all flex items-center justify-center gap-3 shadow-sm border border-[var(--amber-dark)]"
                 >
                   Explore Intelligence
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/topics"
-                  className="w-full sm:w-auto px-8 py-4 border border-[var(--border)] bg-[var(--surface)] text-sm font-bold uppercase tracking-[0.06em] text-white hover:bg-[var(--elevated)] transition-all rounded-md text-center"
+                  className="w-full sm:w-auto px-8 py-4 border border-[var(--sage)] bg-[var(--surface)] text-sm font-bold uppercase tracking-[0.06em] text-[var(--sage)] hover:bg-[var(--sage)] hover:text-[var(--bg)] transition-all rounded-md text-center"
                 >
                   View Topics
                 </Link>

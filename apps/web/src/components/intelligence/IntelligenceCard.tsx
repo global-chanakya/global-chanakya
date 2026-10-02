@@ -5,18 +5,18 @@ import { IntelligenceItem } from '@/lib/intelligence/types';
 import { EntityChip } from './EntityChip';
 
 const impactColors = {
-  CRITICAL: "text-[var(--danger)] border-[var(--danger)] bg-[var(--danger)]/10",
-  HIGH: "text-orange-400 border-orange-400/50 bg-orange-400/10",
-  MEDIUM: "text-yellow-400 border-yellow-400/50 bg-yellow-400/10",
-  LOW: "text-green-400 border-green-400/50 bg-green-400/10",
-  NEUTRAL: "text-[var(--muted)] border-[var(--border)] bg-[var(--surface)]",
+  CRITICAL: "text-[var(--amber)] border-[var(--amber)] bg-[var(--amber)]/10",
+  HIGH: "text-[var(--amber-light)] border-[var(--amber-light)] bg-[var(--amber)]/10",
+  MEDIUM: "text-[var(--sage)] border-[var(--sage)] bg-[var(--sage)]/10",
+  LOW: "text-[var(--concrete)] border-[var(--concrete)] bg-[var(--surface)]",
+  NEUTRAL: "text-[var(--text-muted)] border-[var(--border)] bg-[var(--surface)]",
 };
 
 const riskColors = {
-  SEVERE: "text-[var(--danger)] border-[var(--danger)] bg-[var(--danger)]/10",
-  HIGH: "text-orange-400 border-orange-400/50 bg-orange-400/10",
-  MODERATE: "text-yellow-400 border-yellow-400/50 bg-yellow-400/10",
-  LOW: "text-green-400 border-green-400/50 bg-green-400/10",
+  SEVERE: "text-[var(--amber)] border-[var(--amber)] bg-[var(--amber)]/10",
+  HIGH: "text-[var(--amber-light)] border-[var(--amber-light)] bg-[var(--amber)]/10",
+  MODERATE: "text-[var(--sage)] border-[var(--sage)] bg-[var(--sage)]/10",
+  LOW: "text-[var(--concrete)] border-[var(--concrete)] bg-[var(--surface)]",
 };
 
 export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
@@ -40,7 +40,7 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
 
       {/* Main Content */}
       <div className="p-5 flex-1 flex flex-col">
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-tight group-hover:text-[var(--gold)] transition-colors">
+        <h3 className="text-xl md:text-2xl font-bold text-[var(--cream)] mb-3 leading-tight group-hover:text-[var(--amber)] transition-colors">
           {item.headline}
         </h3>
         
@@ -81,7 +81,7 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
          <div className="text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--muted)]">
             Confidence: <span className="text-white">{item.confidence}</span>
          </div>
-         <Link href={`/intelligence/${item.id}`} className="text-xs font-bold text-[var(--gold)] hover:text-yellow-300 transition-colors uppercase tracking-[0.1em] flex items-center gap-1.5">
+         <Link href={`/intelligence/${item.id}`} className="text-xs font-bold text-[var(--sage)] hover:text-[var(--sage-light)] transition-colors uppercase tracking-[0.1em] flex items-center gap-1.5">
             Read Intel <ArrowRight className="w-3.5 h-3.5" />
          </Link>
       </div>

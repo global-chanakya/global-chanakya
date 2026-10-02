@@ -177,14 +177,14 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       if (pCount === 2 || (pCount === 6 && relatedBlogs.length > 1)) {
         const relatedLink = pCount === 2 ? relatedBlogs[0] : relatedBlogs[1];
         return `${match}
-          <div className="my-8 p-5 bg-[var(--surface)] rounded-md border-l-4 border-[var(--gold)] bg-[var(--surface)] transition-colors w-full relative overflow-hidden">
+          <div className="my-8 p-5 bg-[var(--stone)] rounded-md border-l-4 border-[var(--sage)] transition-colors w-full relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none"></div>
             <div className="relative z-10">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] mb-1.5 flex items-center gap-1.5">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[var(--sage-dark)] mb-1.5 flex items-center gap-1.5">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-4 4v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 Related Intelligence
               </div>
-              <a href="/blogs/${relatedLink.slug}" className="text-[16px] md:text-[18px] font-heading font-bold text-white hover:text-[var(--gold)] !border-none inline-block">
+              <a href="/blogs/${relatedLink.slug}" className="text-[16px] md:text-[18px] font-heading font-bold text-[#181C16] hover:text-[var(--amber-dark)] !border-none inline-block">
                 ${relatedLink.title}
               </a>
             </div>
@@ -280,10 +280,12 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
             {/* Ad: After featured image */}
             <InArticleAd slot="auto" />
 
-            <div 
-              className="article-body" 
-              dangerouslySetInnerHTML={{ __html: sanitizedContent }} 
-            />
+            <div className="bg-[var(--cream)] rounded-md p-6 md:p-10 text-[#252821] shadow-sm mb-12">
+              <div 
+                className="article-body" 
+                dangerouslySetInnerHTML={{ __html: sanitizedContent }} 
+              />
+            </div>
 
             {/* Citations */}
             {blog.citations && blog.citations.length > 0 && (
@@ -473,40 +475,40 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         .article-body {
           font-size: 18px;
           line-height: 1.85;
-          color: var(--secondary);
+          color: #555A50;
           font-family: var(--font-inter), sans-serif;
         }
-        .article-body p { margin-bottom: 1.6em; color: var(--text); }
+        .article-body p { margin-bottom: 1.6em; color: #252821; }
         .article-body h2 { 
           font-family: var(--font-heading), sans-serif;
           font-size: 1.8em; 
           font-weight: 800; 
-          color: white !important; 
+          color: #181C16 !important; 
           margin-top: 2em; 
           margin-bottom: 1em; 
-          border-bottom: 1px solid var(--border); 
+          border-bottom: 1px solid var(--border-light); 
           padding-bottom: 0.5em; 
         }
-        .article-body h3 { font-family: var(--font-heading), sans-serif; font-size: 1.4em; font-weight: 700; color: white !important; margin-top: 1.8em; margin-bottom: 0.8em; }
-        .article-body a { color: var(--gold) !important; text-decoration: none; border-bottom: 1px solid var(--gold); transition: all 0.2s; }
+        .article-body h3 { font-family: var(--font-heading), sans-serif; font-size: 1.4em; font-weight: 700; color: #181C16 !important; margin-top: 1.8em; margin-bottom: 0.8em; }
+        .article-body a { color: var(--amber-dark) !important; text-decoration: none; border-bottom: 1px solid var(--amber-dark); transition: all 0.2s; }
         .article-body a:hover { opacity: 0.8; }
         .article-body blockquote {
           margin: 2em 0;
           padding: 24px;
-          border-left: 3px solid var(--gold);
-          background: var(--surface) !important;
-          color: var(--secondary) !important;
+          border-left: 3px solid var(--amber);
+          background: var(--stone) !important;
+          color: #555A50 !important;
           font-style: italic;
           font-size: 1.1em;
           border-radius: 0 4px 4px 0;
         }
-        .article-body blockquote p { color: var(--secondary) !important; margin: 0; }
+        .article-body blockquote p { color: #555A50 !important; margin: 0; }
         .article-body ul, .article-body ol { margin: 1.5em 0; padding-left: 2em; }
         .article-body li { margin-bottom: 0.5em; }
-        .article-body ul li::marker { color: var(--gold); }
-        .article-body img { width: 100%; border-radius: 4px; margin: 2em 0; border: 1px solid var(--border); }
-        .article-body pre { background: var(--surface) !important; padding: 20px; border-radius: 4px; border: 1px solid var(--border); overflow-x: auto; }
-        .article-body code { font-family: monospace; color: var(--cyan) !important; }
+        .article-body ul li::marker { color: var(--sage); }
+        .article-body img { width: 100%; border-radius: 4px; margin: 2em 0; border: 1px solid var(--border-light); }
+        .article-body pre { background: var(--bg) !important; padding: 20px; border-radius: 4px; border: 1px solid var(--border-light); overflow-x: auto; }
+        .article-body code { font-family: monospace; color: var(--amber-dark) !important; }
       `}</style>
     </div>
   );
