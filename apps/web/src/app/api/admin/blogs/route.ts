@@ -141,8 +141,15 @@ export async function POST(req: NextRequest) {
         }
         return NextResponse.json({ success: true, id: updated!._id.toString(), slug: updated!.slug }, { status: 200 });
       }
-      // Otherwise auto-fix slug with timestamp
-      finalSlug = `${slug}-${Date.now()}`;
+      return NextResponse.json(
+        {
+          success: false,
+          code: "SLUG_ALREADY_PUBLISHED",
+          error: "An article with this slug is already published.",
+          existingBlogId: existing._id.toString()
+        },
+        { status: 409 }
+      );
     }
 
     const newBlogData = {
