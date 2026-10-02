@@ -5,31 +5,31 @@ import { IntelligenceItem } from '@/lib/intelligence/types';
 import { EntityChip } from './EntityChip';
 
 const impactColors = {
-  CRITICAL: "text-[var(--amber)] border-[var(--amber)] bg-[var(--amber)]/10",
-  HIGH: "text-[var(--amber-light)] border-[var(--amber-light)] bg-[var(--amber)]/10",
-  MEDIUM: "text-[var(--sage)] border-[var(--sage)] bg-[var(--sage)]/10",
-  LOW: "text-[var(--concrete)] border-[var(--concrete)] bg-[var(--surface)]",
-  NEUTRAL: "text-[var(--text-muted)] border-[var(--border)] bg-[var(--surface)]",
+  CRITICAL: "text-[#DC2626] border-[#DC2626]/50 bg-[#DC2626]/10",
+  HIGH: "text-[var(--gold-dark)] border-[var(--gold-dark)]/50 bg-[var(--gold-dark)]/10",
+  MEDIUM: "text-[var(--gold)] border-[var(--gold)]/50 bg-[var(--gold)]/10",
+  LOW: "text-[var(--slate-200)] border-[var(--border-dark)] bg-[var(--navy-deep)]",
+  NEUTRAL: "text-[var(--slate-200)] border-[var(--border-dark)] bg-[var(--navy-deep)]",
 };
 
 const riskColors = {
-  SEVERE: "text-[var(--amber)] border-[var(--amber)] bg-[var(--amber)]/10",
-  HIGH: "text-[var(--amber-light)] border-[var(--amber-light)] bg-[var(--amber)]/10",
-  MODERATE: "text-[var(--sage)] border-[var(--sage)] bg-[var(--sage)]/10",
-  LOW: "text-[var(--concrete)] border-[var(--concrete)] bg-[var(--surface)]",
+  SEVERE: "text-[#DC2626] border-[#DC2626]/50 bg-[#DC2626]/10",
+  HIGH: "text-[var(--gold-dark)] border-[var(--gold-dark)]/50 bg-[var(--gold-dark)]/10",
+  MODERATE: "text-[var(--gold)] border-[var(--gold)]/50 bg-[var(--gold)]/10",
+  LOW: "text-[var(--slate-200)] border-[var(--border-dark)] bg-[var(--navy-deep)]",
 };
 
 export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
   return (
-    <article className="bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:border-[var(--accent)] bg-[var(--surface)]/30 flex flex-col h-full group">
+    <article className="bg-[var(--navy-surface)] rounded-sm border border-[var(--border-dark)] overflow-hidden transition-all duration-300 hover:border-[var(--gold)] flex flex-col h-full group">
       
       {/* Header area */}
-      <div className="px-5 py-4 border-b border-[var(--border)]/50 flex flex-wrap items-center justify-between gap-3">
+      <div className="px-5 py-4 border-b border-[var(--border-dark)] flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--cyan)] bg-[var(--cyan)]/10 px-2 py-1 rounded border border-[var(--border)]">
+           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--slate-200)] bg-[var(--navy-deep)] px-2 py-1 rounded-sm border border-[var(--border-dark)]">
              {item.region}
            </span>
-           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/50">
+           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--slate-200)]">
              {item.topic}
            </span>
         </div>
@@ -40,17 +40,17 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
 
       {/* Main Content */}
       <div className="p-5 flex-1 flex flex-col">
-        <h3 className="text-xl md:text-2xl font-bold text-[var(--cream)] mb-3 leading-tight group-hover:text-[var(--amber)] transition-colors">
+        <h3 className="text-xl md:text-2xl font-serif font-bold text-[var(--white)] mb-3 leading-tight group-hover:text-[var(--gold)] transition-colors">
           {item.headline}
         </h3>
         
         <div className="mb-5 flex-1">
-          <p className="text-sm text-white/80 leading-relaxed mb-4">
+          <p className="text-sm text-[var(--slate-100)] leading-relaxed mb-4">
             {item.summary}
           </p>
-          <div className="bg-[var(--bg)]/50 p-4 rounded-sm border border-[var(--border)]">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--muted)] mb-2">Why It Matters</h4>
-            <p className="text-xs text-white/70 leading-relaxed">{item.whyItMatters}</p>
+          <div className="bg-[var(--navy-deep)] p-4 rounded-sm border border-[var(--border-dark)]">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--slate-200)] mb-2">Why It Matters</h4>
+            <p className="text-xs text-[var(--slate-200)] leading-relaxed">{item.whyItMatters}</p>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
         
         {/* Entities */}
         {item.entities.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--border)]/50 mb-4">
+          <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--border-dark)] mb-4">
             {item.entities.map(entity => (
               <EntityChip key={entity.id} entity={entity} />
             ))}
@@ -77,11 +77,11 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
       </div>
       
       {/* Footer CTA */}
-      <div className="px-5 py-4 bg-[var(--bg)]/80 border-t border-[var(--border)] flex justify-between items-center">
-         <div className="text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--muted)]">
-            Confidence: <span className="text-white">{item.confidence}</span>
+      <div className="px-5 py-4 bg-[var(--navy-deep)] border-t border-[var(--border-dark)] flex justify-between items-center">
+         <div className="text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--text-muted)]">
+            Confidence: <span className="text-[var(--white)]">{item.confidence}</span>
          </div>
-         <Link href={`/intelligence/${item.id}`} className="text-xs font-bold text-[var(--sage)] hover:text-[var(--sage-light)] transition-colors uppercase tracking-[0.1em] flex items-center gap-1.5">
+         <Link href={`/intelligence/${item.id}`} className="text-xs font-bold text-[var(--gold)] hover:text-[var(--gold-light)] transition-colors uppercase tracking-[0.1em] flex items-center gap-1.5">
             Read Intel <ArrowRight className="w-3.5 h-3.5" />
          </Link>
       </div>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import Navbar from "@/components/layout/Navbar";
@@ -18,14 +18,14 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0B1020",
+  themeColor: "#0B1B3D",
   width: "device-width",
   initialScale: 1,
 };
@@ -165,7 +165,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           strategy="lazyOnload" 
         />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased leading-[1.8] w-full overflow-x-hidden bg-[#07111F] text-[#F8FAFC]`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased leading-[1.8] w-full overflow-x-hidden bg-[#071329] text-[#F8FAFC]`}>
         <CookieConsent />
         <CSPostHogProvider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>

@@ -57,8 +57,8 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
   if (variant === "compact") {
     return (
       <Link href={`/blogs/${blog.slug}`} className="group block h-full">
-        <article className="flex flex-row items-center sm:items-stretch gap-4 h-full p-3 bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] bg-[var(--surface)]">
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 shrink-0 overflow-hidden rounded-lg border border-[var(--border)]/50">
+        <article className="flex flex-row items-center sm:items-stretch gap-4 h-full p-3 bg-[var(--navy-surface)] rounded-sm border border-[var(--border-dark)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold)]">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 shrink-0 overflow-hidden rounded-lg border border-[var(--border-dark)]">
             <Image
               src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
               alt={blog.title || "Geopolitical Intelligence"}
@@ -67,7 +67,7 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             {isViral && (
-              <div className="absolute top-1.5 left-1.5 bg-[var(--danger)] text-white p-1 rounded shadow-sm">
+              <div className="absolute top-1.5 left-1.5 bg-[#DC2626] text-white p-1 rounded shadow-sm">
                  <Flame className="w-3 h-3" />
               </div>
             )}
@@ -78,10 +78,10 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
                 {blog.category}
               </span>
             </div>
-            <h3 className="font-heading font-bold text-white text-xs sm:text-sm md:text-base leading-[1.3] mb-2 group-hover:text-[var(--gold)] transition-colors line-clamp-2">
+            <h3 className="font-heading font-bold text-[var(--white)] text-xs sm:text-sm md:text-base leading-[1.3] mb-2 group-hover:text-[var(--gold)] transition-colors line-clamp-2">
               {blog.title}
             </h3>
-            <div className="mt-auto flex items-center justify-between text-[9px] sm:text-[10px] text-[var(--muted)] uppercase tracking-[0.14em] font-bold">
+            <div className="mt-auto flex items-center justify-between text-[9px] sm:text-[10px] text-[var(--slate-200)] uppercase tracking-[0.14em] font-bold">
               <span className="flex items-center gap-1.5">
                 <Eye className="w-3.5 h-3.5" />
                 {formatViews(blog.analytics?.views ?? 0)}
@@ -97,8 +97,8 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
   if (variant === "featured") {
     return (
       <Link href={`/blogs/${blog.slug}`} className="group block h-full min-h-[360px] md:min-h-[440px]">
-        <article className="relative flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[var(--accent)]">
-          <div className="absolute inset-0 bg-[var(--surface)]">
+        <article className="relative flex flex-col h-full bg-[var(--navy-surface)] rounded-sm border border-[var(--border-dark)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[var(--gold)]">
+          <div className="absolute inset-0 bg-[var(--navy-surface)]">
             <Image
               src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
               alt={blog.title || "Geopolitical Intelligence"}
@@ -113,11 +113,11 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
           {/* Badges */}
           <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-2 z-20">
             {isViral ? (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--danger)]/90 text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#DC2626]/90 text-[var(--white)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <Flame className="w-3.5 h-3.5" /> High Threat
               </span>
             ) : blog.isTrending && (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--cyan)]/20 border border-[var(--border)] text-[var(--cyan)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--gold)]/20 border border-[var(--gold)]/50 text-[var(--gold)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <TrendingUp className="w-3.5 h-3.5" /> Trending
               </span>
             )}
@@ -125,17 +125,17 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
 
           <div className="relative z-10 mt-auto p-6 md:p-8 lg:p-10 flex flex-col">
             <div className="mb-4">
-              <span className="inline-block px-3 py-1.5 rounded bg-[var(--gold)]/10 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--accent)]">
+              <span className="inline-block px-3 py-1.5 rounded bg-[var(--gold)]/10 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--gold)]/30">
                 {blog.category}
               </span>
             </div>
-            <h3 className="font-heading font-extrabold text-white text-2xl md:text-3xl lg:text-4xl leading-[1.2] mb-4 group-hover:text-[var(--gold)] transition-colors duration-300 line-clamp-3">
+            <h3 className="font-heading font-extrabold text-[var(--white)] text-2xl md:text-3xl lg:text-4xl leading-[1.2] mb-4 group-hover:text-[var(--gold)] transition-colors duration-300 line-clamp-3">
               {blog.title}
             </h3>
-            <p className="text-sm md:text-base lg:text-lg text-white/80 leading-[1.6] line-clamp-2 mb-6 max-w-3xl">
+            <p className="text-sm md:text-base lg:text-lg text-[var(--slate-100)] leading-[1.6] line-clamp-2 mb-6 max-w-3xl">
               {blog.excerpt}
             </p>
-            <div className="pt-5 border-t border-[rgba(255,255,255,0.1)] flex items-center justify-between text-[10px] md:text-[11px] text-[var(--muted)] uppercase tracking-[0.14em] font-bold">
+            <div className="pt-5 border-t border-[rgba(255,255,255,0.1)] flex items-center justify-between text-[10px] md:text-[11px] text-[var(--slate-200)] uppercase tracking-[0.14em] font-bold">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1.5">
                   <Eye className="w-4 h-4" />
@@ -155,8 +155,8 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
   // Default Variant
   return (
     <Link href={`/blogs/${blog.slug}`} className="group block h-full">
-      <article className="flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] bg-[var(--surface)]">
-        <div className="relative aspect-[16/9] overflow-hidden border-b border-[var(--border)] bg-[var(--elevated)]">
+      <article className="flex flex-col h-full bg-[var(--navy-surface)] rounded-sm border border-[var(--border-dark)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold)]">
+        <div className="relative aspect-[16/9] overflow-hidden border-b border-[var(--border-dark)] bg-[var(--navy-deep)]">
           <Image
             src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
             alt={blog.title || "Geopolitical Intelligence"}
@@ -166,11 +166,11 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
           />
           <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
             {isViral ? (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--danger)]/90 text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#DC2626]/90 text-[var(--white)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <Flame className="w-3.5 h-3.5" /> Hot
               </span>
             ) : blog.isTrending && (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--cyan)]/90 text-[var(--bg)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--gold)]/90 text-[var(--navy-deep)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <TrendingUp className="w-3.5 h-3.5" /> Trending
               </span>
             )}
@@ -178,17 +178,17 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
         </div>
         <div className="flex flex-col flex-1 p-5 lg:p-6">
           <div className="mb-3">
-            <span className="inline-block px-2.5 py-1 rounded bg-[var(--elevated)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--border)]">
+            <span className="inline-block px-2.5 py-1 rounded bg-[var(--navy-deep)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--border-dark)]">
               {blog.category}
             </span>
           </div>
-          <h3 className="font-heading font-bold text-white text-lg md:text-xl leading-[1.3] mb-3 group-hover:text-[var(--gold)] transition-colors line-clamp-2">
+          <h3 className="font-heading font-bold text-[var(--white)] text-lg md:text-xl leading-[1.3] mb-3 group-hover:text-[var(--gold)] transition-colors line-clamp-2">
             {blog.title}
           </h3>
-          <p className="text-xs md:text-sm text-[var(--muted)] leading-[1.6] line-clamp-3 flex-1 mb-5">
+          <p className="text-xs md:text-sm text-[var(--slate-200)] leading-[1.6] line-clamp-3 flex-1 mb-5">
             {blog.excerpt}
           </p>
-          <div className="mt-auto pt-4 border-t border-[var(--border)] flex items-center justify-between text-[9px] md:text-[10px] text-[var(--muted)] uppercase tracking-[0.14em] font-bold">
+          <div className="mt-auto pt-4 border-t border-[var(--border-dark)] flex items-center justify-between text-[9px] md:text-[10px] text-[var(--slate-200)] uppercase tracking-[0.14em] font-bold">
             <span className="flex items-center gap-1.5">
               <Eye className="w-3.5 h-3.5" />
                {formatViews(blog.analytics?.views ?? 0)}
@@ -262,7 +262,7 @@ export default async function Home() {
   const sideTrending = trendingBlogs.slice(1, 4); // take exactly 3 for perfect side stack
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text)]">
+    <div className="min-h-screen flex flex-col bg-[var(--navy-deep)] text-[var(--text-on-dark)]">
 
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden border-b border-[var(--border)] min-h-[calc(100vh-5rem)] flex items-center py-12 md:py-16">
@@ -271,14 +271,13 @@ export default async function Home() {
             
             {/* Left */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 md:px-4 md:py-2 rounded border border-[var(--sage)] bg-[var(--sage)]/10 text-[var(--sage)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] w-fit mb-6 shadow-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-[var(--sage)]" />
-                Independent Strategic Analysis
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 md:px-4 md:py-2 border-b border-[var(--border-dark)] text-[var(--slate-200)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] w-fit mb-6">
+                GLOBAL CHANAKYA INTELLIGENCE
               </div>
 
-              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-[var(--cream)] max-w-[760px] mb-6 md:mb-8">
+              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-[var(--white)] max-w-[760px] mb-6 md:mb-8">
                 Understand the Forces <br className="hidden sm:block" />
-                <span className="text-[var(--sage-light)]">Shaping the World.</span>
+                <span className="text-[var(--gold)]">Shaping the World.</span>
               </h1>
 
               <p className="text-lg md:text-xl text-[var(--muted)] leading-[1.7] max-w-[620px] mb-8 md:mb-10">
@@ -288,14 +287,14 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto">
                 <Link
                   href="/blogs"
-                  className="w-full sm:w-auto px-8 py-4 bg-[var(--amber)] text-[var(--cream)] text-sm font-extrabold uppercase tracking-[0.06em] rounded-md hover:bg-[var(--amber-dark)] transition-all flex items-center justify-center gap-3 shadow-sm border border-[var(--amber-dark)]"
+                  className="w-full sm:w-auto px-8 py-4 bg-[var(--gold)] text-[var(--navy-deep)] text-sm font-extrabold uppercase tracking-[0.06em] rounded-sm hover:bg-[var(--gold-light)] transition-all flex items-center justify-center gap-3 shadow-sm border border-[var(--gold)]"
                 >
                   Explore Intelligence
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/topics"
-                  className="w-full sm:w-auto px-8 py-4 border border-[var(--sage)] bg-[var(--surface)] text-sm font-bold uppercase tracking-[0.06em] text-[var(--sage)] hover:bg-[var(--sage)] hover:text-[var(--bg)] transition-all rounded-md text-center"
+                  className="w-full sm:w-auto px-8 py-4 border border-[var(--border-dark)] bg-transparent text-sm font-bold uppercase tracking-[0.06em] text-[var(--white)] hover:bg-[var(--navy-surface)] transition-all rounded-sm text-center"
                 >
                   View Topics
                 </Link>
@@ -345,21 +344,21 @@ export default async function Home() {
       </section>
 
       {/* ─── LATEST INTELLIGENCE (Replaces Breaking Intel) ─── */}
-      <section className="py-16 border-b border-[var(--border)] bg-[var(--surface)]">
+      <section className="py-16 border-b border-[var(--border-dark)] bg-[var(--navy-surface)]">
         <div className="container mx-auto max-w-7xl px-6 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border)] pb-6 gap-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border-dark)] pb-6 gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-md bg-[var(--elevated)] border border-[var(--border)] flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-sm bg-[var(--navy-deep)] border border-[var(--border-dark)] flex items-center justify-center shrink-0">
                 <Activity className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-white tracking-tight">Latest Intelligence</h2>
-                <p className="text-[var(--muted)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Real-time assessments</p>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--white)] tracking-tight">Latest Intelligence</h2>
+                <p className="text-[var(--slate-200)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Real-time assessments</p>
               </div>
             </div>
             <Link
               href={`/intelligence`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--elevated)] border border-[var(--border)] text-xs font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--accent)] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-[var(--navy-deep)] border border-[var(--border-dark)] text-xs font-bold uppercase tracking-[0.06em] text-[var(--white)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all duration-300"
             >
               Command Center <ArrowRight className="w-4 h-4" />
             </Link>
@@ -375,16 +374,16 @@ export default async function Home() {
 
       {/* ─── FEATURED ANALYSIS (Trending) ─── */}
       {hasTrending && (
-        <section className="py-16 md:py-24 border-b border-[var(--border)] bg-[var(--bg)]">
+        <section className="py-16 md:py-24 border-b border-[var(--border-dark)] bg-[var(--navy-deep)]">
           <div className="container mx-auto max-w-7xl px-6 md:px-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border)] pb-6 gap-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border-dark)] pb-6 gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-md bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0">
-                  <Flame className="w-5 h-5 text-[var(--danger)]" />
+                <div className="w-10 h-10 rounded-sm bg-[var(--navy-surface)] border border-[var(--border-dark)] flex items-center justify-center shrink-0">
+                  <Flame className="w-5 h-5 text-[var(--gold)]" />
                 </div>
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-white tracking-tight">Featured Analysis</h2>
-                  <p className="text-[var(--muted)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Trending Geopolitics</p>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--white)] tracking-tight">Featured Analysis</h2>
+                  <p className="text-[var(--slate-200)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Trending Geopolitics</p>
                 </div>
               </div>
             </div>
@@ -408,11 +407,11 @@ export default async function Home() {
       )}
 
       {/* ─── EXPLORE TOPICS ─── */}
-      <section className="py-16 md:py-24 border-b border-[var(--border)] bg-[var(--surface)]">
+      <section className="py-16 md:py-24 border-b border-[var(--border-dark)] bg-[var(--navy-surface)]">
         <div className="container mx-auto max-w-7xl px-6 md:px-8">
           <div className="text-center mb-10 md:mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">Explore Intelligence by Topic</h2>
-            <p className="text-[var(--muted)] text-[10px] md:text-sm font-bold uppercase tracking-[0.14em]">Deep dive into specialized research areas</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--white)] mb-4 tracking-tight">Explore Intelligence by Topic</h2>
+            <p className="text-[var(--slate-200)] text-[10px] md:text-sm font-bold uppercase tracking-[0.14em]">Deep dive into specialized research areas</p>
           </div>
           
           <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
@@ -420,7 +419,7 @@ export default async function Home() {
               <Link
                 key={cat}
                 href={`/blogs?category=${encodeURIComponent(cat)}`}
-                className="px-5 py-3 md:px-6 md:py-4 rounded-md border border-[var(--border)] bg-[var(--elevated)] text-xs md:text-sm font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all duration-300"
+                className="px-5 py-3 md:px-6 md:py-4 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-xs md:text-sm font-bold uppercase tracking-[0.06em] text-[var(--white)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all duration-300"
               >
                 {cat}
               </Link>
@@ -431,21 +430,21 @@ export default async function Home() {
 
       {/* ─── LATEST REPORTS ─── */}
       {latestBlogs.length > 0 && (
-        <section className="py-16 md:py-24 border-b border-[var(--border)] bg-[var(--bg)]">
+        <section className="py-16 md:py-24 border-b border-[var(--border-dark)] bg-[var(--navy-deep)]">
           <div className="container mx-auto max-w-7xl px-6 md:px-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border)] pb-6 gap-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border-dark)] pb-6 gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-md bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-[var(--cyan)]" />
+                <div className="w-10 h-10 rounded-sm bg-[var(--navy-surface)] border border-[var(--border-dark)] flex items-center justify-center shrink-0">
+                  <Clock className="w-5 h-5 text-[var(--slate-200)]" />
                 </div>
                 <div>
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-white tracking-tight">Latest Reports</h2>
-                  <p className="text-[var(--muted)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Recently Published</p>
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--white)] tracking-tight">Latest Reports</h2>
+                  <p className="text-[var(--slate-200)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Recently Published</p>
                 </div>
               </div>
               <Link
                 href={`/blogs`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--surface)] border border-[var(--border)] text-xs font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--accent)] transition-all duration-300"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-[var(--navy-surface)] border border-[var(--border-dark)] text-xs font-bold uppercase tracking-[0.06em] text-[var(--white)] hover:border-[var(--gold)] transition-all duration-300"
               >
                 All Reports <ArrowRight className="w-4 h-4" />
               </Link>
@@ -468,13 +467,13 @@ export default async function Home() {
       </div>
 
       {/* ─── METHODOLOGY / SOURCE VERIFICATION ─── */}
-      <section className="py-16 md:py-24 border-b border-[var(--border)] bg-[var(--surface)]">
+      <section className="py-16 md:py-24 border-b border-[var(--border-dark)] bg-[var(--navy-surface)]">
         <div className="container mx-auto max-w-7xl px-6 md:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--white)] mb-4 tracking-tight">
               Methodology & Trust
             </h2>
-            <p className="text-[var(--muted)] text-lg max-w-2xl mx-auto">
+            <p className="text-[var(--slate-200)] text-lg max-w-2xl mx-auto">
               We adhere to strict editorial standards, ensuring all intelligence is independently verified, properly sourced, and analytically sound.
             </p>
           </div>
@@ -483,13 +482,13 @@ export default async function Home() {
             {methodologyPillars.map((p) => (
               <div
                 key={p.title}
-                className="p-6 md:p-8 rounded-sm bg-[var(--elevated)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-300"
+                className="p-6 md:p-8 rounded-sm bg-[var(--navy-surface)] border border-[var(--border-dark)] hover:border-[var(--gold)] transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-lg bg-[var(--bg)] flex items-center justify-center mb-6 border border-[var(--border)]">
+                <div className="w-12 h-12 rounded-sm bg-[var(--navy-deep)] flex items-center justify-center mb-6 border border-[var(--border-dark)]">
                   <p.icon className="w-5 h-5 text-[var(--gold)]" />
                 </div>
-                <h3 className="font-heading text-lg font-bold text-white mb-3">{p.title}</h3>
-                <p className="text-sm text-[var(--muted)] leading-[1.6]">{p.desc}</p>
+                <h3 className="font-heading text-lg font-bold text-[var(--white)] mb-3">{p.title}</h3>
+                <p className="text-sm text-[var(--slate-200)] leading-[1.6]">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -497,18 +496,18 @@ export default async function Home() {
       </section>
 
       {/* ─── ABOUT GLOBAL CHANAKYA ─── */}
-      <section className="py-16 md:py-24 border-b border-[var(--border)] bg-[var(--bg)]">
+      <section className="py-16 md:py-24 border-b border-[var(--border-dark)] bg-[var(--navy-deep)]">
         <div className="container mx-auto max-w-7xl px-6 md:px-8 flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6">
+          <div className="w-16 h-16 rounded-sm bg-[var(--navy-surface)] border border-[var(--border-dark)] flex items-center justify-center mb-6">
             <Info className="w-8 h-8 text-[var(--gold)]" />
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">About Global Chanakya</h2>
-          <p className="text-[var(--muted)] text-lg max-w-3xl leading-[1.7] mb-8">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--white)] mb-6 tracking-tight">About Global Chanakya</h2>
+          <p className="text-[var(--slate-200)] text-lg max-w-3xl leading-[1.7] mb-8">
             Global Chanakya Intelligence is a premier strategic research platform dedicated to decoding the complexities of modern geopolitics. We provide policymakers, defense analysts, and corporate strategists with the actionable insights required to navigate an increasingly multipolar world.
           </p>
           <Link
             href="/about"
-            className="px-6 py-3 border border-[var(--gold)] text-[var(--gold)] font-bold uppercase tracking-[0.06em] rounded-md hover:bg-[var(--gold)] hover:text-[var(--bg)] transition-colors text-sm"
+            className="px-6 py-3 border border-[var(--gold)] text-[var(--gold)] font-bold uppercase tracking-[0.06em] rounded-sm hover:bg-[var(--gold)] hover:text-[var(--navy-deep)] transition-colors text-sm"
           >
             Read Our Story
           </Link>

@@ -1,40 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #20241D;
-  --bg-deep: #181C16;
-  --surface: #2B3027;
-  --surface-elevated: #343931;
-  --surface-hover: #3D4238;
+  /* Institutional Brand Colors */
+  --navy: #0B1B3D;
+  --navy-deep: #071329;
+  --navy-surface: #122447;
   
-  --sage: #9CAF88;
-  --sage-dark: #71805F;
-  --sage-light: #B5C3A2;
+  --white: #FFFFFF;
+  --slate-50: #F4F6F9;
+  --slate-100: #E9EDF2;
+  --slate-200: #D8DEE6;
   
-  --amber: #CC5500;
-  --amber-dark: #A94300;
-  --amber-light: #E07832;
-  
-  --concrete: #A7A7A7;
-  
-  --cream: #F1EDE3;
-  --stone: #DED9CE;
-  
-  --text: #F2EFE7;
-  --text-secondary: #C9C5BB;
-  --text-muted: #A7A7A7;
-  
-  --border: rgba(156, 175, 136, 0.18);
-  --border-light: rgba(37, 40, 33, 0.12);
+  --gold: #D4AF37;
+  --gold-dark: #B8921F;
+  --gold-light: #E5C766;
 
-  /* Legacy mappings */
-  --accent: var(--sage);
-  --accent-hover: var(--sage-light);
-  --gold: var(--sage);
-  --gold-hover: var(--sage-light);
-  --blue: var(--sage-dark);
-  --cyan: var(--concrete);
-  --danger: var(--amber);
+  /* Typography Colors */
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --text-on-dark: #F8FAFC;
+  
+  --border-light: #D8DEE6;
+  --border-dark: rgba(255, 255, 255, 0.12);
+
+  /* Legacy Compatibility Aliases (To be migrated) */
+  --bg: var(--navy-deep);
+  --bg-deep: var(--navy-deep);
+  --surface: var(--navy-surface);
+  --surface-elevated: var(--navy-surface);
+  --surface-hover: #1A305A;
+  
+  --sage: var(--gold);
+  --sage-dark: var(--gold-dark);
+  --sage-light: var(--gold-light);
+  
+  --amber: var(--gold-dark);
+  --amber-dark: var(--gold-dark);
+  --amber-light: var(--gold-light);
+  
+  --concrete: var(--slate-200);
+  --cream: var(--white);
+  --stone: var(--slate-50);
+  
+  --text: var(--text-on-dark);
+  --border: var(--border-dark);
+
+  --accent: var(--gold);
+  --accent-hover: var(--gold-light);
+  --blue: var(--navy);
+  --cyan: var(--slate-200);
+  --danger: #DC2626;
   --muted: var(--text-muted);
 }
 
@@ -42,12 +58,25 @@
   --color-background: var(--bg);
   --color-foreground: var(--text);
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
+  --font-heading: var(--font-playfair);
+  
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-surface: var(--navy-surface);
+  --color-white: var(--white);
+  --color-slate-50: var(--slate-50);
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-gold: var(--gold);
+  --color-gold-dark: var(--gold-dark);
+  --color-gold-light: var(--gold-light);
   
   --color-surface: var(--surface);
   --color-elevated: var(--surface-elevated);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
+  --color-border: var(--border);
+  
+  /* Retaining mapped utilities to prevent breakage */
   --color-sage: var(--sage);
   --color-sage-dark: var(--sage-dark);
   --color-sage-light: var(--sage-light);
@@ -57,9 +86,6 @@
   --color-concrete: var(--concrete);
   --color-cream: var(--cream);
   --color-stone: var(--stone);
-  --color-border: var(--border);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
 }
 
 body {

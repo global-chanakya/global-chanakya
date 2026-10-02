@@ -177,14 +177,14 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       if (pCount === 2 || (pCount === 6 && relatedBlogs.length > 1)) {
         const relatedLink = pCount === 2 ? relatedBlogs[0] : relatedBlogs[1];
         return `${match}
-          <div className="my-8 p-5 bg-[var(--stone)] rounded-md border-l-4 border-[var(--sage)] transition-colors w-full relative overflow-hidden">
+          <div className="my-8 p-5 bg-[var(--navy-surface)] rounded-md border-l-4 border-[var(--gold)] transition-colors w-full relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none"></div>
             <div className="relative z-10">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[var(--sage-dark)] mb-1.5 flex items-center gap-1.5">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-4 4v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] mb-1.5 flex items-center gap-1.5">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-4 4v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 Related Intelligence
               </div>
-              <a href="/blogs/${relatedLink.slug}" className="text-[16px] md:text-[18px] font-heading font-bold text-[#181C16] hover:text-[var(--amber-dark)] !border-none inline-block">
+              <a href="/blogs/${relatedLink.slug}" className="text-[16px] md:text-[18px] font-heading font-bold text-[var(--white)] hover:text-[var(--gold-light)] !border-none inline-block">
                 ${relatedLink.title}
               </a>
             </div>
@@ -198,7 +198,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   const jsonLd = generateArticleSchema(blog);
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+    <div className="min-h-screen bg-[var(--navy-deep)] text-[var(--text-on-dark)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -213,37 +213,37 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       <ReadingProgress />
 
       {/* Hero Header */}
-      <header className="relative pt-32 pb-12 border-b border-[var(--border)] strategic-grid bg-[var(--surface)]">
+      <header className="relative pt-32 pb-12 border-b border-[var(--border-dark)] strategic-grid bg-[var(--navy-surface)]">
         <div className="absolute inset-0 pointer-events-none" />
         <div className="container mx-auto max-w-7xl px-6 md:px-8 relative z-10">
-          <Link href="/blogs" className="inline-flex items-center gap-2 text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-white transition-colors mb-8 group">
+          <Link href="/blogs" className="inline-flex items-center gap-2 text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--white)] transition-colors mb-8 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Intel Desk
           </Link>
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="px-3 py-1.5 rounded-sm intel-border bg-[var(--surface)] text-[var(--cyan)] text-[11px] font-bold uppercase tracking-widest">
+            <span className="px-3 py-1.5 rounded-sm intel-border bg-[var(--navy-deep)] text-[var(--gold)] text-[11px] font-bold uppercase tracking-widest">
               {blog.category}
             </span>
             {blog.isTrending && (
-              <span className="px-3 py-1.5 rounded-sm bg-[var(--blue)]/10 border border-[var(--blue)]/20 text-[var(--blue)] text-[11px] font-bold uppercase tracking-widest flex items-center gap-1.5">
+              <span className="px-3 py-1.5 rounded-sm bg-[var(--gold)]/10 border border-[var(--gold)]/30 text-[var(--gold)] text-[11px] font-bold uppercase tracking-widest flex items-center gap-1.5">
                 <TrendingUp className="w-3.5 h-3.5" /> Trending Report
               </span>
             )}
           </div>
 
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-0.02em] text-white mb-6 max-w-4xl">
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-[-0.02em] text-[var(--white)] mb-6 max-w-4xl">
             {blog.title}
           </h1>
 
-          <p className="text-[18px] md:text-[20px] leading-[1.8] text-[var(--secondary)] max-w-3xl border-l-2 border-[var(--gold)] pl-5 font-medium">
+          <p className="text-[18px] md:text-[20px] leading-[1.8] text-[var(--slate-100)] max-w-3xl border-l-2 border-[var(--gold)] pl-5 font-medium">
             {blog.excerpt}
           </p>
 
-          <div className="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-[var(--border)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)]">
+          <div className="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-[var(--border-dark)] text-[12px] font-bold uppercase tracking-widest text-[var(--slate-200)]">
             <div className="flex items-center gap-3">
               <Link href={`/author/${blog.author?.authorSlug || 'global-chanakya-editorial'}`} className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-sm bg-[var(--surface)] intel-border flex items-center justify-center text-[14px] text-white group-hover:border-[var(--gold)] transition-colors overflow-hidden">
+                <div className="w-10 h-10 rounded-sm bg-[var(--navy-deep)] intel-border flex items-center justify-center text-[14px] text-white group-hover:border-[var(--gold)] transition-colors overflow-hidden">
                   {blog.author?.avatar ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={blog.author.avatar} alt={blog.author?.name || "Global Chanakya Editorial"} className="w-full h-full object-cover" />
@@ -252,15 +252,15 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
                   )}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-white group-hover:text-[var(--gold)] transition-colors">{blog.isSystemGenerated ? "Global Chanakya Editorial" : blog.author?.name || "Global Chanakya Editorial"}</span>
+                  <span className="text-[var(--white)] group-hover:text-[var(--gold)] transition-colors">{blog.isSystemGenerated ? "Global Chanakya Editorial" : blog.author?.name || "Global Chanakya Editorial"}</span>
                   <span className="text-[10px] text-[var(--gold)]">{blog.author?.role === 'editor' ? 'Lead Analyst / Editor' : 'Lead Analyst'}</span>
                 </div>
               </Link>
             </div>
-            <div className="w-px h-8 bg-[var(--border)] hidden sm:block"></div>
-            <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-[var(--secondary)]" /> {publishDate}</span>
-            <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-[var(--secondary)]" /> {readTime} min read</span>
-            <span className="flex items-center gap-2"><Eye className="w-4 h-4 text-[var(--secondary)]" /> <span className="blog-view-count">{formatViews(blog.analytics?.views || 0)}</span> views</span>
+            <div className="w-px h-8 bg-[var(--border-dark)] hidden sm:block"></div>
+            <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-[var(--slate-200)]" /> {publishDate}</span>
+            <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-[var(--slate-200)]" /> {readTime} min read</span>
+            <span className="flex items-center gap-2"><Eye className="w-4 h-4 text-[var(--slate-200)]" /> <span className="blog-view-count">{formatViews(blog.analytics?.views || 0)}</span> views</span>
           </div>
         </div>
       </header>
@@ -280,7 +280,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
             {/* Ad: After featured image */}
             <InArticleAd slot="auto" />
 
-            <div className="bg-[var(--cream)] rounded-md p-6 md:p-10 text-[#252821] shadow-sm mb-12">
+            <div className="bg-[var(--navy-surface)] border border-[var(--border-dark)] rounded-sm p-6 md:p-10 text-[var(--white)] shadow-sm mb-12">
               <div 
                 className="article-body" 
                 dangerouslySetInnerHTML={{ __html: sanitizedContent }} 
@@ -289,7 +289,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Citations */}
             {blog.citations && blog.citations.length > 0 && (
-              <div className="mt-12 pt-8 border-t border-[var(--border)]">
+              <div className="mt-12 pt-8 border-t border-[var(--border-dark)]">
                 <h3 className="font-heading text-xl font-bold text-white mb-4 flex items-center gap-2">Sources & References</h3>
                 <ul className="space-y-3">
                   {blog.citations.map((citation: any, idx: number) => (
@@ -297,13 +297,13 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
                       <div className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] mt-2 shrink-0" />
                       <div>
                         {citation.url ? (
-                          <a href={citation.url} target="_blank" rel="noopener noreferrer" className="text-[var(--cyan)] hover:underline font-medium break-all">
+                          <a href={citation.url} target="_blank" rel="noopener noreferrer" className="text-[var(--gold)] hover:underline font-medium break-all">
                             {citation.source}
                           </a>
                         ) : (
-                          <span className="text-white font-medium">{citation.source}</span>
+                          <span className="text-[var(--white)] font-medium">{citation.source}</span>
                         )}
-                        {citation.type && <span className="text-[var(--muted)] ml-2 text-xs uppercase tracking-wider">[{citation.type}]</span>}
+                        {citation.type && <span className="text-[var(--slate-200)] ml-2 text-xs uppercase tracking-wider">[{citation.type}]</span>}
                       </div>
                     </li>
                   ))}
@@ -316,32 +316,32 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Entity Hub Links */}
             {(blog.topics?.length > 0 || blog.countries?.length > 0 || blog.regions?.length > 0 || blog.leaders?.length > 0 || blog.conflicts?.length > 0) && (
-              <div className="mt-16 pt-8 border-t border-[var(--border)] flex flex-wrap gap-3">
-                <div className="w-full flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[var(--secondary)] mb-2">
+              <div className="mt-16 pt-8 border-t border-[var(--border-dark)] flex flex-wrap gap-3">
+                <div className="w-full flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[var(--slate-200)] mb-2">
                   <Tag className="w-3.5 h-3.5" /> Related Analysis Hubs
                 </div>
                 {blog.topics?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/topics/${entity.slug}`} className="px-4 py-2 rounded-sm intel-border bg-[var(--surface)] text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+                  <Link key={entity._id || entity.slug} href={`/topics/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     {entity.name} (Topic)
                   </Link>
                 ))}
                 {blog.countries?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/countries/${entity.slug}`} className="px-4 py-2 rounded-sm intel-border bg-[var(--surface)] text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+                  <Link key={entity._id || entity.slug} href={`/countries/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     {entity.name} (Country)
                   </Link>
                 ))}
                 {blog.regions?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/regions/${entity.slug}`} className="px-4 py-2 rounded-sm intel-border bg-[var(--surface)] text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+                  <Link key={entity._id || entity.slug} href={`/regions/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     {entity.name} (Region)
                   </Link>
                 ))}
                 {blog.leaders?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/leaders/${entity.slug}`} className="px-4 py-2 rounded-sm intel-border bg-[var(--surface)] text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+                  <Link key={entity._id || entity.slug} href={`/leaders/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     {entity.name} (Leader)
                   </Link>
                 ))}
                 {blog.conflicts?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/conflicts/${entity.slug}`} className="px-4 py-2 rounded-sm intel-border bg-[var(--surface)] text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+                  <Link key={entity._id || entity.slug} href={`/conflicts/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     {entity.name} (Conflict)
                   </Link>
                 ))}
@@ -350,12 +350,12 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Tags */}
             {blog.tags && blog.tags.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-[var(--border)] flex flex-wrap gap-3">
-                <div className="w-full flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[var(--secondary)] mb-2">
+              <div className="mt-8 pt-8 border-t border-[var(--border-dark)] flex flex-wrap gap-3">
+                <div className="w-full flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[var(--slate-200)] mb-2">
                   <Tag className="w-3.5 h-3.5" /> Tracked Tags
                 </div>
                 {blog.tags.map((tag: string) => (
-                  <Link key={tag} href={`/blogs?tag=${encodeURIComponent(tag)}`} className="px-4 py-2 rounded-sm intel-border bg-[var(--surface)] text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
+                  <Link key={tag} href={`/blogs?tag=${encodeURIComponent(tag)}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     #{tag}
                   </Link>
                 ))}
@@ -372,24 +372,24 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Chronological Discovery / Prev & Next */}
             {(adjacentBlogs.prev || adjacentBlogs.next) && (
-              <div className="mt-12 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row justify-between gap-4">
+              <div className="mt-12 pt-8 border-t border-[var(--border-dark)] flex flex-col sm:flex-row justify-between gap-4">
                 {adjacentBlogs.prev ? (
-                  <Link href={`/blogs/${adjacentBlogs.prev.slug}`} className="flex-1 bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)] hover:border-[var(--accent)] group flex flex-col items-start text-left transition-colors">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-1.5">
+                  <Link href={`/blogs/${adjacentBlogs.prev.slug}`} className="flex-1 bg-[var(--navy-surface)] p-5 rounded-sm border border-[var(--border-dark)] hover:border-[var(--gold)] group flex flex-col items-start text-left transition-colors">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--slate-200)] mb-2 flex items-center gap-1.5">
                       <ArrowLeft className="w-3.5 h-3.5" /> Previous in {blog.category}
                     </span>
-                    <span className="font-heading text-[15px] font-bold text-white group-hover:text-[var(--gold)] transition-colors line-clamp-2 leading-snug">
+                    <span className="font-heading text-[15px] font-bold text-[var(--white)] group-hover:text-[var(--gold)] transition-colors line-clamp-2 leading-snug">
                       {adjacentBlogs.prev.title}
                     </span>
                   </Link>
                 ) : <div className="flex-1" />}
                 
                 {adjacentBlogs.next ? (
-                  <Link href={`/blogs/${adjacentBlogs.next.slug}`} className="flex-1 bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)] hover:border-[var(--accent)] group flex flex-col items-end text-right transition-colors">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-1.5">
+                  <Link href={`/blogs/${adjacentBlogs.next.slug}`} className="flex-1 bg-[var(--navy-surface)] p-5 rounded-sm border border-[var(--border-dark)] hover:border-[var(--gold)] group flex flex-col items-end text-right transition-colors">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--slate-200)] mb-2 flex items-center gap-1.5">
                       Next in {blog.category} <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
                     </span>
-                    <span className="font-heading text-[15px] font-bold text-white group-hover:text-[var(--gold)] transition-colors line-clamp-2 leading-snug">
+                    <span className="font-heading text-[15px] font-bold text-[var(--white)] group-hover:text-[var(--gold)] transition-colors line-clamp-2 leading-snug">
                       {adjacentBlogs.next.title}
                     </span>
                   </Link>
@@ -399,18 +399,18 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Bottom Suggestions / Related Blogs */}
             {relatedBlogs.length > 0 && (
-              <div className="mt-16 pt-12 border-t border-[var(--border)]">
+              <div className="mt-16 pt-12 border-t border-[var(--border-dark)]">
                 <h3 className="font-heading text-[18px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-8">
-                  <Newspaper className="w-5 h-5 text-[var(--cyan)]" /> Suggested Intelligence
+                  <Newspaper className="w-5 h-5 text-[var(--gold)]" /> Suggested Intelligence
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {relatedBlogs.map((rb: any) => (
-                    <Link key={rb._id} href={`/blogs/${rb.slug}`} className="bg-[var(--surface)] p-5 rounded-sm hover:-translate-y-1 transition-transform group flex flex-col gap-3 border border-[var(--border)] hover:border-[var(--accent)]">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--cyan)]">{rb.category}</span>
+                    <Link key={rb._id} href={`/blogs/${rb.slug}`} className="bg-[var(--navy-surface)] p-5 rounded-sm hover:-translate-y-1 transition-transform group flex flex-col gap-3 border border-[var(--border-dark)] hover:border-[var(--gold)]">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)]">{rb.category}</span>
                       <h4 className="font-heading text-[16px] font-bold text-white leading-snug group-hover:text-[var(--gold)] transition-colors line-clamp-2">
                         {rb.title}
                       </h4>
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)] flex items-center gap-2 mt-auto pt-2">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--slate-200)] flex items-center gap-2 mt-auto pt-2">
                         <Clock className="w-3.5 h-3.5" /> {formatDate(rb.publishAt, "short")}
                       </span>
                     </Link>
@@ -424,8 +424,8 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
           <aside className="xl:col-span-4 sticky top-32 max-h-[calc(100vh-128px)] overflow-y-auto custom-scrollbar flex-col gap-8 hidden xl:flex pb-8 pr-4">
             {/* TOC */}
             {toc.length > 0 && (
-              <div className="bg-[var(--surface)] rounded-sm p-6 shrink-0">
-                <h3 className="font-heading text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
+              <div className="bg-[var(--navy-surface)] border border-[var(--border-dark)] rounded-sm p-6 shrink-0">
+                <h3 className="font-heading text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border-dark)] pb-4">
                   <Crosshair className="w-4 h-4 text-[var(--gold)]" /> Executive Summary
                 </h3>
                 <nav className="flex flex-col gap-3">
@@ -433,7 +433,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
                     <a 
                       key={item.id} 
                       href={`#${item.id}`} 
-                      className={`text-[13px] leading-[1.6] font-medium transition-colors hover:text-[var(--gold)] ${item.level === "3" ? "ml-4 text-[var(--muted)]" : "text-[var(--secondary)]"}`}
+                      className={`text-[13px] leading-[1.6] font-medium transition-colors hover:text-[var(--gold)] ${item.level === "3" ? "ml-4 text-[var(--slate-200)]" : "text-[var(--slate-100)]"}`}
                     >
                       {item.text}
                     </a>
@@ -444,18 +444,18 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Related Reports */}
             {relatedBlogs.length > 0 && (
-              <div className="bg-[var(--surface)] rounded-sm p-6 shrink-0">
-                <h3 className="font-heading text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
-                  <Newspaper className="w-4 h-4 text-[var(--cyan)]" /> Related Intelligence
+              <div className="bg-[var(--navy-surface)] border border-[var(--border-dark)] rounded-sm p-6 shrink-0">
+                <h3 className="font-heading text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border-dark)] pb-4">
+                  <Newspaper className="w-4 h-4 text-[var(--gold)]" /> Related Intelligence
                 </h3>
                 <div className="flex flex-col gap-5">
                   {relatedBlogs.map((rb: any) => (
                     <Link key={rb._id} href={`/blogs/${rb.slug}`} className="group flex flex-col gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--cyan)]">{rb.category}</span>
-                      <h4 className="font-heading text-[14px] font-bold text-white leading-snug group-hover:text-[var(--gold)] transition-colors line-clamp-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)]">{rb.category}</span>
+                      <h4 className="font-heading text-[14px] font-bold text-[var(--white)] leading-snug group-hover:text-[var(--gold)] transition-colors line-clamp-2">
                         {rb.title}
                       </h4>
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)] flex items-center gap-2 mt-1">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--slate-200)] flex items-center gap-2 mt-1">
                         <Clock className="w-3 h-3" /> {formatDate(rb.publishAt, "short")}
                       </span>
                     </Link>
@@ -475,40 +475,40 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         .article-body {
           font-size: 18px;
           line-height: 1.85;
-          color: #555A50;
+          color: var(--slate-100);
           font-family: var(--font-inter), sans-serif;
         }
-        .article-body p { margin-bottom: 1.6em; color: #252821; }
+        .article-body p { margin-bottom: 1.6em; color: var(--slate-100); }
         .article-body h2 { 
           font-family: var(--font-heading), sans-serif;
           font-size: 1.8em; 
           font-weight: 800; 
-          color: #181C16 !important; 
+          color: var(--white) !important; 
           margin-top: 2em; 
           margin-bottom: 1em; 
-          border-bottom: 1px solid var(--border-light); 
+          border-bottom: 1px solid var(--border-dark); 
           padding-bottom: 0.5em; 
         }
-        .article-body h3 { font-family: var(--font-heading), sans-serif; font-size: 1.4em; font-weight: 700; color: #181C16 !important; margin-top: 1.8em; margin-bottom: 0.8em; }
-        .article-body a { color: var(--amber-dark) !important; text-decoration: none; border-bottom: 1px solid var(--amber-dark); transition: all 0.2s; }
+        .article-body h3 { font-family: var(--font-heading), sans-serif; font-size: 1.4em; font-weight: 700; color: var(--white) !important; margin-top: 1.8em; margin-bottom: 0.8em; }
+        .article-body a { color: var(--gold) !important; text-decoration: none; border-bottom: 1px solid var(--gold); transition: all 0.2s; }
         .article-body a:hover { opacity: 0.8; }
         .article-body blockquote {
           margin: 2em 0;
           padding: 24px;
-          border-left: 3px solid var(--amber);
-          background: var(--stone) !important;
-          color: #555A50 !important;
+          border-left: 3px solid var(--gold);
+          background: var(--navy-deep) !important;
+          color: var(--slate-200) !important;
           font-style: italic;
           font-size: 1.1em;
           border-radius: 0 4px 4px 0;
         }
-        .article-body blockquote p { color: #555A50 !important; margin: 0; }
+        .article-body blockquote p { color: var(--slate-200) !important; margin: 0; }
         .article-body ul, .article-body ol { margin: 1.5em 0; padding-left: 2em; }
         .article-body li { margin-bottom: 0.5em; }
-        .article-body ul li::marker { color: var(--sage); }
-        .article-body img { width: 100%; border-radius: 4px; margin: 2em 0; border: 1px solid var(--border-light); }
-        .article-body pre { background: var(--bg) !important; padding: 20px; border-radius: 4px; border: 1px solid var(--border-light); overflow-x: auto; }
-        .article-body code { font-family: monospace; color: var(--amber-dark) !important; }
+        .article-body ul li::marker { color: var(--gold); }
+        .article-body img { width: 100%; border-radius: 4px; margin: 2em 0; border: 1px solid var(--border-dark); }
+        .article-body pre { background: var(--navy-deep) !important; padding: 20px; border-radius: 4px; border: 1px solid var(--border-dark); overflow-x: auto; }
+        .article-body code { font-family: monospace; color: var(--gold) !important; }
       `}</style>
     </div>
   );

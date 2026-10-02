@@ -10,7 +10,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#05070F] border-t border-[#0E1A36] pt-20">
+    <footer className="bg-[var(--navy-deep)] border-t border-[var(--border-dark)] pt-20">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Main Grid */}
@@ -35,7 +35,7 @@ export default function Footer() {
                 </span>
               </div>
             </Link>
-            <p className="text-sm text-[var(--muted)] leading-[1.7] mb-6">
+            <p className="text-sm text-[var(--slate-200)] leading-[1.7] mb-6">
               Independent geopolitical intelligence, strategic analysis and research on the developments reshaping global power.
             </p>
             <div className="flex items-center gap-4">
@@ -43,7 +43,7 @@ export default function Footer() {
                 href="https://www.instagram.com/globalchanaky?stkn=MTRwaDFxaTl0dHRpMw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[var(--surface)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--gold-hover)] hover:border-[var(--gold-hover)] hover:bg-[var(--gold)]/10 transition-all duration-300 group"
+                className="w-10 h-10 rounded-full bg-[var(--navy-surface)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--slate-200)] hover:text-[var(--gold-light)] hover:border-[var(--gold-light)] hover:bg-[var(--gold)]/10 transition-all duration-300 group"
                 aria-label="Follow us on Instagram"
               >
                 <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
@@ -52,7 +52,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/global-chanakya/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[var(--surface)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--gold-hover)] hover:border-[var(--gold-hover)] hover:bg-[var(--gold)]/10 transition-all duration-300 group"
+                className="w-10 h-10 rounded-full bg-[var(--navy-surface)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--slate-200)] hover:text-[var(--gold-light)] hover:border-[var(--gold-light)] hover:bg-[var(--gold)]/10 transition-all duration-300 group"
                 aria-label="Follow us on LinkedIn"
               >
                 <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
@@ -61,7 +61,7 @@ export default function Footer() {
                 href="https://x.com/GChanakyaIntel" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[var(--surface)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--muted)] hover:text-[var(--gold-hover)] hover:border-[var(--gold-hover)] hover:bg-[var(--gold)]/10 transition-all duration-300 group"
+                className="w-10 h-10 rounded-full bg-[var(--navy-surface)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--slate-200)] hover:text-[var(--gold-light)] hover:border-[var(--gold-light)] hover:bg-[var(--gold)]/10 transition-all duration-300 group"
                 aria-label="Follow us on X"
               >
                 <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
@@ -73,39 +73,39 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h4 className="text-white text-sm font-bold uppercase tracking-[0.06em]">Explore</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/intelligence" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Intelligence</Link></li>
-              <li><Link href="/blogs" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Reports</Link></li>
-              <li><Link href="/topics" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Topics</Link></li>
+              <li><Link href="/intelligence" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Intelligence</Link></li>
+              <li><Link href="/blogs" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Reports</Link></li>
+              <li><Link href="/topics" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Topics</Link></li>
             </ul>
           </div>
 
           {/* Column 3: Company */}
           <div className="flex flex-col gap-5">
-            <h4 className="text-white text-sm font-bold uppercase tracking-[0.06em]">Company</h4>
+            <h4 className="text-[var(--white)] text-sm font-bold uppercase tracking-[0.06em]">Company</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/about" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">About</Link></li>
-              <li><Link href="/careers" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Careers</Link></li>
-              <li><Link href="/contact" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Contact</Link></li>
+              <li><Link href="/about" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">About</Link></li>
+              <li><Link href="/careers" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Careers</Link></li>
+              <li><Link href="/contact" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           {/* Column 4: Standards */}
           <div className="flex flex-col gap-5">
-            <h4 className="text-white text-sm font-bold uppercase tracking-[0.06em]">Standards</h4>
+            <h4 className="text-[var(--white)] text-sm font-bold uppercase tracking-[0.06em]">Standards</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/methodology" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Methodology</Link></li>
-              <li><Link href="/source-verification" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Source Verification</Link></li>
-              <li><Link href="/editorial-policy" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Editorial Policy</Link></li>
-              <li><Link href="/privacy" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Privacy</Link></li>
-              <li><Link href="/terms" className="text-sm text-[var(--muted)] hover:text-[var(--gold)] transition-colors">Terms</Link></li>
+              <li><Link href="/methodology" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Methodology</Link></li>
+              <li><Link href="/source-verification" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Source Verification</Link></li>
+              <li><Link href="/editorial-policy" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Editorial Policy</Link></li>
+              <li><Link href="/privacy" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Privacy</Link></li>
+              <li><Link href="/terms" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Terms</Link></li>
             </ul>
           </div>
           
         </div>
 
         {/* Bottom Strip */}
-        <div className="border-t border-[#111827] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[var(--muted)] tracking-wide" suppressHydrationWarning>
+        <div className="border-t border-[var(--border-dark)] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[var(--slate-200)] tracking-wide" suppressHydrationWarning>
             © {currentYear} Global Chanakya Intelligence. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
