@@ -45,13 +45,13 @@ export default function ScenariosPage() {
               value={scenario}
               onChange={(e) => setScenario(e.target.value)}
               placeholder="What if..." 
-              className="w-full bg-[var(--surface)]/50 border-2 border-[var(--border)] rounded-2xl py-6 pl-16 pr-32 text-lg focus:outline-none focus:border-purple-400/50 transition-colors shadow-inner"
+              className="w-full bg-[var(--surface)]/50 border-2 border-[var(--border)] rounded-sm py-6 pl-16 pr-32 text-lg focus:outline-none focus:border-purple-400/50 transition-colors shadow-inner"
               disabled={status === "PROCESSING"}
             />
             <button 
               type="submit"
               disabled={status === "PROCESSING" || !scenario.trim()}
-              className="absolute right-3 top-3 bottom-3 px-6 bg-purple-500 text-white font-bold uppercase tracking-wider rounded-xl hover:bg-purple-400 disabled:opacity-50 transition-colors"
+              className="absolute right-3 top-3 bottom-3 px-6 bg-purple-500 text-white font-bold uppercase tracking-wider rounded-sm hover:bg-purple-400 disabled:opacity-50 transition-colors"
             >
               Simulate
             </button>
@@ -85,9 +85,9 @@ export default function ScenariosPage() {
         )}
 
         {status === "COMPLETE" && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="animate-in fade-in slide-in- duration-700">
             {/* Header */}
-            <div className="p-6 md:p-8 rounded-2xl border border-purple-500/30 bg-[var(--surface)]/80 relative overflow-hidden mb-8">
+            <div className="p-6 md:p-8 rounded-sm border border-purple-500/30 bg-[var(--surface)]/80 relative overflow-hidden mb-8">
               <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
               
               <div className="relative z-10 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
@@ -135,7 +135,7 @@ export default function ScenariosPage() {
                   <AIAnswerSection title="Strategic Response Required" content={response.strategicResponse} type="list" highlight={true} />
                   <AIAnswerSection title="Possible Outcomes" content={response.outcomes} type="list" />
                   
-                  <div className="p-5 rounded-xl border border-[var(--danger)]/30 bg-[var(--danger)]/5 text-sm text-white/90">
+                  <div className="p-5 rounded-sm border border-[var(--danger)]/30 bg-[var(--danger)]/5 text-sm text-white/90">
                     <span className="text-[10px] font-extrabold text-[var(--danger)] uppercase tracking-[0.2em] block mb-2">Risk Assessment</span>
                     {response.riskAssessment}
                   </div>

@@ -17,7 +17,7 @@ export function RiskBlock({ level, assessment }: RiskBlockProps) {
   };
 
   return (
-    <section className={`my-8 p-5 border rounded-2xl ${colorMap[level]} backdrop-blur-sm`} aria-label="Risk Assessment">
+    <section className={`my-8 p-5 border rounded-sm ${colorMap[level]} `} aria-label="Risk Assessment">
       <header className="flex items-center gap-3 mb-3">
         <AlertTriangle className="w-5 h-5" />
         <h3 className="text-sm font-bold uppercase tracking-wider">

@@ -41,7 +41,7 @@ export function AnalystComments({ articleId }: { articleId: string }) {
       </div>
 
       {/* Auth Gate for Commenting */}
-      <div className="p-4 rounded-xl border border-gray-800 bg-gray-900/50 mb-8 flex items-center justify-between">
+      <div className="p-4 rounded-sm border border-gray-800 bg-gray-900/50 mb-8 flex items-center justify-between">
         <p className="text-sm text-gray-400">Join the discussion with global strategists.</p>
         <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg text-sm transition-colors">
           Sign In to Contribute
@@ -50,7 +50,7 @@ export function AnalystComments({ articleId }: { articleId: string }) {
 
       <div className="space-y-6">
         {comments.map(comment => (
-          <div key={comment.id} className={`p-5 rounded-2xl border ${comment.isVerifiedAnalyst ? 'bg-blue-500/5 border-blue-500/20' : 'bg-transparent border-gray-800'}`}>
+          <div key={comment.id} className={`p-5 rounded-sm border ${comment.isVerifiedAnalyst ? 'bg-blue-500/5 border-blue-500/20' : 'bg-transparent border-gray-800'}`}>
             <header className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <span className="font-bold text-gray-200">{comment.author}</span>

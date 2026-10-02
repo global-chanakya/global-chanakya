@@ -61,7 +61,7 @@ export function EntityHub({
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 mt-4">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 rounded-2xl bg-indigo-500/[0.04] border border-indigo-500/[0.2] flex items-center justify-center">
+            <div className="w-20 h-20 rounded-sm bg-indigo-500/[0.04] border border-indigo-500/[0.2] flex items-center justify-center">
               <Network className="w-8 h-8 text-indigo-400" />
             </div>
             <div>
@@ -82,7 +82,7 @@ export function EntityHub({
             {articles.length > 0 ? (
               <RelatedIntelligence items={articles} title={`Latest ${entityType} Reports`} />
             ) : (
-              <div className="glass-card p-8 rounded-sm text-center border border-[var(--border)]">
+              <div className="bg-[var(--surface)] p-8 rounded-sm text-center border border-[var(--border)]">
                 <p className="text-[var(--secondary)]">No intelligence reports currently available for this entity.</p>
               </div>
             )}
@@ -93,7 +93,7 @@ export function EntityHub({
 
           <aside className="lg:col-span-4 flex flex-col gap-8">
             {hasRelated && (
-              <div className="glass-card rounded-sm p-6">
+              <div className="bg-[var(--surface)] rounded-sm p-6">
                 <h3 className="text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
                   <Crosshair className="w-4 h-4 text-[var(--gold)]" /> Entity Graph
                 </h3>
@@ -121,7 +121,7 @@ export function EntityHub({
               </div>
             )}
             
-            <div className="glass-card rounded-sm p-6 border border-[var(--border)] bg-[var(--surface)]/50">
+            <div className="bg-[var(--surface)] rounded-sm p-6 border border-[var(--border)] bg-[var(--surface)]/50">
                <h3 className="text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-4">
                  <Newspaper className="w-4 h-4 text-[var(--cyan)]" /> Intelligence Stats
                </h3>

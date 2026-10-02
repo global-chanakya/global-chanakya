@@ -585,7 +585,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
   const errorsExist = Object.keys(validate(true)).length > 0 || slugStatus.state === "taken";
 
   // ─── Style constants ───────────────────────────────────────────────────────
-  const inputClass = "w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--cyan)]/40 focus:bg-white/8 transition-all";
+  const inputClass = "w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--border)] focus:bg-white/8 transition-all";
   const labelClass = "block text-[11px] text-gray-400 font-semibold mb-1.5 uppercase tracking-widest";
   const errorClass = "text-red-400 text-xs mt-1";
   const selectBg = "bg-[#0d0d17]";
@@ -628,8 +628,8 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
 
       {/* ═══════ Publishing Overlay ═══════ */}
       {publishing && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0d0d17] border border-white/10 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
+        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+          <div className="bg-[#0d0d17] border border-white/10 rounded-sm p-8 max-w-md w-full text-center shadow-sm">
             {publishStep < 3 ? (
               <>
                 <div className="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center text-3xl bg-amber-500/20 border border-amber-500/30">
@@ -700,8 +700,8 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
 
       {/* ═══════ Pre-Publish Checklist Modal ═══════ */}
       {showPrePublishChecklist && (
-        <div className="fixed inset-0 z-[90] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#0d0d17] border border-white/10 rounded-2xl p-6 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[90] bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-[#0d0d17] border border-white/10 rounded-sm p-6 max-w-lg w-full shadow-sm max-h-[90vh] overflow-y-auto">
             <h3 className="text-white font-bold text-base mb-4 flex items-center gap-2">
               <span className="text-amber-400">📋</span> Pre-Publish Checklist
             </h3>
@@ -840,7 +840,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
             {/* ══════════════════════════════════════════
                 SECTION: ARTICLE IDENTITY
                 ══════════════════════════════════════════ */}
-            <section id="section-identity" className="bg-[#0d0d17] border border-white/10 rounded-2xl overflow-hidden shadow-lg">
+            <section id="section-identity" className="bg-[#0d0d17] border border-white/10 rounded-sm overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-white/10 bg-white/4">
                 <h2 className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[var(--gold)]" />
@@ -869,7 +869,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
                 {/* Slug */}
                 <div>
                   <label htmlFor="field-slug" className={labelClass}>URL Slug</label>
-                  <div className="flex items-stretch gap-0 rounded-lg overflow-hidden border border-white/10 focus-within:border-[var(--cyan)]/40 transition-all">
+                  <div className="flex items-stretch gap-0 rounded-lg overflow-hidden border border-white/10 focus-within:border-[var(--border)] transition-all">
                     <span className="flex items-center px-3 bg-white/4 text-gray-500 text-xs font-mono border-r border-white/10 whitespace-nowrap shrink-0">/blogs/</span>
                     <input
                       id="field-slug"
@@ -950,7 +950,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
                       src={form.featuredImage}
                       alt="Featured image preview"
                       loading="lazy"
-                      className="mt-3 rounded-xl max-h-48 w-auto object-cover border border-white/10"
+                      className="mt-3 rounded-sm max-h-48 w-auto object-cover border border-white/10"
                       onError={e => { (e.target as HTMLImageElement).style.display = "none"; }}
                     />
                   )}
@@ -961,7 +961,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
             {/* ══════════════════════════════════════════
                 SECTION: CONTENT
                 ══════════════════════════════════════════ */}
-            <section id="section-content" className="bg-[#0d0d17] border border-white/10 rounded-2xl overflow-hidden shadow-lg">
+            <section id="section-content" className="bg-[#0d0d17] border border-white/10 rounded-sm overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-white/10 bg-white/4 flex items-center justify-between flex-wrap gap-3">
                 <h2 className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[var(--cyan)]" />
@@ -1028,7 +1028,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
                     </div>
                   </>
                 ) : (
-                  <div className="rounded-xl overflow-hidden border border-white/10" style={{ minHeight: "560px" }}>
+                  <div className="rounded-sm overflow-hidden border border-white/10" style={{ minHeight: "560px" }}>
                     {form.content ? (
                       <iframe
                         srcDoc={`<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{background:#fff;color:#111;font-family:Georgia,serif;font-size:17px;line-height:1.8;padding:24px 32px;max-width:800px;margin:0 auto;}h1,h2,h3,h4{font-family:-apple-system,sans-serif;font-weight:700;margin-top:1.5em;line-height:1.3;}h2{font-size:1.4em;}h3{font-size:1.2em;}a{color:#ef4444;}blockquote{border-left:4px solid #ef4444;margin:1.5em 0;padding:12px 20px;background:#fff5f5;border-radius:0 8px 8px 0;font-style:italic;color:#555;}ul,ol{padding-left:1.5em;}img{max-width:100%;border-radius:8px;}p{margin-bottom:1em;}</style></head><body>${form.content}</body></html>`}
@@ -1050,7 +1050,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
             {/* ══════════════════════════════════════════
                 SECTION: SEO & METADATA
                 ══════════════════════════════════════════ */}
-            <section id="section-seo" className="bg-[#0d0d17] border border-white/10 rounded-2xl overflow-hidden shadow-lg">
+            <section id="section-seo" className="bg-[#0d0d17] border border-white/10 rounded-sm overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-white/10 bg-white/4">
                 <h2 className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-blue-500" />
@@ -1176,7 +1176,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
             {/* ══════════════════════════════════════════
                 SECTION: SETTINGS
                 ══════════════════════════════════════════ */}
-            <section id="section-settings" className="bg-[#0d0d17] border border-white/10 rounded-2xl overflow-hidden shadow-lg">
+            <section id="section-settings" className="bg-[#0d0d17] border border-white/10 rounded-sm overflow-hidden shadow-sm">
               <div className="px-6 py-4 border-b border-white/10 bg-white/4">
                 <h2 className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
@@ -1302,9 +1302,9 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
                         role="switch"
                         aria-checked={!!form[key]}
                         onClick={() => update(key, !form[key])}
-                        className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all ${
+                        className={`flex items-center gap-2 px-3 py-2.5 rounded-sm border text-xs font-medium transition-all ${
                           form[key]
-                            ? "bg-[var(--cyan)]/10 border-[var(--cyan)]/30 text-[var(--cyan)]"
+                            ? "bg-[var(--cyan)]/10 border-[var(--border)] text-[var(--cyan)]"
                             : "bg-white/3 border-white/8 text-gray-500 hover:text-gray-300"
                         }`}
                       >
@@ -1378,14 +1378,14 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
               <button
                 onClick={() => handleSave(false)}
                 disabled={saving}
-                className="flex-1 py-3 bg-white/8 hover:bg-white/12 text-white text-sm font-medium rounded-xl border border-white/10 transition-all disabled:opacity-50"
+                className="flex-1 py-3 bg-white/8 hover:bg-white/12 text-white text-sm font-medium rounded-sm border border-white/10 transition-all disabled:opacity-50"
               >
                 {saving ? "Saving…" : "💾 Save Draft"}
               </button>
               <button
                 onClick={handlePublishClick}
                 disabled={saving}
-                className="flex-1 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-xl transition-all disabled:opacity-50"
+                className="flex-1 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-sm transition-all disabled:opacity-50"
               >
                 🚀 Publish
               </button>
@@ -1504,7 +1504,7 @@ function EntitySelector({
             onChange([...selectedIds, e.target.value].join(", "));
           }
         }}
-        className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--cyan)]/40 transition-all bg-[#0d0d17]"
+        className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--border)] transition-all bg-[#0d0d17]"
       >
         <option value="" className="bg-[#0d0d17]">— Add {label} —</option>
         {entities.map(e => (

@@ -31,11 +31,11 @@ export function TrendingEngine() {
   }, []);
 
   if (loading) {
-    return <div className="h-48 rounded-2xl bg-gray-900/30 animate-pulse border border-gray-800"></div>;
+    return <div className="h-48 rounded-sm bg-gray-900/30 animate-pulse border border-gray-800"></div>;
   }
 
   return (
-    <div className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 backdrop-blur-md">
+    <div className="p-6 rounded-sm bg-gray-900/50 border border-gray-800">
       <h3 className="text-lg font-extrabold text-white mb-4 flex items-center gap-2">
         <TrendingUp className="w-5 h-5 text-red-500" />
         Trending Intelligence

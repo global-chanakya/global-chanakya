@@ -83,7 +83,7 @@ export default function AdminGrowthClient() {
     );
   }
 
-  const inputClass = "w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--gold)]/50 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all";
+  const inputClass = "w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-sm text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] focus: transition-all";
   const labelClass = "block text-[11px] text-white/50 font-bold mb-2 uppercase tracking-[0.1em]";
 
   return (
@@ -92,7 +92,7 @@ export default function AdminGrowthClient() {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] mb-2 flex items-center gap-3">
-            Growth <span className="bg-gradient-to-r from-[var(--cyan)] to-blue-500 text-transparent bg-clip-text drop-shadow-sm">Dashboard</span>
+            Growth <span className="text-[var(--text)]">Dashboard</span>
           </h1>
           <p className="text-white/50 text-[14px] font-medium max-w-xl leading-relaxed">
             Manage announcements, newsletter configurations, and trending algorithms.
@@ -103,8 +103,8 @@ export default function AdminGrowthClient() {
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold uppercase tracking-[0.1em] text-[12px] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 ${
-            saved ? "bg-[var(--cyan)] text-black" : "bg-gradient-to-r from-[var(--gold)] to-yellow-500 text-black"
+          className={`flex items-center gap-2 px-6 py-3 rounded-sm font-bold uppercase tracking-[0.1em] text-[12px] transition-all  hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 ${
+            saved ? "bg-[var(--cyan)] text-black" : " )]  text-black"
           }`}
         >
           {isSaving ? (
@@ -119,7 +119,7 @@ export default function AdminGrowthClient() {
       </div>
 
       {error && (
-        <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3 text-red-400">
+        <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-sm flex items-center gap-3 text-red-400">
           <AlertCircle className="w-5 h-5 shrink-0" />
           <p className="text-sm font-medium">{error}</p>
         </div>
@@ -129,13 +129,13 @@ export default function AdminGrowthClient() {
         
         <div className="space-y-8">
           {/* Announcement Bar */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 md:p-8 shadow-sm relative overflow-hidden">
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3">
               <Megaphone className="w-4 h-4 text-[var(--gold)]" /> Announcement Bar
             </h2>
             
             <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-[var(--bg)]/50">
+              <div className="flex items-center justify-between p-4 rounded-sm border border-[var(--border)] bg-[var(--bg)]/50">
                 <div>
                   <p className="text-[12px] font-bold uppercase tracking-[0.05em] text-white">Enable Bar</p>
                   <p className="text-white/40 text-[11px] mt-1">Show banner across all pages</p>
@@ -144,7 +144,7 @@ export default function AdminGrowthClient() {
                   onClick={() => updateAnnouncement("isActive", !growthSettings.announcementBar.isActive)}
                   className={`relative w-12 h-6 rounded-full transition-colors shrink-0 ${
                     growthSettings.announcementBar.isActive
-                      ? "bg-[var(--cyan)] shadow-[0_0_10px_rgba(34,211,238,0.3)]"
+                      ? "bg-[var(--cyan)] "
                       : "bg-white/10"
                   }`}
                 >
@@ -214,7 +214,7 @@ export default function AdminGrowthClient() {
 
         <div className="space-y-8">
           {/* Newsletter Config */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 md:p-8 shadow-sm relative overflow-hidden">
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3">
               <Mail className="w-4 h-4 text-blue-400" /> Newsletter Configuration
             </h2>
@@ -231,7 +231,7 @@ export default function AdminGrowthClient() {
           </div>
 
           {/* Trending Rules */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 md:p-8 shadow-sm relative overflow-hidden">
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3">
               <TrendingUp className="w-4 h-4 text-emerald-400" /> Trending Algorithm
             </h2>

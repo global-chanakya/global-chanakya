@@ -16,7 +16,7 @@ export function Skeleton({
     text: "h-4 rounded",
     circular: "rounded-full",
     rectangular: "",
-    rounded: "rounded-2xl"
+    rounded: "rounded-sm"
   }[variant];
   
   // Custom subtle shimmer animation using CSS
@@ -33,7 +33,7 @@ export function Skeleton({
 
 export function SkeletonCard() {
   return (
-    <div className="flex flex-col h-full glass-card rounded-2xl border border-[var(--border)] overflow-hidden bg-[var(--surface)]/20 p-5 md:p-6 lg:p-7">
+    <div className="flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden bg-[var(--surface)]/20 p-5 md:p-6 lg:p-7">
       <Skeleton variant="rectangular" className="w-full aspect-[16/9] -mx-5 -mx-6 -mx-7 -mt-5 -mt-6 -mt-7 mb-4 md:mb-5" />
       <Skeleton className="w-16 h-5 mb-4" />
       <Skeleton className="w-full h-6 mb-2" />
@@ -51,7 +51,7 @@ export function SkeletonCard() {
 
 export function SkeletonIntelligenceCard() {
   return (
-    <div className="flex flex-col h-full glass-card rounded-2xl border border-[var(--border)] bg-[var(--surface)]/20 p-6 md:p-8 relative overflow-hidden">
+    <div className="flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] bg-[var(--surface)]/20 p-6 md:p-8 relative overflow-hidden">
       <div className="flex justify-between items-start mb-4">
         <div className="flex gap-2">
           <Skeleton className="w-16 h-6 rounded" />

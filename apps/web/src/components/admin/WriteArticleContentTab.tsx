@@ -33,8 +33,8 @@ export function WriteArticleContentTab({
         <div className="flex items-center justify-between mb-3">
           <label className={`${labelClass} !mb-0`}>Article Content *</label>
           <div className="flex gap-1 bg-[var(--surface)] border border-[var(--border)] rounded-lg p-1 shadow-inner">
-            <button type="button" onClick={() => setEditorMode("code")} className={`px-4 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-[0.1em] transition-all ${editorMode === "code" ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/30" : "text-white/40 hover:text-white hover:bg-white/5 border border-transparent"}`}>&lt;/&gt; Code</button>
-            <button type="button" onClick={() => setEditorMode("preview")} className={`px-4 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-[0.1em] transition-all ${editorMode === "preview" ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/30" : "text-white/40 hover:text-white hover:bg-white/5 border border-transparent"}`}>👁 Preview</button>
+            <button type="button" onClick={() => setEditorMode("code")} className={`px-4 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-[0.1em] transition-all ${editorMode === "code" ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--accent)]" : "text-white/40 hover:text-white hover:bg-white/5 border border-transparent"}`}>&lt;/&gt; Code</button>
+            <button type="button" onClick={() => setEditorMode("preview")} className={`px-4 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-[0.1em] transition-all ${editorMode === "preview" ? "bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--accent)]" : "text-white/40 hover:text-white hover:bg-white/5 border border-transparent"}`}>👁 Preview</button>
           </div>
         </div>
         {editorMode === "code" ? (
@@ -48,7 +48,7 @@ export function WriteArticleContentTab({
             }
           }} />
         ) : (
-          <div className="rounded-xl overflow-hidden border border-[var(--border)] shadow-inner" style={{ height: "560px" }}>
+          <div className="rounded-sm overflow-hidden border border-[var(--border)] shadow-inner" style={{ height: "560px" }}>
             {form.content ? (
               <iframe srcDoc={`<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{background:#fff;color:#111;font-family:Georgia,serif;font-size:17px;line-height:1.8;padding:24px 32px;max-width:800px;margin:0 auto;}h1,h2,h3,h4{font-family:-apple-system,sans-serif;font-weight:700;margin-top:1.5em;}a{color:#ef4444;}blockquote{border-left:4px solid #ef4444;margin:1.5em 0;padding:12px 20px;background:#fff5f5;border-radius:0 8px 8px 0;font-style:italic;color:#555;}ul,ol{padding-left:1.5em;}img{max-width:100%;border-radius:8px;}</style></head><body>${form.content}</body></html>`} className="w-full h-full bg-white" title="Preview" sandbox="allow-scripts" />
             ) : (

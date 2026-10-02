@@ -16,9 +16,9 @@ const getIcon = (name: string) => {
 };
 
 const impactColors = {
-  CRITICAL: "bg-[var(--danger)] text-white shadow-[0_0_10px_rgba(220,38,38,0.5)] border-[var(--danger)]",
-  HIGH: "bg-orange-500 text-white shadow-[0_0_10px_rgba(249,115,22,0.4)] border-orange-500",
-  MEDIUM: "bg-yellow-500 text-[var(--bg)] shadow-[0_0_10px_rgba(234,179,8,0.4)] border-yellow-500",
+  CRITICAL: "bg-[var(--danger)] text-white  border-[var(--danger)]",
+  HIGH: "bg-orange-500 text-white  border-orange-500",
+  MEDIUM: "bg-yellow-500 text-[var(--bg)]  border-yellow-500",
   LOW: "bg-green-500 text-[var(--bg)] border-green-500",
   NEUTRAL: "bg-[var(--surface)] text-[var(--muted)] border-[var(--border)]",
 };
@@ -33,7 +33,7 @@ const barWidths = {
 
 export function ImpactMeter({ dimension }: { dimension: ImpactDimension }) {
   return (
-    <div className="flex flex-col p-4 rounded-xl bg-[var(--surface)]/30 border border-[var(--border)] group hover:border-[var(--gold)]/30 transition-colors">
+    <div className="flex flex-col p-4 rounded-sm bg-[var(--surface)]/30 border border-[var(--border)] group hover:border-[var(--accent)] transition-colors">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-[var(--bg)] flex items-center justify-center border border-[var(--border)] text-[var(--cyan)]">

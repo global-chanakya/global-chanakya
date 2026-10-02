@@ -25,7 +25,7 @@ const getSourceIcon = (type: SourceType) => {
 export function SourceCard({ type, title, publisher, date, url, credibilityScore = 95 }: SourceProps) {
   return (
     <div 
-      className="p-4 rounded-xl border border-gray-800 bg-gray-900/50 hover:bg-gray-800/80 transition-colors flex flex-col sm:flex-row sm:items-center gap-4 group"
+      className="p-4 rounded-sm border border-gray-800 bg-gray-900/50 hover:bg-gray-800/80 transition-colors flex flex-col sm:flex-row sm:items-center gap-4 group"
       itemProp="citation" 
       itemScope 
       itemType="https://schema.org/CreativeWork"

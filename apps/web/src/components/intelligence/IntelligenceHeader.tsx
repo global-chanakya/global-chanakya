@@ -11,8 +11,8 @@ export function IntelligenceHeader({ title, subtitle, live = false }: Intelligen
   return (
     <div className="flex flex-col mb-8 md:mb-12 border-b border-[var(--border)] pb-6 pt-8">
       <div className="flex items-center gap-4 mb-4">
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
-          <Crosshair className="w-5 h-5 md:w-6 md:h-6 text-[var(--gold)] drop-shadow-[0_0_8px_rgba(212,175,55,0.5)]" />
+        <div className="w-10 h-10 md:w-12 md:h-12 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0">
+          <Crosshair className="w-5 h-5 md:w-6 md:h-6 text-[var(--gold)] drop-" />
         </div>
         <div className="flex flex-col">
           <div className="flex items-center gap-3">
@@ -20,7 +20,7 @@ export function IntelligenceHeader({ title, subtitle, live = false }: Intelligen
               {title}
             </h1>
             {live && (
-              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[var(--danger)]/10 text-[var(--danger)] border border-[var(--danger)]/30 text-[9px] font-bold uppercase tracking-[0.15em] animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.2)]">
+              <span className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[var(--danger)]/10 text-[var(--danger)] border border-[var(--danger)]/30 text-[9px] font-bold uppercase tracking-[0.15em] animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--danger)]"></span> Live
               </span>
             )}

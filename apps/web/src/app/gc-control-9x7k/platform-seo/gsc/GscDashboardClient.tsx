@@ -53,7 +53,7 @@ export default function GscDashboardClient() {
   if (error) {
     return (
       <div className="p-8">
-        <div className="bg-red-500/10 border border-red-500/30 text-red-400 p-6 rounded-xl flex flex-col items-center justify-center text-center">
+        <div className="bg-red-500/10 border border-red-500/30 text-red-400 p-6 rounded-sm flex flex-col items-center justify-center text-center">
           <AlertTriangle className="w-8 h-8 mb-3" />
           <h2 className="text-lg font-bold mb-1">Failed to load Intelligence Data</h2>
           <p className="text-sm opacity-80">{error}</p>
@@ -74,7 +74,7 @@ export default function GscDashboardClient() {
             <p className="text-gray-400">Search Console Performance & Semantic Analysis</p>
           </div>
         </div>
-        <div className="bg-[var(--surface)] border border-[var(--border)] p-12 rounded-2xl flex flex-col items-center justify-center text-center">
+        <div className="bg-[var(--surface)] border border-[var(--border)] p-12 rounded-sm flex flex-col items-center justify-center text-center">
           <div className="w-16 h-16 rounded-full bg-[var(--cyan)]/10 flex items-center justify-center mb-6">
             <BarChart2 className="w-8 h-8 text-[var(--cyan)]" />
           </div>
@@ -82,7 +82,7 @@ export default function GscDashboardClient() {
           <p className="text-gray-400 max-w-md mb-8">
             To view organic search intelligence, you must configure GSC credentials and ingest historical data.
           </p>
-          <div className="bg-black/40 rounded-xl p-6 text-left max-w-lg w-full border border-white/5 space-y-4">
+          <div className="bg-black/40 rounded-sm p-6 text-left max-w-lg w-full border border-white/5 space-y-4">
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</div>
               <p className="text-sm text-gray-300">Configure <code className="text-white bg-white/10 px-1.5 py-0.5 rounded">GSC_SERVICE_ACCOUNT_EMAIL</code>, <code className="text-white bg-white/10 px-1.5 py-0.5 rounded">GSC_PRIVATE_KEY</code>, and <code className="text-white bg-white/10 px-1.5 py-0.5 rounded">GSC_SITE_URL</code>.</p>
@@ -119,7 +119,7 @@ export default function GscDashboardClient() {
             <p className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Latest GSC Data</p>
             <p className="text-sm font-medium text-white">{latestDataDate}</p>
           </div>
-          <button onClick={fetchDashboardData} className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
+          <button onClick={fetchDashboardData} className="p-2.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
             <RefreshCw className="w-4 h-4 text-gray-300" />
           </button>
         </div>
@@ -127,7 +127,7 @@ export default function GscDashboardClient() {
 
       {/* KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl">
+        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-sm">
           <div className="flex items-center gap-3 mb-3">
             <div className="p-2 rounded-lg bg-[var(--cyan)]/10 text-[var(--cyan)]">
               <MousePointerClick className="w-4 h-4" />
@@ -137,7 +137,7 @@ export default function GscDashboardClient() {
           <p className="text-3xl font-black text-white">{kpis?.clicks.toLocaleString()}</p>
         </div>
         
-        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl">
+        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-sm">
           <div className="flex items-center gap-3 mb-3">
             <div className="p-2 rounded-lg bg-[var(--gold)]/10 text-[var(--gold)]">
               <Eye className="w-4 h-4" />
@@ -147,7 +147,7 @@ export default function GscDashboardClient() {
           <p className="text-3xl font-black text-white">{kpis?.impressions.toLocaleString()}</p>
         </div>
 
-        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl">
+        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-sm">
           <div className="flex items-center gap-3 mb-3">
             <div className="p-2 rounded-lg bg-green-500/10 text-green-400">
               <Activity className="w-4 h-4" />
@@ -157,7 +157,7 @@ export default function GscDashboardClient() {
           <p className="text-3xl font-black text-white">{kpis?.ctr}%</p>
         </div>
 
-        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-2xl">
+        <div className="bg-[var(--surface)] border border-[var(--border)] p-5 rounded-sm">
           <div className="flex items-center gap-3 mb-3">
             <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400">
               <TrendingUp className="w-4 h-4" />
@@ -169,7 +169,7 @@ export default function GscDashboardClient() {
       </div>
 
       {/* Trend Chart (Simple CSS implementation) */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] p-6 rounded-2xl">
+      <div className="bg-[var(--surface)] border border-[var(--border)] p-6 rounded-sm">
         <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-6">Performance Trend (Impressions vs Clicks)</h3>
         <div className="h-48 flex items-end gap-2 w-full pt-4 relative">
           {trend?.map((t, i) => (
@@ -206,7 +206,7 @@ export default function GscDashboardClient() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Top Queries */}
-        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden flex flex-col">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm overflow-hidden flex flex-col">
           <div className="p-5 border-b border-[var(--border)]">
             <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400">Top Search Queries</h3>
           </div>
@@ -242,7 +242,7 @@ export default function GscDashboardClient() {
         </div>
 
         {/* Top Pages */}
-        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden flex flex-col">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm overflow-hidden flex flex-col">
           <div className="p-5 border-b border-[var(--border)]">
             <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400">Top Performing URLs</h3>
           </div>
@@ -286,7 +286,7 @@ export default function GscDashboardClient() {
       </div>
 
       {/* SEO Review Opportunities (CTR) */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm overflow-hidden">
         <div className="p-5 border-b border-[var(--border)] flex items-center justify-between">
           <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400">SEO Review Opportunities</h3>
           <span className="px-2 py-1 bg-[var(--cyan)]/10 text-[var(--cyan)] text-xs font-bold rounded">High Impr. / Low CTR</span>
@@ -328,7 +328,7 @@ export default function GscDashboardClient() {
       </div>
 
       {/* Cannibalization Evidence */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm overflow-hidden">
         <div className="p-5 border-b border-[var(--border)] flex items-center gap-3">
           <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400">Cannibalization Evidence</h3>
           <span className="px-2 py-1 bg-gray-500/10 text-gray-400 text-xs font-bold rounded">Query Overlap Analysis</span>

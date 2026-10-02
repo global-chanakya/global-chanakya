@@ -139,7 +139,7 @@ export default function ProfileClient() {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <aside className="lg:col-span-4 flex flex-col gap-6">
-          <div className="glass-card p-6 rounded-lg border border-[var(--border)] animate-pulse">
+          <div className="bg-[var(--surface)] p-6 rounded-lg border border-[var(--border)] animate-pulse">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-[var(--surface)]" />
               <div className="flex-1 space-y-2">
@@ -152,10 +152,10 @@ export default function ProfileClient() {
               <div className="h-3 bg-[var(--surface)] rounded w-1/2" />
             </div>
           </div>
-          <div className="glass-card p-6 rounded-lg border border-[var(--border)] animate-pulse h-48" />
+          <div className="bg-[var(--surface)] p-6 rounded-lg border border-[var(--border)] animate-pulse h-48" />
         </aside>
         <main className="lg:col-span-8 flex flex-col gap-6">
-          <div className="glass-card h-[600px] rounded-lg border border-[var(--border)] animate-pulse" />
+          <div className="bg-[var(--surface)] h-[600px] rounded-lg border border-[var(--border)] animate-pulse" />
         </main>
       </div>
     );
@@ -163,7 +163,7 @@ export default function ProfileClient() {
 
   if (error || !profileData) {
     return (
-      <div className="glass-card p-8 rounded-lg text-center border-red-500/20">
+      <div className="bg-[var(--surface)] p-8 rounded-lg text-center border-red-500/20">
         <p className="text-red-400">{error || "Failed to load profile"}</p>
       </div>
     );
@@ -176,12 +176,12 @@ export default function ProfileClient() {
       {/* ── Left Sidebar (User Info & Stats) ── */}
       <aside className="lg:col-span-4 flex flex-col gap-6">
         {/* User Card */}
-        <div className="glass-card p-6 rounded-lg border border-[var(--border)] relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--gold)] to-[var(--cyan)]" />
+        <div className="bg-[var(--surface)] p-6 rounded-lg border border-[var(--border)] relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1" />
           
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-[var(--surface)] intel-border flex items-center justify-center text-xl font-bold text-white shadow-lg overflow-hidden relative">
+              <div className="w-16 h-16 rounded-full bg-[var(--surface)] intel-border flex items-center justify-center text-xl font-bold text-white shadow-sm overflow-hidden relative">
                 {user.avatar ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img loading="lazy" src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
@@ -222,7 +222,7 @@ export default function ProfileClient() {
         </div>
 
         {/* Analytics Card */}
-        <div className="glass-card p-6 rounded-lg border border-[var(--border)]">
+        <div className="bg-[var(--surface)] p-6 rounded-lg border border-[var(--border)]">
           <h3 className="text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
             <Activity className="w-4 h-4 text-[var(--gold)]" /> Engagement Metrics
           </h3>
@@ -257,7 +257,7 @@ export default function ProfileClient() {
 
       {/* ── Right Content (Activity Feed) ── */}
       <main className="lg:col-span-8 flex flex-col gap-6">
-        <div className="glass-card rounded-lg border border-[var(--border)] overflow-hidden">
+        <div className="bg-[var(--surface)] rounded-lg border border-[var(--border)] overflow-hidden">
           {/* Tabs Header */}
           <div className="flex border-b border-[var(--border)] bg-[var(--surface)]">
             <button
@@ -303,7 +303,7 @@ export default function ProfileClient() {
                     <Link
                       key={`${item._id}-${index}`}
                       href={`/blogs/${blog.slug}`}
-                      className="group flex flex-col sm:flex-row gap-4 p-4 rounded-md border border-[var(--border)] bg-[var(--bg)] hover:border-[var(--gold)]/50 hover:-translate-y-1 transition-all"
+                      className="group flex flex-col sm:flex-row gap-4 p-4 rounded-md border border-[var(--border)] bg-[var(--bg)] hover:border-[var(--accent)] hover:-translate-y-1 transition-all"
                     >
                       {blog.featuredImage && (
                         <div className="w-full sm:w-32 h-24 shrink-0 rounded overflow-hidden">
@@ -370,8 +370,8 @@ export default function ProfileClient() {
 
       {/* Edit Profile Modal */}
       {isEditing && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[var(--bg)] border border-[var(--border)] rounded-lg max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-[var(--bg)] border border-[var(--border)] rounded-lg max-w-md w-full shadow-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-4 border-b border-[var(--border)]">
               <h3 className="font-bold text-white uppercase tracking-widest text-sm">Edit Profile</h3>
               <button onClick={() => setIsEditing(false)} className="text-[var(--muted)] hover:text-white">

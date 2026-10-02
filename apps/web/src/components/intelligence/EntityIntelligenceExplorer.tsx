@@ -9,7 +9,7 @@ export function EntityIntelligenceExplorer({ intelligence }: { intelligence: Ent
   return (
     <div className="mt-12 pt-12 border-t border-[var(--border)]">
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-xl bg-[var(--gold)]/10 flex items-center justify-center border border-[var(--gold)]/20">
+        <div className="w-10 h-10 rounded-sm bg-[var(--gold)]/10 flex items-center justify-center border border-[var(--accent)]">
           <Compass className="w-5 h-5 text-[var(--gold)]" />
         </div>
         <div>
@@ -54,7 +54,7 @@ export function EntityIntelligenceExplorer({ intelligence }: { intelligence: Ent
         </div>
 
         <div className="lg:col-span-4 flex flex-col gap-6">
-           <div className="glass-card p-5 rounded-2xl border border-[var(--border)]">
+           <div className="bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)]">
               <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[var(--danger)] mb-4 flex items-center gap-2">
                 <ShieldAlert className="w-4 h-4" /> Current Risks
               </h3>
@@ -67,7 +67,7 @@ export function EntityIntelligenceExplorer({ intelligence }: { intelligence: Ent
               </ul>
            </div>
 
-           <div className="glass-card p-5 rounded-2xl border border-[var(--border)]">
+           <div className="bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)]">
               <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-purple-400 mb-4 flex items-center gap-2">
                 <Crosshair className="w-4 h-4" /> Possible Scenarios
               </h3>
@@ -81,13 +81,13 @@ export function EntityIntelligenceExplorer({ intelligence }: { intelligence: Ent
            </div>
            
            {intelligence.entityType === 'Country' && intelligence.majorRelationships && (
-             <div className="glass-card p-5 rounded-2xl border border-[var(--border)]">
+             <div className="bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)]">
                 <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[var(--cyan)] mb-4 flex items-center gap-2">
                   <Compass className="w-4 h-4" /> Major Relationships
                 </h3>
                 <ul className="space-y-3">
                   {intelligence.majorRelationships.map((rel, i) => (
-                    <li key={i} className="text-sm text-white/80 leading-relaxed border-l-2 border-[var(--cyan)]/50 pl-3">
+                    <li key={i} className="text-sm text-white/80 leading-relaxed border-l-2 border-[var(--border)] pl-3">
                       {rel}
                     </li>
                   ))}

@@ -31,7 +31,7 @@ export default function FactCheckingPage() {
           {/* Section 1 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Search className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">1. Our Five-Step Verification Process</h2>
@@ -42,35 +42,35 @@ export default function FactCheckingPage() {
               </p>
 
               <div className="space-y-6 mt-6">
-                <div className="p-5 rounded-xl glass-card border border-[var(--border)]">
+                <div className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="font-bold text-white mb-2">Step 1: Initial Source Assessment</h3>
                   <p className="text-sm text-white/80 leading-[1.7]">
                     When a piece of information is first identified, the analyst evaluates the credibility and reliability of the original source. Is the source a government agency, a recognised news outlet, an academic institution, or an unverified social media account? This initial assessment determines the level of additional verification required. Information from Tier 1 sources (official government publications, international organisations) requires less additional verification than information from Tier 3 sources (social media, anonymous tips).
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl glass-card border border-[var(--border)]">
+                <div className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="font-bold text-white mb-2">Step 2: Cross-Reference & Corroboration</h3>
                   <p className="text-sm text-white/80 leading-[1.7]">
                     The analyst cross-references the information against at least two independent sources. For high-stakes geopolitical claims — such as military movements, diplomatic ruptures, or territorial disputes — a minimum of three independent sources is required. Sources must be genuinely independent (not simply republishing the same original report).
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl glass-card border border-[var(--border)]">
+                <div className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="font-bold text-white mb-2">Step 3: Contextual Verification</h3>
                   <p className="text-sm text-white/80 leading-[1.7]">
                     The information is evaluated within its broader geopolitical context. Does the claim align with known facts and established patterns? Is there a plausible strategic rationale for the claimed event? Are there any known disinformation campaigns currently targeting this issue? This step helps identify sophisticated disinformation that may pass basic source checks.
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl glass-card border border-[var(--border)]">
+                <div className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="font-bold text-white mb-2">Step 4: Expert Consultation</h3>
                   <p className="text-sm text-white/80 leading-[1.7]">
                     For specialised claims (e.g., military capabilities, nuclear doctrine, economic sanctions), we consult with subject-matter experts — either from within our analyst network or from recognised external institutions. This ensures that technical claims are evaluated by individuals with the relevant domain expertise.
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl glass-card border border-[var(--border)]">
+                <div className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="font-bold text-white mb-2">Step 5: Editorial Board Review</h3>
                   <p className="text-sm text-white/80 leading-[1.7]">
                     Before publication, the senior editorial board conducts a final review of the fact-checked content. This review ensures that the verification process has been properly followed and that all claims are adequately supported. The board has the authority to hold or reject content that does not meet our verification standards.
@@ -83,7 +83,7 @@ export default function FactCheckingPage() {
           {/* Section 2 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">2. Source Classification System</h2>
@@ -136,7 +136,7 @@ export default function FactCheckingPage() {
           {/* Section 3 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <AlertTriangle className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">3. Identifying & Countering Disinformation</h2>
@@ -157,7 +157,7 @@ export default function FactCheckingPage() {
           {/* Section 4 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <RefreshCw className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">4. Error Correction Protocol</h2>
@@ -178,7 +178,7 @@ export default function FactCheckingPage() {
           {/* Section 5 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">5. Reader Contributions to Fact-Checking</h2>
@@ -203,11 +203,11 @@ export default function FactCheckingPage() {
           <section className="pt-12 border-t border-[var(--border)]">
             <h2 className="text-xl font-bold text-white mb-6">Related Policies</h2>
             <div className="grid sm:grid-cols-2 gap-4">
-              <Link href="/editorial-policy" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/editorial-policy" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Editorial Policy</h3>
                 <p className="text-sm text-[var(--muted)]">Our editorial standards & principles</p>
               </Link>
-              <Link href="/source-verification" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/source-verification" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Source Verification</h3>
                 <p className="text-sm text-[var(--muted)]">Source hierarchy & reliability criteria</p>
               </Link>

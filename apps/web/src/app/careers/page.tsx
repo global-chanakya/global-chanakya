@@ -19,7 +19,7 @@ export default function CareersPage() {
           We are not currently hiring for full-time desk positions. However, we are always open to high-quality pitches from freelance geopolitical analysts, defense correspondents, and regional experts.
         </p>
 
-        <div className="p-8 rounded-3xl bg-[#0a0a0a] border border-white/[0.08] text-left">
+        <div className="p-8 rounded-lg bg-[#0a0a0a] border border-white/[0.08] text-left">
           <h3 className="text-xl font-bold text-white mb-4">Pitch Guidelines</h3>
           <ul className="space-y-4 text-gray-400 text-sm mb-8">
             <li className="flex gap-3">

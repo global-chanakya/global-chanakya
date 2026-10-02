@@ -10,15 +10,15 @@ export function AIProcessingState({ status, message }: AIProcessingStateProps) {
   if (status === "IDLE" || status === "COMPLETE") return null;
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-12 glass-card rounded-2xl border border-[var(--border)] relative overflow-hidden">
+    <div className="w-full flex flex-col items-center justify-center p-12 bg-[var(--surface)] rounded-sm border border-[var(--border)] relative overflow-hidden">
       {/* Background sweep */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--gold)]/5 to-transparent -translate-x-[100%] animate-[shimmer_2s_infinite]" />
+      <div className="absolute inset-0 -translate-x-[100%] animate-[shimmer_2s_infinite]" />
       
       {status === "PROCESSING" || status === "STREAMING" ? (
         <>
           <div className="relative w-16 h-16 mb-6">
-            <div className="absolute inset-0 rounded-full border-2 border-[var(--gold)]/20 border-t-[var(--gold)] animate-spin" />
-            <div className="absolute inset-2 rounded-full border-2 border-[var(--cyan)]/20 border-b-[var(--cyan)] animate-spin-reverse" />
+            <div className="absolute inset-0 rounded-full border-2 border-[var(--accent)] border-t-[var(--gold)] animate-spin" />
+            <div className="absolute inset-2 rounded-full border-2 border-[var(--border)] border-b-[var(--cyan)] animate-spin-reverse" />
             <Loader2 className="absolute inset-0 m-auto w-6 h-6 text-white animate-pulse" />
           </div>
           <h3 className="text-lg font-bold text-white tracking-widest uppercase mb-2">

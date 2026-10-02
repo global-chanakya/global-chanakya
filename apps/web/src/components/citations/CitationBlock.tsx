@@ -28,7 +28,7 @@ export function CitationBlock({ citations }: CitationBlockProps) {
   });
 
   return (
-    <section className="my-12 p-6 rounded-2xl bg-gray-950 border border-gray-800" aria-label="Article Citations and Sources">
+    <section className="my-12 p-6 rounded-sm bg-gray-950 border border-gray-800" aria-label="Article Citations and Sources">
       <header className="flex items-center gap-3 mb-8">
         <div className="p-2 bg-blue-500/10 rounded-lg text-blue-400">
           <BookMarked className="w-5 h-5" />

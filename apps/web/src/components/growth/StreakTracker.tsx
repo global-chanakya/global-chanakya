@@ -26,7 +26,7 @@ export function StreakTracker() {
       <span className="text-sm font-bold">{streak}</span>
       
       {/* Hidden tooltip for growth engine */}
-      <div className="absolute top-12 right-0 w-48 p-3 rounded-xl bg-gray-900 border border-gray-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 text-xs text-gray-300">
+      <div className="absolute top-12 right-0 w-48 p-3 rounded-sm bg-gray-900 border border-gray-700 shadow-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 text-xs text-gray-300">
         You are on a <strong className="text-orange-400">{streak} day streak!</strong> Read 1 more article today to maintain your status as an active intelligence gatherer.
       </div>
     </div>

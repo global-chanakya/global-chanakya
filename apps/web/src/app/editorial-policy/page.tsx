@@ -31,7 +31,7 @@ export default function EditorialPolicyPage() {
           {/* Section 1 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Shield className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">1. Editorial Independence</h2>
@@ -52,7 +52,7 @@ export default function EditorialPolicyPage() {
           {/* Section 2 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <FileCheck className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">2. Accuracy & Verification Standards</h2>
@@ -74,7 +74,7 @@ export default function EditorialPolicyPage() {
           {/* Section 3 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">3. Content Standards & Classification</h2>
@@ -98,7 +98,7 @@ export default function EditorialPolicyPage() {
           {/* Section 4 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Scale className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">4. Impartiality & Non-Partisan Approach</h2>
@@ -119,7 +119,7 @@ export default function EditorialPolicyPage() {
           {/* Section 5 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <AlertTriangle className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">5. Corrections & Retraction Policy</h2>
@@ -143,7 +143,7 @@ export default function EditorialPolicyPage() {
           {/* Section 6 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Users className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">6. Conflicts of Interest</h2>
@@ -168,7 +168,7 @@ export default function EditorialPolicyPage() {
           {/* Section 7 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">7. Reader Complaints & Accountability</h2>
@@ -207,19 +207,19 @@ export default function EditorialPolicyPage() {
           <section className="pt-12 border-t border-[var(--border)]">
             <h2 className="text-xl font-bold text-white mb-6">Related Policies</h2>
             <div className="grid sm:grid-cols-2 gap-4">
-              <Link href="/fact-checking" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/fact-checking" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Fact-Checking Policy</h3>
                 <p className="text-sm text-[var(--muted)]">Our multi-step verification process</p>
               </Link>
-              <Link href="/methodology" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/methodology" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Research Methodology</h3>
                 <p className="text-sm text-[var(--muted)]">Analytical frameworks & data sources</p>
               </Link>
-              <Link href="/source-verification" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/source-verification" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Source Verification</h3>
                 <p className="text-sm text-[var(--muted)]">Source hierarchy & reliability criteria</p>
               </Link>
-              <Link href="/contributor-policy" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/contributor-policy" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Contributor Policy</h3>
                 <p className="text-sm text-[var(--muted)]">Submission guidelines & standards</p>
               </Link>

@@ -13,7 +13,7 @@ export default function GlobalSEOManagerPage() {
           <p className="text-gray-400">Manage canonicals, schema, and AI summaries.</p>
         </div>
       </div>
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-8 flex flex-col items-center justify-center text-center h-64">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm p-8 flex flex-col items-center justify-center text-center h-64">
         <p className="text-gray-500 italic">Module scaffolded and ready for implementation.</p>
       </div>
     </div>

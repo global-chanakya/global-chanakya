@@ -12,13 +12,13 @@ interface Stats {
 
 export default function AdminDashboard({ stats }: { stats: Stats }) {
   const cards = [
-    { label: "Total Users", value: stats.totalUsers, icon: Users, glow: "shadow-[0_0_40px_rgba(37,99,235,0.15)]", border: "hover:border-[var(--blue)]", text: "text-[var(--blue)]", gradient: "from-[var(--blue)] to-blue-300" },
-    { label: "Total Reports", value: stats.totalBlogs, icon: Newspaper, glow: "shadow-[0_0_40px_rgba(212,175,55,0.15)]", border: "hover:border-[var(--gold)]", text: "text-[var(--gold)]", gradient: "from-[var(--gold)] to-yellow-200" },
+    { label: "Total Users", value: stats.totalUsers, icon: Users, glow: "", border: "hover:border-[var(--blue)]", text: "text-[var(--blue)]", gradient: ")] " },
+    { label: "Total Reports", value: stats.totalBlogs, icon: Newspaper, glow: "", border: "hover:border-[var(--gold)]", text: "text-[var(--gold)]", gradient: ")] " },
   ];
 
   const roleColors: Record<string, { bg: string, text: string, border: string }> = {
-    admin: { bg: "bg-[var(--gold)]/10", text: "text-[var(--gold)]", border: "border-[var(--gold)]/30" },
-    premium: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--cyan)]/30" },
+    admin: { bg: "bg-[var(--gold)]/10", text: "text-[var(--gold)]", border: "border-[var(--accent)]" },
+    premium: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--border)]" },
     free: { bg: "bg-[var(--blue)]/10", text: "text-[var(--blue)]", border: "border-[var(--blue)]/30" },
     guest: { bg: "bg-[var(--surface)]", text: "text-[var(--muted)]", border: "border-[var(--border)]" },
   };
@@ -34,11 +34,11 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
         
         {/* Header */}
         <div className="mb-14">
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-red-500/20 bg-red-500/5 backdrop-blur-md text-[var(--danger)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] mb-6 shadow-[0_0_15px_rgba(220,38,38,0.15)]">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-red-500/20 bg-red-500/5 text-[var(--danger)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] mb-6">
             <ShieldAlert className="w-4 h-4 animate-pulse" /> Director Level Access Only
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] mb-4">
-            Command <span className="bg-gradient-to-r from-[var(--gold)] via-yellow-200 to-[var(--gold)] text-transparent bg-clip-text drop-shadow-sm">Center</span>
+            Command <span className=")] text-[var(--text)]">Center</span>
           </h1>
           <p className="text-lg text-white/60 max-w-2xl font-medium leading-relaxed">
             Welcome back, Director. Here is the latest global intelligence brief and system status overview.
@@ -50,9 +50,9 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
           {cards.map((card) => (
             <div
               key={card.label}
-              className={`relative bg-[var(--surface)]/50 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-8 overflow-hidden group transition-all duration-500 hover:-translate-y-1 ${card.glow} ${card.border}`}
+              className={`relative bg-[var(--surface)]/50  border border-[var(--border)] rounded-sm p-8 overflow-hidden group transition-all duration-500 hover:-translate-y-1 ${card.glow} ${card.border}`}
             >
-              <div className={`absolute -right-6 -top-6 w-24 h-24 bg-gradient-to-br ${card.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity duration-500`} />
+              <div className={`absolute -right-6 -top-6 w-24 h-24  ${card.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity duration-500`} />
               <div className="flex justify-between items-start mb-6">
                 <p className="text-[12px] text-white/50 font-bold uppercase tracking-[0.2em]">{card.label}</p>
                 <div className={`p-2.5 rounded-lg bg-[var(--bg)] border border-[var(--border)] ${card.text} group-hover:scale-110 transition-transform duration-500 shadow-inner`}>
@@ -61,7 +61,7 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
               </div>
               {/* suppressHydrationWarning: toLocaleString is locale-sensitive; explicit "en-US"
                   keeps server and client output identical regardless of system locale. */}
-              <p className={`text-5xl font-black bg-gradient-to-br ${card.gradient} text-transparent bg-clip-text drop-shadow-sm`} suppressHydrationWarning>
+              <p className={`text-5xl font-black  ${card.gradient} text-[var(--text)]  `} suppressHydrationWarning>
                 {card.value.toLocaleString("en-US")}
               </p>
             </div>
@@ -82,7 +82,7 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
               </Link>
             </div>
             
-            <div className="bg-[var(--surface)]/60 backdrop-blur-xl border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl flex-1 flex flex-col">
+            <div className="bg-[var(--surface)]/60 border border-[var(--border)] rounded-sm overflow-hidden shadow-sm flex-1 flex flex-col">
               <div className="divide-y divide-[var(--border)]/50 flex-1">
                 {stats.recentUsers.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full py-16 text-center">
@@ -93,7 +93,7 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
                   stats.recentUsers.map((u, i) => (
                     <div key={u._id} className="px-6 py-5 flex items-center gap-5 hover:bg-[var(--bg)]/50 transition-colors group">
                       <div className="relative">
-                        <div className={`absolute inset-0 bg-gradient-to-br from-[var(--cyan)] to-[var(--blue)] blur opacity-40 group-hover:opacity-70 transition-opacity rounded-full`} />
+                        <div className={`absolute inset-0  )] )] blur opacity-40 group-hover:opacity-70 transition-opacity rounded-full`} />
                         <div className="relative w-11 h-11 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-white font-bold text-[15px] z-10 shadow-inner">
                           {u.name?.[0]?.toUpperCase() ?? "?"}
                         </div>
@@ -102,7 +102,7 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
                         <p className="text-white text-[14px] font-bold truncate group-hover:text-[var(--cyan)] transition-colors">{u.name}</p>
                         <p className="text-white/50 text-[12px] truncate font-medium mt-0.5">{u.email}</p>
                       </div>
-                      <span className={`px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] border ${roleColors[u.role]?.border ?? roleColors.free.border} ${roleColors[u.role]?.text ?? roleColors.free.text} ${roleColors[u.role]?.bg ?? roleColors.free.bg} backdrop-blur-md`}>
+                      <span className={`px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] border ${roleColors[u.role]?.border ?? roleColors.free.border} ${roleColors[u.role]?.text ?? roleColors.free.text} ${roleColors[u.role]?.bg ?? roleColors.free.bg} `}>
                         {u.role}
                       </span>
                     </div>
@@ -128,15 +128,15 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
                 <Link
                   key={action.href}
                   href={action.href}
-                  className="group relative flex items-center gap-5 p-5 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/40 backdrop-blur-md hover:border-white/20 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden"
+                  className="group relative flex items-center gap-5 p-5 rounded-sm border border-[var(--border)] bg-[var(--surface)]/40 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out" />
+                  <div className="absolute inset-0 /0 /5 /0 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out" />
                   
-                  <div className="p-3 rounded-xl bg-[var(--bg)] border border-[var(--border)] group-hover:scale-110 transition-transform duration-300 shadow-inner" style={{ color: action.color }}>
+                  <div className="p-3 rounded-sm bg-[var(--bg)] border border-[var(--border)] group-hover:scale-110 transition-transform duration-300 shadow-inner" style={{ color: action.color }}>
                     <action.icon className="w-5 h-5" />
                   </div>
                   <div className="flex-1 relative z-10">
-                    <p className="text-white text-[14px] font-bold uppercase tracking-[0.05em] mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all">
+                    <p className="text-white text-[14px] font-bold uppercase tracking-[0.05em] mb-1 group-hover:text-[var(--text)] transition-all">
                       {action.label}
                     </p>
                     <p className="text-white/50 text-[12px] font-medium leading-relaxed">{action.desc}</p>
@@ -145,7 +145,7 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
               ))}
 
               {/* Admin Lock Notice */}
-              <div className="mt-4 p-5 rounded-2xl bg-[var(--danger)]/5 border border-[var(--danger)]/20 backdrop-blur-md relative overflow-hidden">
+              <div className="mt-4 p-5 rounded-sm bg-[var(--danger)]/5 border border-[var(--danger)]/20 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-[var(--danger)]" />
                 <p className="text-[var(--danger)] text-[12px] font-bold uppercase tracking-[0.15em] flex items-center gap-2 mb-2">
                   <ShieldAlert className="w-4 h-4" /> Protocol Lockdown

@@ -76,7 +76,7 @@ export default async function PlatformSeoIndex() {
               In-depth analysis of global power shifts, defense strategy, and international relations.
             </p>
           </div>
-          <div className="glass-card p-12 rounded-2xl border border-[var(--border)] text-center">
+          <div className="bg-[var(--surface)] p-12 rounded-sm border border-[var(--border)] text-center">
             <FileText className="w-12 h-12 text-[var(--muted)] mx-auto mb-4 opacity-50" />
             <h2 className="text-xl font-bold text-white mb-2">No Platform Intelligence Published Yet</h2>
             <p className="text-sm text-[var(--muted)]">Strategic reports will appear here once they are published through the admin CMS.</p>
@@ -108,7 +108,7 @@ export default async function PlatformSeoIndex() {
             
             <div className="flex flex-col gap-8">
               {posts.map((post) => (
-                <article key={post._id} className="glass-card p-6 rounded-2xl border border-[var(--border)] hover:border-[var(--gold)]/30 transition-colors">
+                <article key={post._id} className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)] hover:border-[var(--accent)] transition-colors">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="px-2.5 py-1 rounded bg-[var(--surface)] text-[10px] font-bold uppercase tracking-wider text-[var(--cyan)]">
                       {post.category}
@@ -150,21 +150,21 @@ export default async function PlatformSeoIndex() {
           <div className="lg:col-span-4 flex flex-col gap-10">
             
             {/* Search */}
-            <div className="glass-card p-6 rounded-2xl border border-[var(--border)]">
+            <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)]">
               <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Search Hub</h3>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                 <input 
                   type="text" 
                   placeholder="Search intelligence reports..." 
-                  className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[var(--gold)]"
+                  className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-sm py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[var(--gold)]"
                 />
               </div>
             </div>
 
             {/* Categories */}
             {categories.length > 0 && (
-              <div className="glass-card p-6 rounded-2xl border border-[var(--border)]">
+              <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)]">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Focus Areas</h3>
                 <ul className="flex flex-col gap-2">
                   {categories.map((cat) => (
@@ -181,7 +181,7 @@ export default async function PlatformSeoIndex() {
 
             {/* Popular Posts */}
             {popularPosts.length > 0 && (
-              <div className="glass-card p-6 rounded-2xl border border-[var(--border)]">
+              <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)]">
                 <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Strategic Briefs</h3>
                 <div className="flex flex-col gap-4">
                   {popularPosts.map((post) => (

@@ -80,7 +80,7 @@ export default function SearchContent() {
               ref={inputRef}
               type="text"
               placeholder="Search reports, regions, or topics..."
-              className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-xl py-4 pl-12 pr-4 text-lg text-white placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--cyan)] transition-colors shadow-lg"
+              className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-sm py-4 pl-12 pr-4 text-lg text-white placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--cyan)] transition-colors shadow-sm"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -88,7 +88,7 @@ export default function SearchContent() {
         </div>
 
         {/* Results Body */}
-        <div className="glass-card rounded-2xl border border-[var(--border)] min-h-[400px] bg-[var(--surface)]/30 backdrop-blur-sm overflow-hidden">
+        <div className="bg-[var(--surface)] rounded-sm border border-[var(--border)] min-h-[400px] bg-[var(--surface)]/30 overflow-hidden">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-32 gap-4 text-[var(--secondary)]">
               <Loader2 className="w-10 h-10 animate-spin text-[var(--gold)]" />
@@ -103,7 +103,7 @@ export default function SearchContent() {
                   className="group flex gap-6 p-6 border-b border-[var(--border)] hover:bg-[var(--elevated)] transition-all duration-300 hover:px-8"
                 >
                   {/* Thumbnail */}
-                  <div className="relative w-24 h-24 shrink-0 rounded-xl overflow-hidden border border-[var(--border)]/50 hidden sm:block">
+                  <div className="relative w-24 h-24 shrink-0 rounded-sm overflow-hidden border border-[var(--border)]/50 hidden sm:block">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img loading="lazy"
                       src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
@@ -135,7 +135,7 @@ export default function SearchContent() {
             </div>
           ) : query.trim() !== "" ? (
             <div className="flex flex-col items-center justify-center py-32 text-center px-6">
-              <div className="w-20 h-20 rounded-2xl bg-[var(--elevated)] border border-[var(--border)] flex items-center justify-center mb-6">
+              <div className="w-20 h-20 rounded-sm bg-[var(--elevated)] border border-[var(--border)] flex items-center justify-center mb-6">
                 <Search className="w-10 h-10 text-[var(--muted)]" />
               </div>
               <p className="text-white font-bold text-2xl mb-2">No Intel Found</p>
@@ -153,7 +153,7 @@ export default function SearchContent() {
                   <button 
                     key={tag}
                     onClick={() => setQuery(tag)}
-                    className="px-5 py-2.5 rounded-xl bg-[var(--elevated)] border border-[var(--border)] text-sm text-[var(--secondary)] font-bold uppercase tracking-wider hover:text-white hover:border-[var(--gold)]/50 hover:bg-[var(--gold)]/5 transition-all shadow-sm"
+                    className="px-5 py-2.5 rounded-sm bg-[var(--elevated)] border border-[var(--border)] text-sm text-[var(--secondary)] font-bold uppercase tracking-wider hover:text-white hover:border-[var(--accent)] hover:bg-[var(--gold)]/5 transition-all shadow-sm"
                   >
                     {tag}
                   </button>

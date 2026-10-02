@@ -194,7 +194,7 @@ export default async function PlatformSeoArticle({ params }: Props) {
 
       {/* Hero Header matching standard blogs */}
       <header className="relative pt-32 pb-12 border-b border-[var(--border)] strategic-grid bg-[var(--surface)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg)] pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none" />
         <div className="container mx-auto max-w-7xl px-6 md:px-8 relative z-10">
           <Link href="/platformseo" className="inline-flex items-center gap-2 text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-white transition-colors mb-8 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -205,7 +205,7 @@ export default async function PlatformSeoArticle({ params }: Props) {
             <span className="px-3 py-1.5 rounded-sm intel-border bg-[var(--surface)] text-[var(--cyan)] text-[11px] font-bold uppercase tracking-widest">
               {blog.category}
             </span>
-            <span className="px-3 py-1.5 rounded-sm bg-[var(--gold)]/10 border border-[var(--gold)]/20 text-[var(--gold)] text-[11px] font-bold uppercase tracking-widest flex items-center gap-1.5">
+            <span className="px-3 py-1.5 rounded-sm bg-[var(--gold)]/10 border border-[var(--accent)] text-[var(--gold)] text-[11px] font-bold uppercase tracking-widest flex items-center gap-1.5">
               Platform Intelligence
             </span>
           </div>
@@ -220,7 +220,7 @@ export default async function PlatformSeoArticle({ params }: Props) {
 
           <div className="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-[var(--border)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] intel-border flex items-center justify-center text-[14px] text-white shadow-[0_0_10px_rgba(255,255,255,0.05)]">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] intel-border flex items-center justify-center text-[14px] text-white">
                 GC
               </div>
               <div className="flex flex-col gap-0.5">
@@ -275,7 +275,7 @@ export default async function PlatformSeoArticle({ params }: Props) {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {relatedPosts.map((rp: any) => (
-                    <Link key={rp._id} href={`/platformseo/${rp.slug}`} className="glass-card p-5 rounded-sm hover:-translate-y-1 transition-transform group flex flex-col gap-3 border border-[var(--border)] hover:border-[var(--gold)]/50">
+                    <Link key={rp._id} href={`/platformseo/${rp.slug}`} className="bg-[var(--surface)] p-5 rounded-sm hover:-translate-y-1 transition-transform group flex flex-col gap-3 border border-[var(--border)] hover:border-[var(--accent)]">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--cyan)]">{rp.category}</span>
                       <h4 className="text-[16px] font-bold text-white leading-snug group-hover:text-[var(--gold)] transition-colors line-clamp-3">
                         {rp.title}
@@ -294,7 +294,7 @@ export default async function PlatformSeoArticle({ params }: Props) {
           <aside className="xl:col-span-4 sticky top-32 max-h-[calc(100vh-128px)] overflow-y-auto custom-scrollbar flex-col gap-8 hidden xl:flex pb-8 pr-4">
             {/* TOC */}
             {toc.length > 0 && (
-              <div className="glass-card rounded-sm p-6 shrink-0">
+              <div className="bg-[var(--surface)] rounded-sm p-6 shrink-0">
                 <h3 className="text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
                   <Crosshair className="w-4 h-4 text-[var(--gold)]" /> Contents
                 </h3>
@@ -314,7 +314,7 @@ export default async function PlatformSeoArticle({ params }: Props) {
 
             {/* Related Reports */}
             {relatedPosts.length > 0 && (
-              <div className="glass-card rounded-sm p-6 shrink-0">
+              <div className="bg-[var(--surface)] rounded-sm p-6 shrink-0">
                 <h3 className="text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
                   <Newspaper className="w-4 h-4 text-[var(--cyan)]" /> Explore More
                 </h3>

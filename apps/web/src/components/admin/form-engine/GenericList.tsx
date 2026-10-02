@@ -130,15 +130,15 @@ export default function GenericList({ schema }: { schema: EntitySchema }) {
       {/* Stats Row (for blogs/analytics) */}
       {hasAnalytics && (
         <div className="grid grid-cols-3 gap-4">
-          <div className="p-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+          <div className="p-4 bg-[var(--surface)] border border-[var(--border)] rounded-sm">
             <p className="text-xs text-[var(--muted)] flex items-center gap-1.5"><BarChart2 className="w-3.5 h-3.5" /> Total Views</p>
             <p className="text-2xl font-bold text-white mt-1">{formatViews(totalViews)}</p>
           </div>
-          <div className="p-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+          <div className="p-4 bg-[var(--surface)] border border-[var(--border)] rounded-sm">
             <p className="text-xs text-[var(--muted)]">📰 Published</p>
             <p className="text-2xl font-bold text-green-400 mt-1">{publishedCount}</p>
           </div>
-          <div className="p-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+          <div className="p-4 bg-[var(--surface)] border border-[var(--border)] rounded-sm">
             <p className="text-xs text-[var(--muted)]">✏️ Drafts</p>
             <p className="text-2xl font-bold text-yellow-400 mt-1">{draftCount}</p>
           </div>
@@ -146,7 +146,7 @@ export default function GenericList({ schema }: { schema: EntitySchema }) {
       )}
 
       {/* Table Card */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm overflow-hidden">
         {/* Toolbar */}
         <div className="p-4 border-b border-[var(--border)] flex flex-wrap items-center gap-3">
           <div className="relative flex-1 min-w-48">
@@ -211,7 +211,7 @@ export default function GenericList({ schema }: { schema: EntitySchema }) {
               ) : filtered.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-5 py-12 text-center">
-                    <div className="w-14 h-14 bg-[var(--bg)] border border-[var(--border)] rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <div className="w-14 h-14 bg-[var(--bg)] border border-[var(--border)] rounded-sm flex items-center justify-center mx-auto mb-3">
                       <Search className="w-6 h-6 text-[var(--muted)]" />
                     </div>
                     <p className="text-white font-bold mb-1">No items found</p>
@@ -315,7 +315,7 @@ export default function GenericList({ schema }: { schema: EntitySchema }) {
                           )}
                           <Link
                             href={`${schema.frontendBasePath || '/admin/' + schema.id}/${itemId}`}
-                            className="p-1.5 text-[var(--gold)] hover:bg-[var(--gold)]/10 bg-[var(--bg)] rounded-lg border border-[var(--gold)]/30 transition-colors"
+                            className="p-1.5 text-[var(--gold)] hover:bg-[var(--gold)]/10 bg-[var(--bg)] rounded-lg border border-[var(--accent)] transition-colors"
                             title="Edit"
                           >
                             <Edit2 className="w-4 h-4" />

@@ -31,10 +31,10 @@ export default function CookieConsent() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 animate-in slide-in-from-bottom duration-500">
-      <div className="max-w-4xl mx-auto bg-[var(--elevated)] border border-[var(--border)] rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/50 backdrop-blur-xl">
+    <div className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6 animate-in slide-in- duration-500">
+      <div className="max-w-4xl mx-auto bg-[var(--elevated)] border border-[var(--border)] rounded-sm p-5 md:p-6 shadow-sm shadow-black/50">
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0 mt-0.5">
+          <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0 mt-0.5">
             <Cookie className="w-5 h-5 text-[var(--gold)]" />
           </div>
           <div className="flex-1 min-w-0">
@@ -47,7 +47,7 @@ export default function CookieConsent() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={acceptCookies}
-                className="px-5 py-2.5 bg-[var(--gold)] text-[var(--bg)] text-xs font-bold uppercase tracking-[0.06em] rounded-lg hover:opacity-90 transition-opacity shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+                className="px-5 py-2.5 bg-[var(--gold)] text-[var(--bg)] text-xs font-bold uppercase tracking-[0.06em] rounded-lg hover:opacity-90 transition-opacity"
               >
                 Accept All
               </button>

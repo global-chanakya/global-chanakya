@@ -76,7 +76,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 mt-4">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 rounded-2xl bg-indigo-500/[0.04] border border-indigo-500/[0.2] flex items-center justify-center">
+            <div className="w-20 h-20 rounded-sm bg-indigo-500/[0.04] border border-indigo-500/[0.2] flex items-center justify-center">
               <Network className="w-8 h-8 text-indigo-400" />
             </div>
             <div>

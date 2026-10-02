@@ -32,7 +32,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
     setTimeout(() => setSaved(false), 3000);
   }
 
-  const inputClass = "w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--gold)]/50 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all";
+  const inputClass = "w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-sm text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] focus: transition-all";
   const labelClass = "block text-[11px] text-white/50 font-bold mb-2 uppercase tracking-[0.1em]";
 
   return (
@@ -42,7 +42,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] mb-2 flex items-center gap-3">
-            System <span className="bg-gradient-to-r from-gray-200 to-gray-500 text-transparent bg-clip-text drop-shadow-sm">Parameters</span>
+            System <span className="text-[var(--text)]">Parameters</span>
           </h1>
           <p className="text-white/50 text-[14px] font-medium max-w-xl leading-relaxed">
             Configure global telemetry, access controls, and network-wide parameters.
@@ -52,8 +52,8 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
         {/* Action Button */}
         <button
           onClick={handleSave}
-          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold uppercase tracking-[0.1em] text-[12px] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:scale-105 ${
-            saved ? "bg-[var(--cyan)] text-black" : "bg-gradient-to-r from-[var(--gold)] to-yellow-500 text-black"
+          className={`flex items-center gap-2 px-6 py-3 rounded-sm font-bold uppercase tracking-[0.1em] text-[12px] transition-all  hover:scale-105 ${
+            saved ? "bg-[var(--cyan)] text-black" : " )]  text-black"
           }`}
         >
           {saved ? <CheckCircle2 className="w-4 h-4" /> : <Save className="w-4 h-4" />}
@@ -65,8 +65,8 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
         
         <div className="lg:col-span-2 space-y-8">
           {/* Site Settings */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 md:p-8 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 /20" />
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3">
               <Globe className="w-4 h-4 text-white/50" /> Network Identity
             </h2>
@@ -91,7 +91,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
           </div>
 
           {/* Content Settings */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 md:p-8 shadow-sm relative overflow-hidden">
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3">
               <Layout className="w-4 h-4 text-white/50" /> Display Formatting
             </h2>
@@ -106,7 +106,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
 
         <div className="space-y-8">
           {/* Admin Profile Card */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--gold)]/10 blur-[50px] rounded-full group-hover:bg-[var(--gold)]/20 transition-colors" />
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3 relative z-10">
               <User className="w-4 h-4 text-[var(--gold)]" /> Director Profile
@@ -115,9 +115,9 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
             <div className="flex flex-col items-center text-center relative z-10">
               {user.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img loading="lazy" src={user.image} alt="" className="w-20 h-20 rounded-full border-2 border-[var(--gold)]/50 p-1 mb-4 shadow-[0_0_15px_rgba(212,175,55,0.2)]" />
+                <img loading="lazy" src={user.image} alt="" className="w-20 h-20 rounded-full border-2 border-[var(--accent)] p-1 mb-4" />
               ) : (
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--gold)] to-yellow-600 flex items-center justify-center text-black font-extrabold text-2xl mb-4 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center text-black font-extrabold text-2xl mb-4">
                   {user.name?.[0]?.toUpperCase()}
                 </div>
               )}
@@ -125,16 +125,16 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
               <p className="text-white/50 text-[12px] font-medium mt-1">{user.email}</p>
               
               <div className="flex items-center gap-2 mt-4">
-                <span className="px-3 py-1 bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-[var(--gold)]/30">
+                <span className="px-3 py-1 bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-[var(--accent)]">
                   Apex Access
                 </span>
-                <span className="px-3 py-1 bg-[var(--cyan)]/10 text-[var(--cyan)] text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-[var(--cyan)]/30">
+                <span className="px-3 py-1 bg-[var(--cyan)]/10 text-[var(--cyan)] text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-[var(--border)]">
                   Verified Auth
                 </span>
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-[var(--danger)]/5 border border-[var(--danger)]/20 rounded-xl relative z-10">
+            <div className="mt-6 p-4 bg-[var(--danger)]/5 border border-[var(--danger)]/20 rounded-sm relative z-10">
               <div className="flex gap-3">
                 <ShieldAlert className="w-4 h-4 text-[var(--danger)] shrink-0 mt-0.5" />
                 <p className="text-[var(--danger)] text-[11px] font-medium leading-relaxed">
@@ -145,7 +145,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
           </div>
 
           {/* Platform Toggles */}
-          <div className="bg-[var(--surface)]/40 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+          <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm p-6 shadow-sm relative overflow-hidden">
             <h2 className="text-white font-extrabold text-[14px] uppercase tracking-[0.15em] mb-6 flex items-center gap-3">
               <Sliders className="w-4 h-4 text-[var(--cyan)]" /> Security Toggles
             </h2>
@@ -171,7 +171,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
                   danger: false,
                 },
               ].map((t) => (
-                <div key={t.key} className="flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-[var(--bg)]/50">
+                <div key={t.key} className="flex items-center justify-between p-4 rounded-sm border border-[var(--border)] bg-[var(--bg)]/50">
                   <div className="pr-4">
                     <p className={`text-[12px] font-bold uppercase tracking-[0.05em] flex items-center gap-2 ${t.danger ? "text-[var(--danger)]" : "text-white"}`}>
                       {t.icon && <t.icon className="w-3.5 h-3.5" />}
@@ -183,7 +183,7 @@ export default function AdminSettingsClient({ user }: { user: AdminUser }) {
                     onClick={() => update(t.key, !siteSettings[t.key as keyof typeof siteSettings])}
                     className={`relative w-12 h-6 rounded-full transition-colors shrink-0 ${
                       siteSettings[t.key as keyof typeof siteSettings]
-                        ? t.danger ? "bg-[var(--danger)] shadow-[0_0_10px_rgba(220,38,38,0.3)]" : "bg-[var(--cyan)] shadow-[0_0_10px_rgba(34,211,238,0.3)]"
+                        ? t.danger ? "bg-[var(--danger)] " : "bg-[var(--cyan)] "
                         : "bg-white/10"
                     }`}
                   >

@@ -35,7 +35,7 @@ export default function AsyncRelationSelect({
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2 mb-2">
         {selectedItems.map((item: any, idx) => (
-          <div key={idx} className="flex items-center gap-2 bg-[var(--gold)]/10 text-[var(--gold)] border border-[var(--gold)]/20 px-3 py-1 rounded text-sm">
+          <div key={idx} className="flex items-center gap-2 bg-[var(--gold)]/10 text-[var(--gold)] border border-[var(--accent)] px-3 py-1 rounded text-sm">
             <span>{item.title || item.name || item.id || item}</span>
             <button
               onClick={() => onChange(selectedItems.filter((i) => i !== item))}
@@ -55,7 +55,7 @@ export default function AsyncRelationSelect({
       />
       {loading && <div className="text-xs text-[var(--muted)] mt-1">Searching...</div>}
       {!loading && results.length > 0 && query.length >= 2 && (
-        <div className="absolute z-10 w-full mt-1 bg-[var(--surface)] border border-[var(--border)] rounded shadow-lg">
+        <div className="absolute z-10 w-full mt-1 bg-[var(--surface)] border border-[var(--border)] rounded shadow-sm">
           {results.map((r) => (
             <button
               key={r.id}

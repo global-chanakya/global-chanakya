@@ -82,7 +82,7 @@ export default function HealthDashboard() {
           const Icon = svc.icon;
           const status = health[svc.id];
           return (
-            <div key={svc.id} className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 relative overflow-hidden group hover:border-[var(--gold)]/50 transition-colors">
+            <div key={svc.id} className="bg-[var(--surface)] border border-[var(--border)] rounded-sm p-6 relative overflow-hidden group hover:border-[var(--accent)] transition-colors">
               <div className="absolute top-0 left-0 w-1 h-full bg-[var(--border)] group-hover:bg-[var(--gold)] transition-colors"></div>
               <div className="flex items-start justify-between mb-4 pl-4">
                 <div className="w-12 h-12 bg-[var(--bg)] border border-[var(--border)] rounded-lg flex items-center justify-center">

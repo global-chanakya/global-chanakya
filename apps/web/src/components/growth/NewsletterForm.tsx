@@ -29,7 +29,7 @@ export function NewsletterForm({ type, entityName }: NewsletterFormProps) {
 
   if (status === "success") {
     return (
-      <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center animate-in fade-in zoom-in duration-300">
+      <div className="p-6 rounded-sm bg-emerald-500/10 border border-emerald-500/30 text-center animate-in fade-in zoom-in duration-300">
         <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
         <h3 className="text-xl font-bold text-emerald-400 mb-2">Intelligence Secured</h3>
         <p className="text-gray-300">You are now subscribed to the {title}. Watch your inbox.</p>
@@ -38,7 +38,7 @@ export function NewsletterForm({ type, entityName }: NewsletterFormProps) {
   }
 
   return (
-    <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 shadow-xl relative overflow-hidden group">
+    <div className="p-6 rounded-sm border border-gray-800 shadow-sm relative overflow-hidden group">
       <div className="absolute top-0 right-0 p-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
       
       <div className="relative z-10">
@@ -57,12 +57,12 @@ export function NewsletterForm({ type, entityName }: NewsletterFormProps) {
             placeholder="strategist@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+            className="flex-1 bg-gray-800 border border-gray-700 text-white rounded-sm px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
           />
           <button 
             type="submit" 
             disabled={status === "loading"}
-            className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl transition-colors disabled:opacity-50 whitespace-nowrap"
+            className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-sm transition-colors disabled:opacity-50 whitespace-nowrap"
           >
             {status === "loading" ? "Securing..." : "Subscribe"}
           </button>

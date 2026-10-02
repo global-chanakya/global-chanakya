@@ -17,7 +17,7 @@ export default function EmptyState({
   actionHref 
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 px-4 text-center rounded-2xl border border-dashed border-[var(--border)] bg-[var(--surface)]/30">
+    <div className="flex flex-col items-center justify-center py-20 px-4 text-center rounded-sm border border-dashed border-[var(--border)] bg-[var(--surface)]/30">
       <div className="w-16 h-16 rounded-full bg-[var(--surface)] flex items-center justify-center mb-6">
         {icon}
       </div>
@@ -28,7 +28,7 @@ export default function EmptyState({
       {actionLabel && actionHref && (
         <Link 
           href={actionHref}
-          className="px-6 py-3 intel-border bg-[var(--surface)] text-xs font-bold uppercase tracking-wider text-white hover:bg-[var(--elevated)] transition-colors rounded-xl"
+          className="px-6 py-3 intel-border bg-[var(--surface)] text-xs font-bold uppercase tracking-wider text-white hover:bg-[var(--elevated)] transition-colors rounded-sm"
         >
           {actionLabel}
         </Link>

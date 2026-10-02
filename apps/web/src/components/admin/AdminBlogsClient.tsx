@@ -21,7 +21,7 @@ interface BlogRow {
 const statusColors: Record<string, { bg: string, text: string, border: string }> = {
   published: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/30" },
   draft: { bg: "bg-gray-500/10", text: "text-gray-400", border: "border-gray-500/30" },
-  scheduled: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--cyan)]/30" },
+  scheduled: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--border)]" },
   archived: { bg: "bg-[var(--danger)]/10", text: "text-[var(--danger)]", border: "border-[var(--danger)]/30" },
 };
 
@@ -76,7 +76,7 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] mb-2 flex items-center gap-3">
-            Intelligence <span className="bg-gradient-to-r from-[var(--gold)] to-yellow-200 text-transparent bg-clip-text drop-shadow-sm">Archive</span>
+            Intelligence <span className="text-[var(--text)]">Archive</span>
           </h1>
           <p className="text-white/50 text-[14px] font-medium max-w-xl leading-relaxed">
             Manage, review, and publish strategic reports and geopolitical analysis.
@@ -87,16 +87,16 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
         {/* Action Button */}
         <Link
           href="/admin/write"
-          className="group relative flex items-center gap-2 px-6 py-3 bg-[var(--gold)] text-black rounded-xl font-bold uppercase tracking-[0.1em] text-[12px] overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+          className="group relative flex items-center gap-2 px-6 py-3 bg-[var(--gold)] text-black rounded-sm font-bold uppercase tracking-[0.1em] text-[12px] overflow-hidden transition-all hover:scale-105 hover:"
         >
-          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-xl" />
+          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-sm" />
           <PenTool className="w-4 h-4 relative z-10" />
           <span className="relative z-10">Write New Report</span>
         </Link>
       </div>
 
       {/* Filters Bar */}
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 bg-[var(--surface)]/50 backdrop-blur-xl border border-[var(--border)] p-3 rounded-2xl shadow-lg">
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 bg-[var(--surface)]/50 border border-[var(--border)] p-3 rounded-sm shadow-sm">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
           <input
@@ -104,7 +104,7 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
             placeholder="Search reports by title or category..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--gold)]/50 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all"
+            className="w-full pl-11 pr-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-sm text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] focus: transition-all"
           />
         </div>
         <div className="flex flex-wrap gap-2 w-full md:w-auto">
@@ -112,9 +112,9 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
             <button
               key={s}
               onClick={() => setFilterStatus(s)}
-              className={`flex-1 md:flex-none px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
+              className={`flex-1 md:flex-none px-5 py-2.5 rounded-sm text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
                 filterStatus === s
-                  ? "bg-[var(--gold)]/10 text-[var(--gold)] border-[var(--gold)]/30 shadow-[0_0_15px_rgba(212,175,55,0.15)]"
+                  ? "bg-[var(--gold)]/10 text-[var(--gold)] border-[var(--accent)] "
                   : "bg-[var(--bg)] text-white/40 border-[var(--border)] hover:text-white hover:bg-[var(--surface)]"
               }`}
             >
@@ -125,9 +125,9 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
       </div>
 
       {/* Archive Table */}
-      <div className="bg-[var(--surface)]/40 backdrop-blur-2xl border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl relative">
+      <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm overflow-hidden shadow-sm relative">
         {/* Glow */}
-        <div className="absolute top-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-[var(--gold)]/50 to-transparent" />
+        <div className="absolute top-0 left-1/4 w-1/2 h-px" />
         
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -135,7 +135,7 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
             <p className="text-white/40 text-[15px] font-medium max-w-md">No intelligence reports match your current clearance filters or search query.</p>
             <Link
               href="/admin/write"
-              className="mt-6 px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-[var(--gold)]/30 hover:bg-[var(--gold)]/10 text-[var(--gold)] text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
+              className="mt-6 px-6 py-3 rounded-sm bg-white/5 border border-white/10 hover:border-[var(--accent)] hover:bg-[var(--gold)]/10 text-[var(--gold)] text-[12px] font-bold uppercase tracking-[0.1em] transition-all"
             >
               Draft Initial Report
             </Link>
@@ -158,7 +158,7 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
                     <td className="px-6 py-5 max-w-[280px]">
                       <div className="flex items-center gap-3">
                         {b.isTrending && (
-                          <div className="w-2 h-2 rounded-full bg-[var(--danger)] animate-pulse shadow-[0_0_8px_var(--danger)]" title="Trending Intelligence" />
+                          <div className="w-2 h-2 rounded-full bg-[var(--danger)] animate-pulse" title="Trending Intelligence" />
                         )}
                         <p className="text-white text-[13.5px] font-bold truncate group-hover:text-[var(--gold)] transition-colors" title={b.title}>
                           {b.title}
@@ -169,7 +169,7 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
                       </p>
                     </td>
                     <td className="px-6 py-5">
-                      <span className="text-[var(--cyan)] text-[11px] font-bold uppercase tracking-[0.15em] bg-[var(--cyan)]/10 border border-[var(--cyan)]/20 px-3 py-1 rounded-full">
+                      <span className="text-[var(--cyan)] text-[11px] font-bold uppercase tracking-[0.15em] bg-[var(--cyan)]/10 border border-[var(--border)] px-3 py-1 rounded-full">
                         {b.category}
                       </span>
                     </td>
@@ -181,12 +181,12 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
                     <td className="px-6 py-5">
                       {(b.chunkCount ?? 0) > 0 ? (
                         <span className="flex items-center gap-1.5 text-emerald-400 text-[11px] font-bold uppercase tracking-[0.1em] bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full w-fit">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_5px_#34d399]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                           Indexed ({b.chunkCount})
                         </span>
                       ) : b.status === "published" ? (
-                        <span className="flex items-center gap-1.5 text-[var(--gold)] text-[11px] font-bold uppercase tracking-[0.1em] bg-[var(--gold)]/10 border border-[var(--gold)]/30 px-3 py-1 rounded-full w-fit">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] shadow-[0_0_5px_var(--gold)]" />
+                        <span className="flex items-center gap-1.5 text-[var(--gold)] text-[11px] font-bold uppercase tracking-[0.1em] bg-[var(--gold)]/10 border border-[var(--accent)] px-3 py-1 rounded-full w-fit">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
                           Pending Index
                         </span>
                       ) : (
@@ -216,14 +216,14 @@ export default function AdminBlogsClient({ blogs }: { blogs: BlogRow[] }) {
                         <Link
                           href={`/blogs/${b.slug}`}
                           target="_blank"
-                          className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-[var(--cyan)] hover:border-[var(--cyan)]/50 transition-all"
+                          className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-[var(--cyan)] hover:border-[var(--border)] transition-all"
                           title="View Live"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
                         <Link
                           href={`/admin/write?id=${b._id}`}
-                          className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-[var(--gold)] hover:border-[var(--gold)]/50 transition-all"
+                          className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-[var(--gold)] hover:border-[var(--accent)] transition-all"
                           title="Edit Report"
                         >
                           <Edit3 className="w-4 h-4" />

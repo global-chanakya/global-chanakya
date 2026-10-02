@@ -23,7 +23,7 @@ export async function RelatedArticles({ currentBlogId, limit = 3 }: RelatedArtic
           <Link 
             href={`/blogs/${blog.slug}`} 
             key={blog._id.toString()}
-            className="group flex flex-col h-full bg-gray-900/50 rounded-2xl border border-gray-800 hover:border-gray-600 transition-all overflow-hidden"
+            className="group flex flex-col h-full bg-gray-900/50 rounded-sm border border-gray-800 hover:border-gray-600 transition-all overflow-hidden"
           >
             {blog.featuredImage && (
               <div className="relative h-32 w-full overflow-hidden bg-gray-800">

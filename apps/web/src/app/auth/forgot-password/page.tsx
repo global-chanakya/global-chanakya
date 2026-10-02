@@ -17,7 +17,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center bg-black">
       <div className="w-full max-w-md">
-        <div className="bg-gray-900 border border-white/10 p-8 rounded-3xl shadow-2xl relative">
+        <div className="bg-gray-900 border border-white/10 p-8 rounded-lg shadow-sm relative">
           <Link href="/auth/signin" className="absolute top-8 left-8 text-gray-400 hover:text-white transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </Link>
@@ -43,12 +43,12 @@ export default function ForgotPasswordPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all"
+                    className="w-full bg-black border border-white/10 rounded-sm px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-500/50 transition-all"
                     placeholder="agent@globalchanakya.com"
                   />
                 </div>
                 
-                <button type="submit" className="w-full bg-rose-600 text-white font-semibold py-3 rounded-xl hover:bg-rose-700 transition-colors mt-6">
+                <button type="submit" className="w-full bg-rose-600 text-white font-semibold py-3 rounded-sm hover:bg-rose-700 transition-colors mt-6">
                   Send Reset Link
                 </button>
               </form>
@@ -61,7 +61,7 @@ export default function ForgotPasswordPage() {
                 <br/><br/>
                 <em>(Note: For security reasons during beta, please contact the admin directly to reset credentials).</em>
               </p>
-              <Link href="/auth/signin" className="block w-full bg-white/10 text-white font-semibold py-3 rounded-xl hover:bg-white/20 transition-colors mt-6">
+              <Link href="/auth/signin" className="block w-full bg-white/10 text-white font-semibold py-3 rounded-sm hover:bg-white/20 transition-colors mt-6">
                 Return to Sign In
               </Link>
             </div>

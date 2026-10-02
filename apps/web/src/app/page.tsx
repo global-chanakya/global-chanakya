@@ -57,7 +57,7 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
   if (variant === "compact") {
     return (
       <Link href={`/blogs/${blog.slug}`} className="group block h-full">
-        <article className="flex flex-row items-center sm:items-stretch gap-4 h-full p-3 glass-card rounded-xl border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold)]/40 hover:shadow-lg hover:shadow-[var(--gold)]/10 bg-[var(--surface)]">
+        <article className="flex flex-row items-center sm:items-stretch gap-4 h-full p-3 bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] bg-[var(--surface)]">
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 shrink-0 overflow-hidden rounded-lg border border-[var(--border)]/50">
             <Image
               src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
@@ -97,7 +97,7 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
   if (variant === "featured") {
     return (
       <Link href={`/blogs/${blog.slug}`} className="group block h-full min-h-[360px] md:min-h-[440px]">
-        <article className="relative flex flex-col h-full glass-card rounded-2xl border border-[var(--border)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[var(--gold)]/50 hover:shadow-2xl hover:shadow-[var(--gold)]/10">
+        <article className="relative flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-[var(--accent)]">
           <div className="absolute inset-0 bg-[var(--surface)]">
             <Image
               src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
@@ -107,17 +107,17 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/80 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 )]/80 opacity-90 group-hover:opacity-100 transition-opacity" />
           </div>
 
           {/* Badges */}
           <div className="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-2 z-20">
             {isViral ? (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--danger)]/90 backdrop-blur-md text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] shadow-[0_0_10px_var(--danger)]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--danger)]/90 text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <Flame className="w-3.5 h-3.5" /> High Threat
               </span>
             ) : blog.isTrending && (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--cyan)]/20 backdrop-blur-md border border-[var(--cyan)]/30 text-[var(--cyan)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--cyan)]/20 border border-[var(--border)] text-[var(--cyan)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <TrendingUp className="w-3.5 h-3.5" /> Trending
               </span>
             )}
@@ -125,14 +125,14 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
 
           <div className="relative z-10 mt-auto p-6 md:p-8 lg:p-10 flex flex-col">
             <div className="mb-4">
-              <span className="inline-block px-3 py-1.5 rounded bg-[var(--gold)]/10 backdrop-blur-md text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--gold)]/20">
+              <span className="inline-block px-3 py-1.5 rounded bg-[var(--gold)]/10 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--accent)]">
                 {blog.category}
               </span>
             </div>
-            <h3 className="font-heading font-extrabold text-white text-2xl md:text-3xl lg:text-4xl leading-[1.2] mb-4 group-hover:text-[var(--gold)] transition-colors duration-300 line-clamp-3 drop-shadow-lg">
+            <h3 className="font-heading font-extrabold text-white text-2xl md:text-3xl lg:text-4xl leading-[1.2] mb-4 group-hover:text-[var(--gold)] transition-colors duration-300 line-clamp-3">
               {blog.title}
             </h3>
-            <p className="text-sm md:text-base lg:text-lg text-white/80 leading-[1.6] line-clamp-2 mb-6 max-w-3xl drop-shadow-md">
+            <p className="text-sm md:text-base lg:text-lg text-white/80 leading-[1.6] line-clamp-2 mb-6 max-w-3xl">
               {blog.excerpt}
             </p>
             <div className="pt-5 border-t border-[rgba(255,255,255,0.1)] flex items-center justify-between text-[10px] md:text-[11px] text-[var(--muted)] uppercase tracking-[0.14em] font-bold">
@@ -155,7 +155,7 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
   // Default Variant
   return (
     <Link href={`/blogs/${blog.slug}`} className="group block h-full">
-      <article className="flex flex-col h-full glass-card rounded-xl border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold)]/40 hover:shadow-xl hover:shadow-[var(--gold)]/10 bg-[var(--surface)]">
+      <article className="flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] bg-[var(--surface)]">
         <div className="relative aspect-[16/9] overflow-hidden border-b border-[var(--border)] bg-[var(--elevated)]">
           <Image
             src={blog.featuredImage || "/images/fallback-geopolitics.jpg"}
@@ -166,11 +166,11 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
           />
           <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
             {isViral ? (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--danger)]/90 backdrop-blur-md text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--danger)]/90 text-white text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <Flame className="w-3.5 h-3.5" /> Hot
               </span>
             ) : blog.isTrending && (
-              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--cyan)]/90 backdrop-blur-md text-[var(--bg)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--cyan)]/90 text-[var(--bg)] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em]">
                 <TrendingUp className="w-3.5 h-3.5" /> Trending
               </span>
             )}
@@ -266,15 +266,12 @@ export default async function Home() {
 
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden border-b border-[var(--border)] min-h-[calc(100vh-5rem)] flex items-center py-12 md:py-16">
-        <div className="absolute inset-0 strategic-grid opacity-30 pointer-events-none" />
-        <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-[var(--elevated)] blur-[120px] rounded-full pointer-events-none" />
-        
         <div className="container mx-auto max-w-7xl px-6 md:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
             
             {/* Left */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 md:px-4 md:py-2 rounded border border-[var(--gold)]/30 bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] w-fit mb-6 shadow-sm">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 md:px-4 md:py-2 rounded border border-[var(--accent)] bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] w-fit mb-6 shadow-sm">
                 <div className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
                 Independent Strategic Analysis
               </div>
@@ -308,7 +305,7 @@ export default async function Home() {
             {/* Right */}
             <div className="lg:col-span-5 w-full">
               {featuredBlog && (
-                <div className="relative w-full aspect-square sm:aspect-[4/5] max-h-[500px] md:max-h-[600px] bg-[var(--surface)] rounded-xl overflow-hidden flex flex-col group border border-[var(--border)] hover:border-[var(--gold)]/40 transition-all duration-500">
+                <div className="relative w-full aspect-square sm:aspect-[4/5] max-h-[500px] md:max-h-[600px] bg-[var(--surface)] rounded-sm overflow-hidden flex flex-col group border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-500">
                   <div className="px-5 py-3 md:px-6 md:py-4 border-b border-[var(--border)] bg-[var(--elevated)] flex items-center justify-between">
                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-white flex items-center gap-2">
                       <Crosshair className="w-3.5 h-3.5 md:w-4 md:h-4 text-[var(--gold)]" /> Featured Brief
@@ -325,10 +322,10 @@ export default async function Home() {
                         className="object-cover"
                       />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/80 to-transparent" />
+                    <div className="absolute inset-0 )]/80" />
                     
                     <div className="relative z-10 flex flex-col">
-                      <span className="mb-3 inline-block px-3 py-1.5 rounded bg-[var(--elevated)]/80 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--border)] w-fit backdrop-blur-md">
+                      <span className="mb-3 inline-block px-3 py-1.5 rounded bg-[var(--elevated)]/80 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--gold)] border border-[var(--border)] w-fit">
                         {featuredBlog.category}
                       </span>
                       <h3 className="font-heading text-2xl md:text-3xl font-bold leading-[1.2] text-white group-hover:text-[var(--gold)] transition-all duration-300 mb-3 md:mb-4 line-clamp-3">
@@ -362,7 +359,7 @@ export default async function Home() {
             </div>
             <Link
               href={`/intelligence`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--elevated)] border border-[var(--border)] text-xs font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--gold)]/50 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--elevated)] border border-[var(--border)] text-xs font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--accent)] transition-all duration-300"
             >
               Command Center <ArrowRight className="w-4 h-4" />
             </Link>
@@ -448,7 +445,7 @@ export default async function Home() {
               </div>
               <Link
                 href={`/blogs`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--surface)] border border-[var(--border)] text-xs font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--gold)]/50 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--surface)] border border-[var(--border)] text-xs font-bold uppercase tracking-[0.06em] text-white hover:border-[var(--accent)] transition-all duration-300"
               >
                 All Reports <ArrowRight className="w-4 h-4" />
               </Link>
@@ -486,7 +483,7 @@ export default async function Home() {
             {methodologyPillars.map((p) => (
               <div
                 key={p.title}
-                className="p-6 md:p-8 rounded-xl bg-[var(--elevated)] border border-[var(--border)] hover:border-[var(--gold)]/30 transition-all duration-300"
+                className="p-6 md:p-8 rounded-sm bg-[var(--elevated)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-lg bg-[var(--bg)] flex items-center justify-center mb-6 border border-[var(--border)]">
                   <p.icon className="w-5 h-5 text-[var(--gold)]" />
@@ -502,7 +499,7 @@ export default async function Home() {
       {/* ─── ABOUT GLOBAL CHANAKYA ─── */}
       <section className="py-16 md:py-24 border-b border-[var(--border)] bg-[var(--bg)]">
         <div className="container mx-auto max-w-7xl px-6 md:px-8 flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-2xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6">
+          <div className="w-16 h-16 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6">
             <Info className="w-8 h-8 text-[var(--gold)]" />
           </div>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">About Global Chanakya</h2>

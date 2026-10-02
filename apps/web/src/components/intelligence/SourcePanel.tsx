@@ -50,13 +50,13 @@ export function SourcePanel({
         
         <div className="flex flex-col gap-4">
            {methodology && (
-             <div className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)]/30">
+             <div className="p-4 rounded-sm border border-[var(--border)] bg-[var(--surface)]/30">
                <h4 className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-[0.15em] mb-2">Methodology</h4>
                <p className="text-xs text-white/70 leading-relaxed">{methodology}</p>
              </div>
            )}
            
-           <div className="p-4 rounded-xl border border-[var(--gold)]/20 bg-[var(--gold)]/5 flex items-center justify-between">
+           <div className="p-4 rounded-sm border border-[var(--accent)] bg-[var(--gold)]/5 flex items-center justify-between">
              <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-[0.15em]">Overall Confidence</span>
              <span className="text-xs font-extrabold text-[var(--gold)] uppercase tracking-[0.15em]">{confidence}</span>
            </div>

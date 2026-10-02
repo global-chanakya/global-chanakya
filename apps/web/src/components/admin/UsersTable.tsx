@@ -13,8 +13,8 @@ interface UserRow {
 }
 
 const roleColors: Record<string, { bg: string, text: string, border: string }> = {
-  admin: { bg: "bg-[var(--gold)]/10", text: "text-[var(--gold)]", border: "border-[var(--gold)]/30" },
-  premium: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--cyan)]/30" },
+  admin: { bg: "bg-[var(--gold)]/10", text: "text-[var(--gold)]", border: "border-[var(--accent)]" },
+  premium: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--border)]" },
   free: { bg: "bg-[var(--blue)]/10", text: "text-[var(--blue)]", border: "border-[var(--blue)]/30" },
   guest: { bg: "bg-[var(--surface)]", text: "text-[var(--muted)]", border: "border-[var(--border)]" },
 };
@@ -84,7 +84,7 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] mb-2 flex items-center gap-3">
-            Operative <span className="bg-gradient-to-r from-[var(--cyan)] to-blue-400 text-transparent bg-clip-text drop-shadow-sm">Roster</span>
+            Operative <span className="text-[var(--text)]">Roster</span>
           </h1>
           <p className="text-white/50 text-[14px] font-medium max-w-xl leading-relaxed">
             Manage system access, intelligence clearances, and active operatives across the network.
@@ -93,14 +93,14 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
         </div>
         
         {/* Admin Warning */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[var(--gold)]/20 bg-[var(--gold)]/5 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-sm border border-[var(--accent)] bg-[var(--gold)]/5">
           <ShieldAlert className="w-4 h-4 text-[var(--gold)]" />
           <p className="text-[var(--gold)] text-[11px] font-bold uppercase tracking-[0.1em]">Admin roles locked</p>
         </div>
       </div>
 
       {/* Filters Bar */}
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 bg-[var(--surface)]/50 backdrop-blur-xl border border-[var(--border)] p-3 rounded-2xl shadow-lg">
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 bg-[var(--surface)]/50 border border-[var(--border)] p-3 rounded-sm shadow-sm">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
           <input
@@ -108,7 +108,7 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
             placeholder="Search by name or email identity..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--cyan)]/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all"
+            className="w-full pl-11 pr-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-sm text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--border)] focus: transition-all"
           />
         </div>
         <div className="flex flex-wrap gap-2 w-full md:w-auto">
@@ -116,9 +116,9 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`flex-1 md:flex-none px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
+              className={`flex-1 md:flex-none px-5 py-2.5 rounded-sm text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
                 filter === f
-                  ? "bg-[var(--cyan)]/10 text-[var(--cyan)] border-[var(--cyan)]/30 shadow-[0_0_15px_rgba(34,211,238,0.15)]"
+                  ? "bg-[var(--cyan)]/10 text-[var(--cyan)] border-[var(--border)] "
                   : "bg-[var(--bg)] text-white/40 border-[var(--border)] hover:text-white hover:bg-[var(--surface)]"
               }`}
             >
@@ -129,9 +129,9 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
       </div>
 
       {/* Roster Table */}
-      <div className="bg-[var(--surface)]/40 backdrop-blur-2xl border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl relative">
+      <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm overflow-hidden shadow-sm relative">
         {/* Glow */}
-        <div className="absolute top-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-[var(--cyan)]/50 to-transparent" />
+        <div className="absolute top-0 left-1/4 w-1/2 h-px" />
         
         <div className="overflow-x-auto custom-scrollbar">
           <table className="w-full text-left border-collapse">
@@ -158,7 +158,7 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
                     <td className="px-6 py-5">
                       <div className="flex items-center gap-4">
                         <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-br from-[var(--cyan)] to-[var(--blue)] blur opacity-30 group-hover:opacity-60 transition-opacity rounded-full" />
+                          <div className="absolute inset-0 )] blur opacity-30 group-hover:opacity-60 transition-opacity rounded-full" />
                           <div className="relative w-10 h-10 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-white font-bold text-[14px] shadow-inner">
                             {u.name?.[0]?.toUpperCase() ?? "?"}
                           </div>
@@ -177,7 +177,7 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
                         className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.1em] border outline-none appearance-none cursor-pointer transition-all ${
                           roleColors[u.role]?.bg ?? roleColors.free.bg
                         } ${roleColors[u.role]?.text ?? roleColors.free.text} ${roleColors[u.role]?.border ?? roleColors.free.border} ${
-                          u.role === "admin" ? "opacity-70 cursor-not-allowed" : "hover:brightness-125 hover:shadow-md"
+                          u.role === "admin" ? "opacity-70 cursor-not-allowed" : "hover:brightness-125 "
                         }`}
                       >
                         <option value="free" className="bg-[var(--bg)] text-white">FREE</option>
@@ -206,10 +206,10 @@ export default function UsersTable({ users }: { users: UserRow[] }) {
                         <button
                           onClick={() => toggleBan(u._id, u.isBanned)}
                           disabled={loading === u._id}
-                          className={`px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
+                          className={`px-4 py-2 rounded-sm text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
                             u.isBanned
-                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
-                              : "bg-[var(--danger)]/10 text-[var(--danger)] border-[var(--danger)]/30 hover:bg-[var(--danger)]/20 hover:shadow-[0_0_15px_rgba(220,38,38,0.15)]"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20 "
+                              : "bg-[var(--danger)]/10 text-[var(--danger)] border-[var(--danger)]/30 hover:bg-[var(--danger)]/20 hover:"
                           } ${loading === u._id ? "opacity-50 cursor-wait" : ""}`}
                         >
                           {loading === u._id ? "Processing..." : u.isBanned ? "Reinstate" : "Revoke Access"}

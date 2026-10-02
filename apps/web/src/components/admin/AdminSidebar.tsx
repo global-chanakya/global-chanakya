@@ -50,9 +50,9 @@ export default function AdminSidebar({ user }: { user: { name?: string; email?: 
   }, {} as Record<string, typeof navItems>);
 
   return (
-    <aside className="w-[280px] min-w-[280px] h-screen bg-[var(--surface)]/60 backdrop-blur-3xl border-r border-[var(--border)] flex flex-col relative overflow-hidden">
+    <aside className="w-[280px] min-w-[280px] h-screen bg-[var(--surface)]/60 border-r border-[var(--border)] flex flex-col relative overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[var(--cyan)]/5 to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-32 pointer-events-none" />
 
       {/* Logo */}
       <div className="px-6 py-6 border-b border-[var(--border)]/50 relative z-10">
@@ -68,7 +68,7 @@ export default function AdminSidebar({ user }: { user: { name?: string; email?: 
             />
           </div>
           <div>
-            <p className="text-white font-black text-[15px] tracking-[-0.03em] leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all">Global Chanakya</p>
+            <p className="text-white font-black text-[15px] tracking-[-0.03em] leading-none group-hover:text-[var(--text)] transition-all">Global Chanakya</p>
             <p className="text-[var(--gold)] text-[10px] font-bold uppercase tracking-[0.2em] mt-1.5 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" /> Command
             </p>
@@ -90,24 +90,24 @@ export default function AdminSidebar({ user }: { user: { name?: string; email?: 
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-[13px] font-bold uppercase tracking-[0.05em] transition-all group relative overflow-hidden ${
+                      className={`flex items-center gap-3.5 px-4 py-2.5 rounded-sm text-[13px] font-bold uppercase tracking-[0.05em] transition-all group relative overflow-hidden ${
                         active
                           ? "text-white"
                           : "text-white/60 hover:text-white"
                       }`}
                     >
                       {active && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)]/10 to-transparent border border-[var(--gold)]/20 rounded-xl" />
+                        <div className="absolute inset-0 border border-[var(--accent)] rounded-sm" />
                       )}
                       {!active && (
-                        <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
+                        <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-sm" />
                       )}
                       
                       <Icon className={`w-4 h-4 relative z-10 transition-colors ${active ? "text-[var(--gold)]" : "group-hover:text-[var(--gold)]/70"}`} />
                       <span className="relative z-10">{item.label}</span>
                       
                       {active && (
-                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--gold)] shadow-[0_0_8px_var(--gold)] relative z-10" />
+                        <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--gold)] relative z-10" />
                       )}
                     </Link>
                   );
@@ -120,14 +120,14 @@ export default function AdminSidebar({ user }: { user: { name?: string; email?: 
 
       {/* User */}
       <div className="p-4 border-t border-[var(--border)]/50 bg-[var(--bg)]/50 relative z-10">
-        <div className="flex items-center gap-3.5 px-4 py-3 rounded-xl bg-[var(--surface)]/80 border border-[var(--border)] shadow-xl mb-3 group hover:border-white/20 transition-colors">
+        <div className="flex items-center gap-3.5 px-4 py-3 rounded-sm bg-[var(--surface)]/80 border border-[var(--border)] shadow-sm mb-3 group hover:border-white/20 transition-colors">
           <div className="relative">
             <div className="absolute inset-0 bg-[var(--cyan)]/20 blur-md rounded-full" />
             {user.image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img loading="lazy" src={user.image} alt="" className="relative z-10 w-9 h-9 rounded-full ring-2 ring-[var(--cyan)]/40" />
             ) : (
-              <div className="relative z-10 w-9 h-9 rounded-full bg-[var(--cyan)]/20 border border-[var(--cyan)]/40 flex items-center justify-center text-[var(--cyan)] font-bold text-sm">
+              <div className="relative z-10 w-9 h-9 rounded-full bg-[var(--cyan)]/20 border border-[var(--border)] flex items-center justify-center text-[var(--cyan)] font-bold text-sm">
                 {user.name?.[0]?.toUpperCase()}
               </div>
             )}
@@ -139,7 +139,7 @@ export default function AdminSidebar({ user }: { user: { name?: string; email?: 
         </div>
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-[12px] font-bold uppercase tracking-[0.1em] text-[var(--danger)] hover:bg-[var(--danger)]/10 hover:border-[var(--danger)]/30 border border-transparent transition-all"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-sm text-[12px] font-bold uppercase tracking-[0.1em] text-[var(--danger)] hover:bg-[var(--danger)]/10 hover:border-[var(--danger)]/30 border border-transparent transition-all"
         >
           <LogOut className="w-4 h-4" /> Disconnect
         </button>

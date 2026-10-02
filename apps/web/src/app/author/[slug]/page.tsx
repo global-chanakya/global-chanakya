@@ -57,8 +57,8 @@ export default async function AuthorPage({
         </Link>
         
         {/* Author Header */}
-        <div className="bg-[var(--surface)] border border-[var(--border)] p-8 md:p-12 rounded-2xl mb-12 flex flex-col md:flex-row gap-8 items-start">
-          <div className="w-24 h-24 shrink-0 rounded-xl bg-[var(--bg)] intel-border flex items-center justify-center text-4xl text-white shadow-lg overflow-hidden">
+        <div className="bg-[var(--surface)] border border-[var(--border)] p-8 md:p-12 rounded-sm mb-12 flex flex-col md:flex-row gap-8 items-start">
+          <div className="w-24 h-24 shrink-0 rounded-sm bg-[var(--bg)] intel-border flex items-center justify-center text-4xl text-white shadow-sm overflow-hidden">
             {author.avatar && author.avatar.startsWith('http') ? (
               <img src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
             ) : (
@@ -87,14 +87,14 @@ export default async function AuthorPage({
           </h2>
           
           {blogs.length === 0 ? (
-            <div className="p-8 text-center border border-[var(--border)] border-dashed rounded-xl bg-[var(--surface)] text-[var(--muted)]">
+            <div className="p-8 text-center border border-[var(--border)] border-dashed rounded-sm bg-[var(--surface)] text-[var(--muted)]">
               No reports published yet.
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {blogs.map((blog: any) => (
                 <Link key={blog._id.toString()} href={`/blogs/${blog.slug}`} className="group block h-full">
-                  <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 h-full flex flex-col hover:border-[var(--gold)] transition-colors">
+                  <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm p-6 h-full flex flex-col hover:border-[var(--gold)] transition-colors">
                     <div className="text-[10px] text-[var(--cyan)] font-bold uppercase tracking-widest mb-3 flex items-center justify-between">
                       <span>{blog.category}</span>
                       <span className="text-[var(--muted)] flex items-center gap-1">

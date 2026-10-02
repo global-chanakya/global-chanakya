@@ -70,13 +70,13 @@ export default function AskChanakyaPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Ask a strategic question..." 
-              className="w-full bg-[var(--surface)]/50 border-2 border-[var(--border)] rounded-2xl py-6 pl-16 pr-32 text-lg focus:outline-none focus:border-[var(--gold)]/50 transition-colors shadow-inner"
+              className="w-full bg-[var(--surface)]/50 border-2 border-[var(--border)] rounded-sm py-6 pl-16 pr-32 text-lg focus:outline-none focus:border-[var(--accent)] transition-colors shadow-inner"
               disabled={status === "PROCESSING"}
             />
             <button 
               type="submit"
               disabled={status === "PROCESSING" || !query.trim()}
-              className="absolute right-3 top-3 bottom-3 px-6 bg-[var(--gold)] text-[var(--bg)] font-bold uppercase tracking-wider rounded-xl hover:bg-yellow-400 disabled:opacity-50 transition-colors"
+              className="absolute right-3 top-3 bottom-3 px-6 bg-[var(--gold)] text-[var(--bg)] font-bold uppercase tracking-wider rounded-sm hover:bg-yellow-400 disabled:opacity-50 transition-colors"
             >
               Analyze
             </button>
@@ -95,7 +95,7 @@ export default function AskChanakyaPage() {
                   <button 
                     key={q}
                     onClick={() => handleSuggested(q)}
-                    className="text-xs text-left px-4 py-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)]/30 hover:border-[var(--cyan)]/50 hover:bg-[var(--cyan)]/5 transition-all text-white/80"
+                    className="text-xs text-left px-4 py-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)]/30 hover:border-[var(--border)] hover:bg-[var(--cyan)]/5 transition-all text-white/80"
                   >
                     {q}
                   </button>
@@ -110,7 +110,7 @@ export default function AskChanakyaPage() {
         )}
 
         {status === "ERROR" && (
-          <div className="animate-in fade-in p-6 rounded-2xl bg-red-950/40 border border-red-500/50 text-red-200">
+          <div className="animate-in fade-in p-6 rounded-sm bg-red-950/40 border border-red-500/50 text-red-200">
             <h3 className="text-lg font-bold flex items-center gap-2 mb-2">
               <AlertTriangle className="w-5 h-5 text-red-500" />
               Intelligence Synthesis Failed
@@ -126,8 +126,8 @@ export default function AskChanakyaPage() {
         )}
 
         {status === "COMPLETE" && response && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="mb-8 p-6 rounded-2xl bg-[var(--surface)]/80 border border-[var(--border)]">
+          <div className="animate-in fade-in slide-in- duration-700">
+            <div className="mb-8 p-6 rounded-sm bg-[var(--surface)]/80 border border-[var(--border)]">
                <h2 className="text-xl font-bold mb-2">Query Assessment: {query || response.query}</h2>
                <p className="text-sm text-[var(--muted)] flex items-center gap-2">
                  <Compass className="w-4 h-4 text-[var(--cyan)]" /> Intelligence Core Synthesis

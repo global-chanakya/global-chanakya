@@ -24,7 +24,7 @@ export default function Footer() {
                 alt="Global Chanakya"
                 width={48}
                 height={48}
-                className="w-12 h-12 rounded-xl group-hover:scale-105 transition-transform duration-300"
+                className="w-12 h-12 rounded-sm group-hover:scale-105 transition-transform duration-300"
               />
               <div className="flex flex-col leading-none gap-1">
                 <span className="text-[28px] font-bold tracking-[-0.03em] text-white">

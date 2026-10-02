@@ -218,7 +218,7 @@ export default function SEOScoringWidget({ formData, onOptimized }: Props) {
 
   const scoreBg =
     score >= 90 ? "bg-green-500/10 border-green-500/20" :
-    score >= 70 ? "bg-[var(--gold)]/10 border-[var(--gold)]/20" :
+    score >= 70 ? "bg-[var(--gold)]/10 border-[var(--accent)]" :
     score >= 50 ? "bg-orange-500/10 border-orange-500/20" :
     "bg-red-500/10 border-red-500/20";
 
@@ -235,7 +235,7 @@ export default function SEOScoringWidget({ formData, onOptimized }: Props) {
   const passed = issues.filter(i => i.type === "pass");
 
   return (
-    <div className="rounded-xl border border-[var(--border)] overflow-hidden">
+    <div className="rounded-sm border border-[var(--border)] overflow-hidden">
       {/* Score Header */}
       <div className={`p-4 border-b border-[var(--border)] ${scoreBg}`}>
         <div className="flex items-center justify-between mb-1">
@@ -331,8 +331,8 @@ export default function SEOScoringWidget({ formData, onOptimized }: Props) {
               ${justOptimized
                 ? "bg-green-500/20 text-green-400 border border-green-500/30"
                 : isOptimizing
-                ? "bg-[var(--gold)]/10 text-[var(--gold)] border border-[var(--gold)]/20 cursor-wait"
-                : "bg-[var(--gold)] text-black hover:bg-yellow-400 shadow-[0_0_16px_rgba(212,175,55,0.2)] hover:shadow-[0_0_24px_rgba(212,175,55,0.5)]"
+                ? "bg-[var(--gold)]/10 text-[var(--gold)] border border-[var(--accent)] cursor-wait"
+                : "bg-[var(--gold)] text-black hover:bg-yellow-400  hover:"
               }
             `}
           >

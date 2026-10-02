@@ -60,7 +60,7 @@ export default function LiveEventsClient({ events }: { events: EventRow[] }) {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] mb-2 flex items-center gap-3">
-            Live <span className="bg-gradient-to-r from-[var(--cyan)] to-blue-300 text-transparent bg-clip-text drop-shadow-sm">Intelligence</span>
+            Live <span className="text-[var(--text)]">Intelligence</span>
           </h1>
           <p className="text-white/50 text-[14px] font-medium max-w-xl leading-relaxed">
             Manage real-time events ingested from external intelligence providers.
@@ -69,7 +69,7 @@ export default function LiveEventsClient({ events }: { events: EventRow[] }) {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 bg-[var(--surface)]/50 backdrop-blur-xl border border-[var(--border)] p-3 rounded-2xl shadow-lg">
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-8 bg-[var(--surface)]/50 border border-[var(--border)] p-3 rounded-sm shadow-sm">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
           <input
@@ -77,7 +77,7 @@ export default function LiveEventsClient({ events }: { events: EventRow[] }) {
             placeholder="Search events by title or source..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--cyan)]/50 focus:shadow-[0_0_15px_rgba(0,255,255,0.1)] transition-all"
+            className="w-full pl-11 pr-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-sm text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--border)] focus: transition-all"
           />
         </div>
         <div className="flex flex-wrap gap-2 w-full md:w-auto">
@@ -85,9 +85,9 @@ export default function LiveEventsClient({ events }: { events: EventRow[] }) {
             <button
               key={s}
               onClick={() => setFilterStatus(s)}
-              className={`flex-1 md:flex-none px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
+              className={`flex-1 md:flex-none px-5 py-2.5 rounded-sm text-[11px] font-bold uppercase tracking-[0.1em] border transition-all ${
                 filterStatus === s
-                  ? "bg-[var(--cyan)]/10 text-[var(--cyan)] border-[var(--cyan)]/30 shadow-[0_0_15px_rgba(0,255,255,0.15)]"
+                  ? "bg-[var(--cyan)]/10 text-[var(--cyan)] border-[var(--border)] "
                   : "bg-[var(--bg)] text-white/40 border-[var(--border)] hover:text-white hover:bg-[var(--surface)]"
               }`}
             >
@@ -97,8 +97,8 @@ export default function LiveEventsClient({ events }: { events: EventRow[] }) {
         </div>
       </div>
 
-      <div className="bg-[var(--surface)]/40 backdrop-blur-2xl border border-[var(--border)] rounded-2xl overflow-hidden shadow-2xl relative">
-        <div className="absolute top-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-[var(--cyan)]/50 to-transparent" />
+      <div className="bg-[var(--surface)]/40 border border-[var(--border)] rounded-sm overflow-hidden shadow-sm relative">
+        <div className="absolute top-0 left-1/4 w-1/2 h-px" />
         
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -151,7 +151,7 @@ export default function LiveEventsClient({ events }: { events: EventRow[] }) {
                             href={e.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-[var(--cyan)] hover:border-[var(--cyan)]/50 transition-all"
+                            className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-[var(--cyan)] hover:border-[var(--border)] transition-all"
                             title="View Source"
                           >
                             <Eye className="w-4 h-4" />

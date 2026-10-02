@@ -31,7 +31,7 @@ export default function SourceVerificationPage() {
           {/* Section 1 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Layers className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">1. Source Hierarchy</h2>
@@ -81,7 +81,7 @@ export default function SourceVerificationPage() {
           {/* Section 2 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Database className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">2. OSINT Standards & Practices</h2>
@@ -102,7 +102,7 @@ export default function SourceVerificationPage() {
           {/* Section 3 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Eye className="w-5 h-5 text-[var(--gold)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">3. Source Reliability Assessment</h2>
@@ -124,7 +124,7 @@ export default function SourceVerificationPage() {
           {/* Section 4 */}
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center">
                 <Lock className="w-5 h-5 text-[var(--cyan)]" />
               </div>
               <h2 className="text-2xl font-bold text-white">4. Source Confidentiality</h2>
@@ -165,11 +165,11 @@ export default function SourceVerificationPage() {
           <section className="pt-12 border-t border-[var(--border)]">
             <h2 className="text-xl font-bold text-white mb-6">Related Policies</h2>
             <div className="grid sm:grid-cols-2 gap-4">
-              <Link href="/editorial-policy" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/editorial-policy" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Editorial Policy</h3>
                 <p className="text-sm text-[var(--muted)]">Our editorial standards & principles</p>
               </Link>
-              <Link href="/fact-checking" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+              <Link href="/fact-checking" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
                 <h3 className="font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Fact-Checking Policy</h3>
                 <p className="text-sm text-[var(--muted)]">Our verification & correction process</p>
               </Link>

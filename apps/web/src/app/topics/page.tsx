@@ -39,12 +39,12 @@ export default async function TopicsPage() {
         <div className="container relative z-10 mx-auto max-w-7xl px-6 md:px-8">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--gold)]/30 bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent)] bg-[var(--gold)]/10 text-[var(--gold)] text-[10px] md:text-xs font-bold uppercase tracking-[0.14em]">
                 <Hash className="w-3.5 h-3.5" /> Intelligence Hubs
               </span>
             </div>
             
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white leading-[1.1] tracking-tight drop-shadow-md">
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white leading-[1.1] tracking-tight">
               Strategic Topics
             </h1>
             <p className="text-lg md:text-xl text-[var(--muted)] font-medium leading-[1.7] max-w-2xl">
@@ -59,8 +59,8 @@ export default async function TopicsPage() {
         <div className="container mx-auto max-w-7xl px-6 md:px-8">
           
           {topics.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-center glass-card rounded-2xl border border-[var(--border)]">
-              <div className="w-16 h-16 rounded-2xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6 shadow-sm">
+            <div className="flex flex-col items-center justify-center py-20 text-center bg-[var(--surface)] rounded-sm border border-[var(--border)]">
+              <div className="w-16 h-16 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6 shadow-sm">
                 <Search className="w-8 h-8 text-[var(--cyan)]" />
               </div>
               <h2 className="font-heading text-2xl font-bold text-white mb-3">
@@ -71,7 +71,7 @@ export default async function TopicsPage() {
               </p>
               <Link 
                 href="/blogs"
-                className="px-6 py-3 rounded-lg bg-[var(--cyan)] text-[var(--bg)] font-bold text-sm uppercase tracking-wider hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,255,0.2)]"
+                className="px-6 py-3 rounded-lg bg-[var(--cyan)] text-[var(--bg)] font-bold text-sm uppercase tracking-wider hover:bg-white transition-all"
               >
                 Browse Latest Reports
               </Link>
@@ -82,9 +82,9 @@ export default async function TopicsPage() {
                 <Link
                   key={topic._id.toString()}
                   href={`/topics/${topic.slug}`}
-                  className="group flex flex-col h-full bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold)]/50 hover:shadow-lg hover:shadow-[var(--gold)]/5"
+                  className="group flex flex-col h-full bg-[var(--surface)] border border-[var(--border)] rounded-sm p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)]"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center mb-5 group-hover:border-[var(--gold)]/30 group-hover:bg-[var(--gold)]/5 transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center mb-5 group-hover:border-[var(--accent)] group-hover:bg-[var(--gold)]/5 transition-colors">
                     <Folder className="w-6 h-6 text-[var(--gold)]" />
                   </div>
                   

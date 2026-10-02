@@ -53,7 +53,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
   }, [profileOpen]);
 
   return (
-    <nav className={`sticky top-0 z-50 w-full backdrop-blur-xl bg-[#07111F]/90 border-b border-[rgba(255,255,255,0.1)] flex items-center transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'}`}>
+    <nav className={`sticky top-0 z-50 w-full bg-[var(--bg)]/95 border-b border-[rgba(255,255,255,0.1)] flex items-center transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'}`}>
       <div className="w-full max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
         
         {/* Left: Logo */}
@@ -63,7 +63,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
             alt="Global Chanakya"
             width={48}
             height={48}
-            className={`rounded-lg md:rounded-xl group-hover:scale-105 transition-transform duration-300 ${scrolled ? 'w-8 h-8 md:w-10 md:h-10' : 'w-8 h-8 md:w-12 md:h-12'}`}
+            className={`rounded-lg md:rounded-sm group-hover:scale-105 transition-transform duration-300 ${scrolled ? 'w-8 h-8 md:w-10 md:h-10' : 'w-8 h-8 md:w-12 md:h-12'}`}
           />
           <div className="flex flex-col leading-none gap-0.5 md:gap-1">
             <span className="text-[16px] md:text-[28px] font-bold tracking-[-0.03em] text-white">
@@ -112,7 +112,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-[var(--gold)] bg-[var(--gold)]/10 border border-[var(--gold)]/20 rounded-md hover:bg-[var(--gold)]/20 transition-colors uppercase tracking-wider"
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-[var(--gold)] bg-[var(--gold)]/10 border border-[var(--accent)] rounded-md hover:bg-[var(--gold)]/20 transition-colors uppercase tracking-wider"
                 >
                   <LayoutDashboard className="w-3 h-3" />
                   Admin
@@ -124,7 +124,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
                 onClick={(e) => { e.stopPropagation(); setProfileOpen(!profileOpen); }}
                 className="flex items-center gap-2.5 px-2 py-1 rounded-md hover:bg-[var(--surface)] transition-colors"
               >
-                <div className="w-8 h-8 rounded-full bg-[var(--blue)] flex items-center justify-center text-[12px] font-bold text-white shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+                <div className="w-8 h-8 rounded-full bg-[var(--blue)] flex items-center justify-center text-[12px] font-bold text-white">
                   {(session.user?.name || "U")[0].toUpperCase()}
                 </div>
               </button>
@@ -132,7 +132,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               {/* Dropdown */}
               {profileOpen && (
                 <div
-                  className="absolute right-0 top-full mt-4 w-56 py-2 rounded-xl bg-[var(--elevated)] intel-border shadow-2xl"
+                  className="absolute right-0 top-full mt-4 w-56 py-2 rounded-sm bg-[var(--elevated)] intel-border shadow-sm"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="px-4 py-3 border-b border-[var(--border)]">
@@ -171,7 +171,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               </Link>
               <Link
                 href="/auth/signup"
-                className="px-7 py-3 bg-[var(--gold)] text-[var(--bg)] text-sm font-bold uppercase tracking-wider rounded-xl hover:opacity-90 transition-opacity"
+                className="px-7 py-3 bg-[var(--gold)] text-[var(--bg)] text-sm font-bold uppercase tracking-wider rounded-sm hover:opacity-90 transition-opacity"
               >
                 Get Started
               </Link>
@@ -199,7 +199,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="absolute top-20 left-0 w-full lg:hidden border-b border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-xl">
+        <div className="absolute top-20 left-0 w-full lg:hidden border-b border-[var(--border)] bg-[var(--bg)]/95">
           <div className="px-6 py-6 space-y-2">
             <div className="pb-4">
               <LiveUpdatesButton />
@@ -223,7 +223,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
               {session ? (
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 px-4">
-                    <div className="w-10 h-10 rounded-full bg-[var(--blue)] flex items-center justify-center text-sm font-bold text-white shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+                    <div className="w-10 h-10 rounded-full bg-[var(--blue)] flex items-center justify-center text-sm font-bold text-white">
                       {(session.user?.name || "U")[0].toUpperCase()}
                     </div>
                     <div>
@@ -261,7 +261,7 @@ export default function NavbarClient({ session }: NavbarClientProps) {
                   <Link
                     href="/auth/signup"
                     onClick={() => setMobileOpen(false)}
-                    className="block w-full px-4 py-3 text-center rounded-xl bg-[var(--gold)] text-[var(--bg)] text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
+                    className="block w-full px-4 py-3 text-center rounded-sm bg-[var(--gold)] text-[var(--bg)] text-[14px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
                   >
                     Get Started
                   </Link>

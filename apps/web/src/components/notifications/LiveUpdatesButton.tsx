@@ -127,7 +127,7 @@ export default function LiveUpdatesButton() {
       title={isSubscribed ? "Disable Live Updates" : "Enable Live Updates"}
       className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-md transition-colors uppercase tracking-wider ${
         isSubscribed 
-          ? "text-[var(--gold)] bg-[var(--gold)]/10 border border-[var(--gold)]/20 hover:bg-[var(--gold)]/20" 
+          ? "text-[var(--gold)] bg-[var(--gold)]/10 border border-[var(--accent)] hover:bg-[var(--gold)]/20" 
           : "text-[var(--secondary)] border border-[var(--border)] hover:text-white hover:border-white"
       }`}
     >

@@ -43,7 +43,7 @@ export default function AuditLogDashboard() {
         </button>
       </div>
 
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-sm overflow-hidden">
         {/* Toolbar */}
         <div className="p-4 border-b border-[var(--border)] flex items-center gap-4">
           <div className="relative w-96">

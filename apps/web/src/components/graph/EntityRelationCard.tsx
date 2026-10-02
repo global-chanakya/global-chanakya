@@ -23,7 +23,7 @@ export function EntityRelationCard({ type, name, slug, imageUrl, subtitle, isAct
   const url = getEntityUrl(type, slug);
 
   return (
-    <Link href={url} className={`group flex flex-col items-center p-4 rounded-xl border border-gray-800 bg-gray-900/50 backdrop-blur-md transition-all duration-300 hover:border-gray-700 hover:bg-gray-800/80 ${isActive ? 'ring-2 ring-blue-500/50 border-blue-500/30' : ''}`} aria-label={`${type}: ${name}`}>
+    <Link href={url} className={`group flex flex-col items-center p-4 rounded-sm border border-gray-800 bg-gray-900/50  transition-all duration-300 hover:border-gray-700 hover:bg-gray-800/80 ${isActive ? 'ring-2 ring-blue-500/50 border-blue-500/30' : ''}`} aria-label={`${type}: ${name}`}>
       <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
         {imageUrl ? (
           <Image 

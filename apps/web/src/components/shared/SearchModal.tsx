@@ -72,12 +72,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] px-4">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-[var(--bg)]/80 backdrop-blur-md"
+        className="absolute inset-0 bg-[var(--bg)]/80"
         onClick={onClose}
       />
       
       {/* Modal */}
-      <div className="relative w-full max-w-2xl bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-2xl bg-[var(--surface)] border border-[var(--border)] rounded-sm shadow-sm overflow-hidden flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header / Input */}
         <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 border-b border-[var(--border)]">
@@ -145,7 +145,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             </div>
           ) : query.trim() !== "" ? (
             <div className="flex flex-col items-center justify-center py-16 text-center px-6">
-              <div className="w-16 h-16 rounded-2xl bg-[var(--elevated)] border border-[var(--border)] flex items-center justify-center mb-4">
+              <div className="w-16 h-16 rounded-sm bg-[var(--elevated)] border border-[var(--border)] flex items-center justify-center mb-4">
                 <Search className="w-8 h-8 text-[var(--muted)]" />
               </div>
               <p className="text-white font-bold text-lg">No Intel Found</p>
@@ -163,7 +163,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   <button 
                     key={tag}
                     onClick={() => setQuery(tag)}
-                    className="px-4 py-2 rounded-lg bg-[var(--elevated)] border border-[var(--border)] text-sm text-[var(--secondary)] font-medium hover:text-white hover:border-[var(--gold)]/50 hover:bg-[var(--gold)]/5 transition-all"
+                    className="px-4 py-2 rounded-lg bg-[var(--elevated)] border border-[var(--border)] text-sm text-[var(--secondary)] font-medium hover:text-white hover:border-[var(--accent)] hover:bg-[var(--gold)]/5 transition-all"
                   >
                     {tag}
                   </button>

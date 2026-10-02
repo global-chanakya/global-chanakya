@@ -32,7 +32,7 @@ export function EntityGraph({ nodes, edges, title = "Geopolitical Connections", 
   // Simple sequential layout for horizontal paths (e.g. India -> Modi -> QUAD)
   if (layout === "horizontal") {
     return (
-      <section className="my-8 p-6 bg-gray-950 rounded-2xl border border-gray-800/50" aria-label="Entity Graph">
+      <section className="my-8 p-6 bg-gray-950 rounded-sm border border-gray-800/50" aria-label="Entity Graph">
         <h2 className="text-lg font-bold text-gray-200 mb-6 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
           {title}

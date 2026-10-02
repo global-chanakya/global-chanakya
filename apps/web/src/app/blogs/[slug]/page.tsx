@@ -177,14 +177,14 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       if (pCount === 2 || (pCount === 6 && relatedBlogs.length > 1)) {
         const relatedLink = pCount === 2 ? relatedBlogs[0] : relatedBlogs[1];
         return `${match}
-          <div class="my-8 p-5 glass-card rounded-md border-l-4 border-[var(--gold)] bg-[var(--surface)] transition-colors w-full relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-[var(--gold)]/5 to-transparent pointer-events-none"></div>
-            <div class="relative z-10">
-              <div class="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] mb-1.5 flex items-center gap-1.5">
+          <div className="my-8 p-5 bg-[var(--surface)] rounded-md border-l-4 border-[var(--gold)] bg-[var(--surface)] transition-colors w-full relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none"></div>
+            <div className="relative z-10">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[var(--gold)] mb-1.5 flex items-center gap-1.5">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8l-4 4v16a2 2 0 0 0 2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                 Related Intelligence
               </div>
-              <a href="/blogs/${relatedLink.slug}" class="text-[16px] md:text-[18px] font-heading font-bold text-white hover:text-[var(--gold)] !border-none inline-block">
+              <a href="/blogs/${relatedLink.slug}" className="text-[16px] md:text-[18px] font-heading font-bold text-white hover:text-[var(--gold)] !border-none inline-block">
                 ${relatedLink.title}
               </a>
             </div>
@@ -214,7 +214,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
       {/* Hero Header */}
       <header className="relative pt-32 pb-12 border-b border-[var(--border)] strategic-grid bg-[var(--surface)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg)] pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none" />
         <div className="container mx-auto max-w-7xl px-6 md:px-8 relative z-10">
           <Link href="/blogs" className="inline-flex items-center gap-2 text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-white transition-colors mb-8 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -243,7 +243,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
           <div className="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-[var(--border)] text-[12px] font-bold uppercase tracking-widest text-[var(--muted)]">
             <div className="flex items-center gap-3">
               <Link href={`/author/${blog.author?.authorSlug || 'global-chanakya-editorial'}`} className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-sm bg-[var(--surface)] intel-border flex items-center justify-center text-[14px] text-white shadow-[0_0_10px_rgba(255,255,255,0.05)] group-hover:border-[var(--gold)] transition-colors overflow-hidden">
+                <div className="w-10 h-10 rounded-sm bg-[var(--surface)] intel-border flex items-center justify-center text-[14px] text-white group-hover:border-[var(--gold)] transition-colors overflow-hidden">
                   {blog.author?.avatar ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={blog.author.avatar} alt={blog.author?.name || "Global Chanakya Editorial"} className="w-full h-full object-cover" />
@@ -372,7 +372,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
             {(adjacentBlogs.prev || adjacentBlogs.next) && (
               <div className="mt-12 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row justify-between gap-4">
                 {adjacentBlogs.prev ? (
-                  <Link href={`/blogs/${adjacentBlogs.prev.slug}`} className="flex-1 glass-card p-5 rounded-sm border border-[var(--border)] hover:border-[var(--gold)]/50 group flex flex-col items-start text-left transition-colors">
+                  <Link href={`/blogs/${adjacentBlogs.prev.slug}`} className="flex-1 bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)] hover:border-[var(--accent)] group flex flex-col items-start text-left transition-colors">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-1.5">
                       <ArrowLeft className="w-3.5 h-3.5" /> Previous in {blog.category}
                     </span>
@@ -383,7 +383,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
                 ) : <div className="flex-1" />}
                 
                 {adjacentBlogs.next ? (
-                  <Link href={`/blogs/${adjacentBlogs.next.slug}`} className="flex-1 glass-card p-5 rounded-sm border border-[var(--border)] hover:border-[var(--gold)]/50 group flex flex-col items-end text-right transition-colors">
+                  <Link href={`/blogs/${adjacentBlogs.next.slug}`} className="flex-1 bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)] hover:border-[var(--accent)] group flex flex-col items-end text-right transition-colors">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] mb-2 flex items-center gap-1.5">
                       Next in {blog.category} <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
                     </span>
@@ -403,7 +403,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {relatedBlogs.map((rb: any) => (
-                    <Link key={rb._id} href={`/blogs/${rb.slug}`} className="glass-card p-5 rounded-sm hover:-translate-y-1 transition-transform group flex flex-col gap-3 border border-[var(--border)] hover:border-[var(--gold)]/50">
+                    <Link key={rb._id} href={`/blogs/${rb.slug}`} className="bg-[var(--surface)] p-5 rounded-sm hover:-translate-y-1 transition-transform group flex flex-col gap-3 border border-[var(--border)] hover:border-[var(--accent)]">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--cyan)]">{rb.category}</span>
                       <h4 className="font-heading text-[16px] font-bold text-white leading-snug group-hover:text-[var(--gold)] transition-colors line-clamp-2">
                         {rb.title}
@@ -422,7 +422,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
           <aside className="xl:col-span-4 sticky top-32 max-h-[calc(100vh-128px)] overflow-y-auto custom-scrollbar flex-col gap-8 hidden xl:flex pb-8 pr-4">
             {/* TOC */}
             {toc.length > 0 && (
-              <div className="glass-card rounded-sm p-6 shrink-0">
+              <div className="bg-[var(--surface)] rounded-sm p-6 shrink-0">
                 <h3 className="font-heading text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
                   <Crosshair className="w-4 h-4 text-[var(--gold)]" /> Executive Summary
                 </h3>
@@ -442,7 +442,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
             {/* Related Reports */}
             {relatedBlogs.length > 0 && (
-              <div className="glass-card rounded-sm p-6 shrink-0">
+              <div className="bg-[var(--surface)] rounded-sm p-6 shrink-0">
                 <h3 className="font-heading text-[12px] font-bold uppercase tracking-widest text-white flex items-center gap-2 mb-6 border-b border-[var(--border)] pb-4">
                   <Newspaper className="w-4 h-4 text-[var(--cyan)]" /> Related Intelligence
                 </h3>

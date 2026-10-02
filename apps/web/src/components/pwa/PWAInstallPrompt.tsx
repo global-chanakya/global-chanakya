@@ -106,7 +106,7 @@ export function PWAInstallPrompt() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-[400px] bg-[var(--elevated)] border border-[var(--border)] rounded-xl shadow-2xl p-5 z-[100] flex flex-col gap-3 animate-in slide-in-from-bottom-5 fade-in duration-300">
+    <div className="fixed bottom-4 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-[400px] bg-[var(--elevated)] border border-[var(--border)] rounded-sm shadow-sm p-5 z-[100] flex flex-col gap-3 animate-in slide-in- fade-in duration-300">
       <div className="flex justify-between items-start">
         <h3 className="text-[14px] font-bold text-white tracking-wide">
           Install Global Chanakya

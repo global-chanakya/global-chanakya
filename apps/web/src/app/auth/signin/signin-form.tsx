@@ -32,9 +32,9 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="glass-card border border-[var(--border)] p-8 rounded-3xl shadow-2xl bg-[var(--surface)]/30">
+    <div className="bg-[var(--surface)] border border-[var(--border)] p-8 rounded-lg shadow-sm bg-[var(--surface)]/30">
       <div className="flex justify-center mb-6">
-        <div className="p-3 bg-[var(--gold)]/10 rounded-full border border-[var(--gold)]/30 shadow-[0_0_15px_rgba(212,175,55,0.15)]">
+        <div className="p-3 bg-[var(--gold)]/10 rounded-full border border-[var(--accent)]">
           <Lock className="w-6 h-6 text-[var(--gold)]" />
         </div>
       </div>
@@ -51,7 +51,7 @@ export default function SignInForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
+            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
             placeholder="agent@globalchanakya.in"
           />
         </div>
@@ -62,7 +62,7 @@ export default function SignInForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
+            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
             placeholder="••••••••"
           />
         </div>
@@ -75,7 +75,7 @@ export default function SignInForm() {
           <Link href="/auth/forgot-password" className="text-[var(--gold)] hover:text-yellow-200 transition-colors">Forgot password?</Link>
         </div>
 
-        <button type="submit" className="w-full bg-[var(--gold)] text-[var(--bg)] text-sm font-extrabold uppercase tracking-[0.06em] py-3.5 rounded-xl hover:bg-yellow-400 transition-colors mt-6 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+        <button type="submit" className="w-full bg-[var(--gold)] text-[var(--bg)] text-sm font-extrabold uppercase tracking-[0.06em] py-3.5 rounded-sm hover:bg-yellow-400 transition-colors mt-6">
           Sign In
         </button>
       </form>
@@ -87,10 +87,10 @@ export default function SignInForm() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 mt-6">
-        <button onClick={() => signIn("google", { callbackUrl })} className="flex items-center justify-center gap-2 py-2.5 border border-[var(--border)] bg-[var(--elevated)] rounded-xl hover:border-[var(--gold)]/50 text-white transition-colors text-sm font-bold uppercase tracking-widest">
+        <button onClick={() => signIn("google", { callbackUrl })} className="flex items-center justify-center gap-2 py-2.5 border border-[var(--border)] bg-[var(--elevated)] rounded-sm hover:border-[var(--accent)] text-white transition-colors text-sm font-bold uppercase tracking-widest">
           <Mail className="w-4 h-4" /> Google
         </button>
-        <button onClick={() => signIn("github", { callbackUrl })} className="flex items-center justify-center gap-2 py-2.5 border border-[var(--border)] bg-[var(--elevated)] rounded-xl hover:border-[var(--gold)]/50 text-white transition-colors text-sm font-bold uppercase tracking-widest">
+        <button onClick={() => signIn("github", { callbackUrl })} className="flex items-center justify-center gap-2 py-2.5 border border-[var(--border)] bg-[var(--elevated)] rounded-sm hover:border-[var(--accent)] text-white transition-colors text-sm font-bold uppercase tracking-widest">
           <Github className="w-4 h-4" /> GitHub
         </button>
       </div>

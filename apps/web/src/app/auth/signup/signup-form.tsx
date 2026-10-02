@@ -48,9 +48,9 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="glass-card border border-[var(--border)] p-8 md:p-10 rounded-3xl shadow-2xl bg-[var(--surface)]/30">
+    <div className="bg-[var(--surface)] border border-[var(--border)] p-8 md:p-10 rounded-lg shadow-sm bg-[var(--surface)]/30">
       <div className="flex items-center gap-4 mb-8">
-        <div className="p-3 bg-[var(--gold)]/10 rounded-xl border border-[var(--gold)]/30 shadow-[0_0_15px_rgba(212,175,55,0.15)]">
+        <div className="p-3 bg-[var(--gold)]/10 rounded-sm border border-[var(--accent)]">
           <Shield className="w-7 h-7 text-[var(--gold)]" />
         </div>
         <div>
@@ -66,7 +66,7 @@ export default function SignUpForm() {
             posthog.capture("user_signed_up", { method: "google" });
             signIn("google", { callbackUrl });
           }}
-          className="flex items-center justify-center gap-2 py-3 border border-[var(--border)] bg-[var(--elevated)] rounded-xl hover:border-[var(--gold)]/50 text-white transition-colors text-sm font-bold uppercase tracking-widest"
+          className="flex items-center justify-center gap-2 py-3 border border-[var(--border)] bg-[var(--elevated)] rounded-sm hover:border-[var(--accent)] text-white transition-colors text-sm font-bold uppercase tracking-widest"
         >
           <Mail className="w-4 h-4" /> Google
         </button>
@@ -75,7 +75,7 @@ export default function SignUpForm() {
             posthog.capture("user_signed_up", { method: "github" });
             signIn("github", { callbackUrl });
           }}
-          className="flex items-center justify-center gap-2 py-3 border border-[var(--border)] bg-[var(--elevated)] rounded-xl hover:border-[var(--gold)]/50 text-white transition-colors text-sm font-bold uppercase tracking-widest"
+          className="flex items-center justify-center gap-2 py-3 border border-[var(--border)] bg-[var(--elevated)] rounded-sm hover:border-[var(--accent)] text-white transition-colors text-sm font-bold uppercase tracking-widest"
         >
           <Github className="w-4 h-4" /> GitHub
         </button>
@@ -95,7 +95,7 @@ export default function SignUpForm() {
           <input
             type="text" required value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
+            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
             placeholder="Your name"
           />
         </div>
@@ -104,7 +104,7 @@ export default function SignUpForm() {
           <input
             type="email" required value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
+            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
             placeholder="agent@globalchanakya.in"
           />
         </div>
@@ -113,14 +113,14 @@ export default function SignUpForm() {
           <input
             type="password" required minLength={8} value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
-            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
+            className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-sm px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-[var(--cyan)] focus:border-[var(--cyan)] transition-all"
             placeholder="Min 8 characters"
           />
         </div>
 
         <button
           type="submit" disabled={loading}
-          className="w-full bg-[var(--gold)] hover:bg-yellow-400 text-[var(--bg)] font-extrabold uppercase tracking-[0.06em] text-sm py-3.5 rounded-xl transition-colors mt-2 flex items-center justify-center gap-2 group disabled:opacity-60 shadow-[0_0_20px_rgba(212,175,55,0.2)]"
+          className="w-full bg-[var(--gold)] hover:bg-yellow-400 text-[var(--bg)] font-extrabold uppercase tracking-[0.06em] text-sm py-3.5 rounded-sm transition-colors mt-2 flex items-center justify-center gap-2 group disabled:opacity-60"
         >
           {loading ? "Creating account..." : "Create Account"}
           {!loading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}

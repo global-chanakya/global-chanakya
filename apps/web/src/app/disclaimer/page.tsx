@@ -18,7 +18,7 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. General Disclaimer</h2>
             <p>
-              The information contained on Global Chanakya Intelligence (&quot;the Platform&quot;), available at <strong>www.globalchanakya.in</strong>, is provided for general informational and educational purposes only. While we strive to provide accurate, up-to-date, and reliable geopolitical analysis, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the Platform for any purpose.
+              The information contained on Global Chanakya Intelligence (&quot;the Platform&quot;), available at <strong>www.globalchanakya.in</strong>, is provided for general informational and educational purposes only. While we strive to provide accurate, up-, and reliable geopolitical analysis, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the Platform for any purpose.
             </p>
             <p className="mt-3">
               Any reliance you place on such information is therefore strictly at your own risk. In no event will we be liable for any loss or damage, including without limitation indirect or consequential loss or damage, or any loss or damage whatsoever arising from the use of the Platform.

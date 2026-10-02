@@ -108,15 +108,15 @@ export default function PlatformSeoEditorClient({ authorId, editData }: Props) {
   }
 
   const inputClass =
-    "w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-xl text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--gold)]/50 focus:shadow-[0_0_15px_rgba(212,175,55,0.1)] transition-all";
+    "w-full px-4 py-3 bg-[var(--bg)] border border-[var(--border)] rounded-sm text-[13px] text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] focus: transition-all";
   const labelClass = "block text-[11px] text-white/50 font-bold mb-2 uppercase tracking-[0.1em]";
 
   return (
     <div className="flex flex-col min-h-screen relative bg-[var(--bg)]">
-      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[var(--gold)]/5 to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-96 pointer-events-none" />
 
       {/* Header Bar */}
-      <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]/50 bg-[var(--surface)]/80 backdrop-blur-xl sticky top-0 z-40">
+      <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--border)]/50 bg-[var(--surface)]/80 sticky top-0 z-40">
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.push("/gc-control-9x7k/platform-seo")}
@@ -134,7 +134,7 @@ export default function PlatformSeoEditorClient({ authorId, editData }: Props) {
             </p>
           </div>
           {saved && (
-            <span className="ml-4 text-[var(--cyan)] text-[10px] font-bold uppercase tracking-[0.15em] bg-[var(--cyan)]/10 border border-[var(--cyan)]/20 px-2.5 py-1 rounded-full animate-pulse">
+            <span className="ml-4 text-[var(--cyan)] text-[10px] font-bold uppercase tracking-[0.15em] bg-[var(--cyan)]/10 border border-[var(--border)] px-2.5 py-1 rounded-full animate-pulse">
               ✓ Saved
             </span>
           )}
@@ -144,7 +144,7 @@ export default function PlatformSeoEditorClient({ authorId, editData }: Props) {
           <button
             onClick={() => handleSave(false)}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-[11px] font-bold uppercase tracking-[0.1em] rounded-xl border border-[var(--border)] transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-[11px] font-bold uppercase tracking-[0.1em] rounded-sm border border-[var(--border)] transition-all disabled:opacity-50"
           >
             <Save className="w-3.5 h-3.5" />
             {saving ? "Saving..." : "Save Draft"}
@@ -152,7 +152,7 @@ export default function PlatformSeoEditorClient({ authorId, editData }: Props) {
           <button
             onClick={() => handleSave(true)}
             disabled={saving || !title.trim() || !content.trim()}
-            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[var(--gold)] to-yellow-300 text-black text-[11px] font-bold uppercase tracking-[0.1em] rounded-xl hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-2.5 text-black text-[11px] font-bold uppercase tracking-[0.1em] rounded-sm transition-all disabled:opacity-50"
           >
             <Send className="w-3.5 h-3.5" />
             Publish
@@ -162,7 +162,7 @@ export default function PlatformSeoEditorClient({ authorId, editData }: Props) {
 
       {/* Error */}
       {error && (
-        <div className="mx-6 mt-4 p-4 bg-red-950/40 border border-red-500/50 rounded-xl text-red-200 text-sm">
+        <div className="mx-6 mt-4 p-4 bg-red-950/40 border border-red-500/50 rounded-sm text-red-200 text-sm">
           {error}
         </div>
       )}
@@ -236,7 +236,7 @@ export default function PlatformSeoEditorClient({ authorId, editData }: Props) {
           </div>
 
           {/* SEO Section */}
-          <div className="glass-card p-6 rounded-2xl border border-[var(--border)]">
+          <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)]">
             <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-6 flex items-center gap-2">
               <Eye className="w-4 h-4 text-[var(--gold)]" /> SEO Settings
             </h3>

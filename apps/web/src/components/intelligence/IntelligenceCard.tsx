@@ -21,12 +21,12 @@ const riskColors = {
 
 export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
   return (
-    <article className="glass-card rounded-2xl border border-[var(--border)] overflow-hidden transition-all duration-300 hover:border-[var(--gold)]/40 hover:shadow-xl hover:shadow-[var(--gold)]/10 bg-[var(--surface)]/30 flex flex-col h-full group">
+    <article className="bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:border-[var(--accent)] bg-[var(--surface)]/30 flex flex-col h-full group">
       
       {/* Header area */}
       <div className="px-5 py-4 border-b border-[var(--border)]/50 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--cyan)] bg-[var(--cyan)]/10 px-2 py-1 rounded border border-[var(--cyan)]/20">
+           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--cyan)] bg-[var(--cyan)]/10 px-2 py-1 rounded border border-[var(--border)]">
              {item.region}
            </span>
            <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/50">
@@ -48,7 +48,7 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
           <p className="text-sm text-white/80 leading-relaxed mb-4">
             {item.summary}
           </p>
-          <div className="bg-[var(--bg)]/50 p-4 rounded-xl border border-[var(--border)]">
+          <div className="bg-[var(--bg)]/50 p-4 rounded-sm border border-[var(--border)]">
             <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--muted)] mb-2">Why It Matters</h4>
             <p className="text-xs text-white/70 leading-relaxed">{item.whyItMatters}</p>
           </div>
@@ -56,11 +56,11 @@ export function IntelligenceCard({ item }: { item: IntelligenceItem }) {
 
         {/* Indicators */}
         <div className="grid grid-cols-2 gap-3 mb-5">
-          <div className={`p-3 rounded-xl border ${impactColors[item.indiaImpact]}`}>
+          <div className={`p-3 rounded-sm border ${impactColors[item.indiaImpact]}`}>
              <div className="text-[9px] font-bold uppercase tracking-[0.15em] opacity-80 mb-1">India Impact</div>
              <div className="font-extrabold text-sm">{item.indiaImpact}</div>
           </div>
-          <div className={`p-3 rounded-xl border ${riskColors[item.riskLevel]}`}>
+          <div className={`p-3 rounded-sm border ${riskColors[item.riskLevel]}`}>
              <div className="text-[9px] font-bold uppercase tracking-[0.15em] opacity-80 mb-1">Regional Risk</div>
              <div className="font-extrabold text-sm">{item.riskLevel}</div>
           </div>

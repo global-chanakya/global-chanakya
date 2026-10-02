@@ -95,7 +95,7 @@ export default function HomepageBuilderPage() {
 
       <div className="space-y-4">
         {config?.homepage?.sections?.sort((a: any, b: any) => a.order - b.order).map((section: any, idx: number) => (
-          <div key={idx} className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex items-start gap-4 transition-all hover:border-[var(--gold)]/30">
+          <div key={idx} className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex items-start gap-4 transition-all hover:border-[var(--accent)]">
             <div className="mt-2 text-gray-500 cursor-grab hover:text-white">
               <GripVertical className="w-5 h-5" />
             </div>

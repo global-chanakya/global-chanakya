@@ -99,8 +99,8 @@ export default function GatedArticleContent({
       />
 
       {showGate && (
-        <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-[var(--bg)] via-[var(--bg)] to-transparent flex items-end justify-center pb-8 z-30 pointer-events-auto">
-          <div className="glass-card max-w-md w-full mx-4 p-8 rounded-lg border border-[var(--border)] shadow-2xl flex flex-col items-center text-center animate-in fade-in slide-in-from-bottom-10 duration-500">
+        <div className="absolute bottom-0 left-0 right-0 h-[50vh] )] flex items-end justify-center pb-8 z-30 pointer-events-auto">
+          <div className="bg-[var(--surface)] max-w-md w-full mx-4 p-8 rounded-lg border border-[var(--border)] shadow-sm flex flex-col items-center text-center animate-in fade-in slide-in- duration-500">
             <div className="w-12 h-12 rounded-full bg-[var(--gold)]/20 flex items-center justify-center mb-4">
               <Lock className="w-6 h-6 text-[var(--gold)]" />
             </div>

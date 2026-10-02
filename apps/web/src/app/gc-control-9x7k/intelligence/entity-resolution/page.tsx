@@ -11,7 +11,7 @@ export default function EntityResolutionPage() {
         <h1 className="text-3xl font-black text-white uppercase tracking-wider">Entity Resolution Engine</h1>
         <p className="text-white/60 mt-2">Manage the entity resolution pipeline rules and view backfill status.</p>
       </div>
-      <div className="bg-gc-dark/50 border border-white/10 rounded-xl p-8">
+      <div className="bg-gc-dark/50 border border-white/10 rounded-sm p-8">
         <h2 className="text-xl font-bold text-white mb-4">Pipeline Status</h2>
         <p className="text-white/70 mb-4">
           The Entity Resolution Engine is active and running inline during the Live Ingestion Pipeline.

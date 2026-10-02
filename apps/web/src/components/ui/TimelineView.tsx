@@ -12,7 +12,7 @@ export interface TimelineEventProp {
 export function TimelineView({ events }: { events: TimelineEventProp[] }) {
   if (!events || events.length === 0) {
     return (
-      <div className="p-8 text-center border border-dashed border-white/10 rounded-2xl bg-white/[0.01]">
+      <div className="p-8 text-center border border-dashed border-white/10 rounded-sm bg-white/[0.01]">
         <p className="text-neutral-500">No timeline events recorded yet.</p>
       </div>
     );

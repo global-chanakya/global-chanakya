@@ -107,7 +107,7 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       {/* Command Center Header */}
       <header className="relative pt-32 pb-12 border-b border-[var(--border)] bg-[var(--surface)]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg)] pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none" />
         <div className="container mx-auto max-w-5xl px-6 md:px-8 relative z-10">
           <Link href="/live" className="inline-flex items-center gap-2 text-[var(--secondary)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--cyan)] transition-colors mb-8 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -149,7 +149,7 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
           
           <article className="lg:col-span-8 flex flex-col gap-8">
              {/* AI Enriched Executive Summary */}
-             <div className="glass-card p-6 rounded-2xl border border-[var(--cyan)]/20 bg-[var(--cyan)]/5">
+             <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)] bg-[var(--cyan)]/5">
                 <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-[var(--cyan)] mb-4 flex items-center gap-2">
                    <Activity className="w-4 h-4" /> Executive Summary
                 </h3>
@@ -159,7 +159,7 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
              </div>
 
              {/* Why It Matters */}
-             <div className="glass-card p-6 rounded-2xl border border-[var(--gold)]/20 bg-[var(--gold)]/5">
+             <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--accent)] bg-[var(--gold)]/5">
                 <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-[var(--gold)] mb-4 flex items-center gap-2">
                    <Crosshair className="w-4 h-4" /> Why It Matters
                 </h3>
@@ -170,7 +170,7 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
 
              {/* Strategic Significance */}
              {event.strategicSignificance && (
-               <div className="glass-card p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/50">
+               <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)] bg-[var(--surface)]/50">
                   <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-[var(--muted)] mb-4 flex items-center gap-2">
                      Strategic Significance
                   </h3>
@@ -182,11 +182,11 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
 
              {/* Impact & Risk Indicators */}
              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className={`p-5 rounded-2xl border ${impactColors[event.indiaImpact || "NEUTRAL"] || impactColors.NEUTRAL}`}>
+                <div className={`p-5 rounded-sm border ${impactColors[event.indiaImpact || "NEUTRAL"] || impactColors.NEUTRAL}`}>
                    <div className="text-[10px] font-bold uppercase tracking-[0.15em] opacity-80 mb-2">India Impact</div>
                    <div className="font-extrabold text-lg">{event.indiaImpact || "NEUTRAL"}</div>
                 </div>
-                <div className={`p-5 rounded-2xl border ${riskColors[event.riskLevel || "LOW"] || riskColors.LOW}`}>
+                <div className={`p-5 rounded-sm border ${riskColors[event.riskLevel || "LOW"] || riskColors.LOW}`}>
                    <div className="text-[10px] font-bold uppercase tracking-[0.15em] opacity-80 mb-2">Regional Risk</div>
                    <div className="font-extrabold text-lg">{event.riskLevel || "LOW"}</div>
                 </div>
@@ -203,7 +203,7 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
           <aside className="lg:col-span-4 flex flex-col gap-8">
              {/* Entities */}
              {allEntities.length > 0 && (
-               <div className="glass-card p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/30">
+               <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)] bg-[var(--surface)]/30">
                   <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-[var(--muted)] mb-4 border-b border-[var(--border)] pb-3">
                      Tracked Entities
                   </h3>
@@ -216,19 +216,19 @@ export default async function IntelligenceDetailPage({ params }: { params: Promi
              )}
 
              {/* Ask Chanakya CTA */}
-             <div className="p-6 rounded-2xl glass-card border border-[var(--gold)]/30 bg-[var(--gold)]/10 flex flex-col gap-4">
+             <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--accent)] bg-[var(--gold)]/10 flex flex-col gap-4">
                 <h3 className="text-lg font-bold text-white leading-snug">Assess this event with Ask Chanakya</h3>
                 <p className="text-[13px] text-white/70 leading-relaxed">
                    Query our AI intelligence core to understand specific implications for your strategic interests.
                 </p>
-                <Link href="/intelligence/ask" className="w-full py-3 bg-[var(--gold)] text-[var(--bg)] font-extrabold uppercase tracking-widest rounded-xl hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 text-[11px]">
+                <Link href="/intelligence/ask" className="w-full py-3 bg-[var(--gold)] text-[var(--bg)] font-extrabold uppercase tracking-widest rounded-sm hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 text-[11px]">
                    Ask Chanakya <ArrowRight className="w-4 h-4" />
                 </Link>
              </div>
 
              {/* Related Intelligence */}
              {relatedIntelligence.length > 0 && (
-               <div className="glass-card p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/30">
+               <div className="bg-[var(--surface)] p-6 rounded-sm border border-[var(--border)] bg-[var(--surface)]/30">
                   <h3 className="text-[11px] font-extrabold uppercase tracking-widest text-[var(--cyan)] mb-4 border-b border-[var(--border)] pb-3 flex items-center gap-2">
                      <AlertTriangle className="w-3.5 h-3.5" /> Related Intelligence
                   </h3>

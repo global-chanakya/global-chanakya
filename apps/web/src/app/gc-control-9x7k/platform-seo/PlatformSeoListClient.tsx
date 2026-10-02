@@ -18,7 +18,7 @@ interface BlogRow {
 const statusColors: Record<string, { bg: string; text: string; border: string }> = {
   published: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/30" },
   draft: { bg: "bg-gray-500/10", text: "text-gray-400", border: "border-gray-500/30" },
-  scheduled: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--cyan)]/30" },
+  scheduled: { bg: "bg-[var(--cyan)]/10", text: "text-[var(--cyan)]", border: "border-[var(--border)]" },
   archived: { bg: "bg-[var(--danger)]/10", text: "text-[var(--danger)]", border: "border-[var(--danger)]/30" },
 };
 
@@ -67,13 +67,13 @@ export default function PlatformSeoListClient({ blogs }: { blogs: BlogRow[] }) {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em] mb-2 flex items-center gap-3">
-            Platform <span className="bg-gradient-to-r from-[var(--gold)] to-yellow-200 text-transparent bg-clip-text drop-shadow-sm">SEO</span>
+            Platform <span className="text-[var(--text)]">SEO</span>
           </h1>
           <p className="text-sm text-[var(--muted)]">Manage articles that appear on /platformseo</p>
         </div>
         <Link
           href="/gc-control-9x7k/platform-seo/new"
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--gold)] to-yellow-300 text-black font-bold text-xs uppercase tracking-[0.1em] rounded-xl hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] transition-all"
+          className="flex items-center gap-2 px-6 py-3 text-black font-bold text-xs uppercase tracking-[0.1em] rounded-sm transition-all"
         >
           <PenTool className="w-4 h-4" /> New Platform SEO
         </Link>
@@ -88,7 +88,7 @@ export default function PlatformSeoListClient({ blogs }: { blogs: BlogRow[] }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search platform SEO articles..."
-            className="w-full px-4 py-3 pl-12 bg-[var(--surface)]/80 border border-[var(--border)] rounded-xl text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--gold)]/50 transition-all"
+            className="w-full px-4 py-3 pl-12 bg-[var(--surface)]/80 border border-[var(--border)] rounded-sm text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] transition-all"
           />
         </div>
         <div className="flex gap-2">
@@ -98,7 +98,7 @@ export default function PlatformSeoListClient({ blogs }: { blogs: BlogRow[] }) {
               onClick={() => setFilterStatus(s)}
               className={`px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-wider border transition-all ${
                 filterStatus === s
-                  ? "bg-[var(--gold)]/10 text-[var(--gold)] border-[var(--gold)]/30"
+                  ? "bg-[var(--gold)]/10 text-[var(--gold)] border-[var(--accent)]"
                   : "bg-[var(--surface)]/50 text-white/40 border-[var(--border)] hover:text-white/70"
               }`}
             >
@@ -110,13 +110,13 @@ export default function PlatformSeoListClient({ blogs }: { blogs: BlogRow[] }) {
 
       {/* List */}
       {filtered.length === 0 ? (
-        <div className="glass-card p-12 rounded-2xl border border-[var(--border)] text-center">
+        <div className="bg-[var(--surface)] p-12 rounded-sm border border-[var(--border)] text-center">
           <FileText className="w-12 h-12 text-[var(--muted)] mx-auto mb-4 opacity-50" />
           <h2 className="text-xl font-bold text-white mb-2">No Platform SEO Articles</h2>
           <p className="text-sm text-[var(--muted)] mb-6">Create your first Platform SEO article to get started.</p>
           <Link
             href="/gc-control-9x7k/platform-seo/new"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--gold)] text-black font-bold text-xs uppercase tracking-wider rounded-xl"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--gold)] text-black font-bold text-xs uppercase tracking-wider rounded-sm"
           >
             <PenTool className="w-4 h-4" /> Create
           </Link>
@@ -128,7 +128,7 @@ export default function PlatformSeoListClient({ blogs }: { blogs: BlogRow[] }) {
             return (
               <div
                 key={blog._id}
-                className="glass-card p-5 rounded-xl border border-[var(--border)] hover:border-[var(--gold)]/20 transition-all flex items-center gap-4"
+                className="bg-[var(--surface)] p-5 rounded-sm border border-[var(--border)] hover:border-[var(--accent)] transition-all flex items-center gap-4"
               >
                 <Globe className="w-5 h-5 text-[var(--cyan)] shrink-0" />
                 <div className="flex-1 min-w-0">

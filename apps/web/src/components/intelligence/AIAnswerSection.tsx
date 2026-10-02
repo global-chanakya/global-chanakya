@@ -12,9 +12,9 @@ export function AIAnswerSection({ title, content, type = "text", highlight = fal
   if (!content || (Array.isArray(content) && content.length === 0)) return null;
 
   return (
-    <div className={`p-6 rounded-2xl border ${highlight ? 'border-[var(--gold)]/30 bg-[var(--gold)]/5 shadow-[0_0_20px_rgba(212,175,55,0.05)]' : 'border-[var(--border)] bg-[var(--surface)]/50'} mb-6`}>
+    <div className={`p-6 rounded-sm border ${highlight ? 'border-[var(--accent)] bg-[var(--gold)]/5 ' : 'border-[var(--border)] bg-[var(--surface)]/50'} mb-6`}>
       <h3 className={`text-xs font-extrabold uppercase tracking-[0.2em] mb-4 flex items-center gap-2 ${highlight ? 'text-[var(--gold)]' : 'text-[var(--cyan)]'}`}>
-        {highlight && <div className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] shadow-[0_0_8px_rgba(212,175,55,0.8)] animate-pulse" />}
+        {highlight && <div className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />}
         {title}
       </h3>
       

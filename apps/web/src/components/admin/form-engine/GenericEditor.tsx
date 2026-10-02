@@ -84,7 +84,7 @@ function SERPPreview({ title, url, description }: { title: string; url: string; 
   const truncDesc = displayDesc.length > 160 ? displayDesc.slice(0, 157) + "..." : displayDesc;
 
   return (
-    <div className="rounded-xl border border-[var(--border)] overflow-hidden">
+    <div className="rounded-sm border border-[var(--border)] overflow-hidden">
       <div className="px-4 py-2.5 bg-[var(--surface)] border-b border-[var(--border)] flex items-center gap-2">
         <Search className="w-3.5 h-3.5 text-[var(--muted)]" />
         <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">
@@ -220,7 +220,7 @@ function StringArrayInput({ value, onChange }: { value: string[]; onChange: (v: 
           placeholder="Type and press Enter"
           className="flex-1 bg-[var(--bg)] border border-[var(--border)] rounded-lg px-3 py-2 text-white text-sm focus:border-[var(--gold)] outline-none"
         />
-        <button onClick={add} className="px-4 py-2 bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/30 rounded-lg text-sm font-bold hover:bg-[var(--gold)]/30 transition-colors">
+        <button onClick={add} className="px-4 py-2 bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--accent)] rounded-lg text-sm font-bold hover:bg-[var(--gold)]/30 transition-colors">
           Add
         </button>
       </div>
@@ -256,7 +256,7 @@ function CitationsInput({ value, onChange }: { value: any[]; onChange: (v: any[]
       <div className="grid grid-cols-[1fr_auto_auto] gap-2">
         <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://..." className="bg-[var(--bg)] border border-[var(--border)] rounded-lg px-3 py-2 text-white text-sm focus:border-[var(--gold)] outline-none" />
         <input value={label} onChange={(e) => setLabel(e.target.value)} placeholder="Label (optional)" className="bg-[var(--bg)] border border-[var(--border)] rounded-lg px-3 py-2 text-white text-sm focus:border-[var(--gold)] outline-none" />
-        <button onClick={add} className="px-4 py-2 bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--gold)]/30 rounded-lg text-sm font-bold hover:bg-[var(--gold)]/30 transition-colors">Add</button>
+        <button onClick={add} className="px-4 py-2 bg-[var(--gold)]/20 text-[var(--gold)] border border-[var(--accent)] rounded-lg text-sm font-bold hover:bg-[var(--gold)]/30 transition-colors">Add</button>
       </div>
       {arr.map((c, i) => (
         <div key={i} className="flex items-center gap-3 p-3 bg-[var(--surface)] border border-[var(--border)] rounded-lg">
@@ -282,7 +282,7 @@ function AnalyticsWidget({ analytics }: { analytics?: Record<string, number> }) 
   ];
 
   return (
-    <div className="mt-6 p-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+    <div className="mt-6 p-4 bg-[var(--surface)] border border-[var(--border)] rounded-sm">
       <p className="text-xs font-bold uppercase tracking-wider text-[var(--muted)] mb-3 flex items-center gap-2">
         <BarChart2 className="w-3.5 h-3.5" /> Live Analytics
       </p>
@@ -497,7 +497,7 @@ export default function GenericEditor({
         return (
           <div className="grid grid-cols-2 gap-2">
             {field.options?.map((o) => (
-              <label key={o.value} className="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors">
+              <label key={o.value} className="flex items-center gap-2 cursor-pointer p-2 rounded-lg border border-[var(--border)] hover:border-[var(--accent)] transition-colors">
                 <input
                   type="checkbox"
                   checked={Array.isArray(value) ? value.includes(o.value) : false}
@@ -633,7 +633,7 @@ export default function GenericEditor({
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   activeTab === tab.id
-                    ? "bg-[var(--gold)]/15 text-[var(--gold)] border border-[var(--gold)]/25"
+                    ? "bg-[var(--gold)]/15 text-[var(--gold)] border border-[var(--accent)]"
                     : "text-gray-400 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -672,7 +672,7 @@ export default function GenericEditor({
           <div className="flex items-center gap-3">
             <h2 className="text-white font-bold text-sm flex items-center gap-2">
               {entityId ? "Editing" : "Creating"} {schema.name}
-              <span className="bg-[var(--gold)]/10 text-[var(--gold)] px-2 py-0.5 rounded text-[10px] uppercase flex items-center gap-1 border border-[var(--gold)]/20">
+              <span className="bg-[var(--gold)]/10 text-[var(--gold)] px-2 py-0.5 rounded text-[10px] uppercase flex items-center gap-1 border border-[var(--accent)]">
                 <Lock className="w-2.5 h-2.5" /> Locked to you
               </span>
             </h2>
@@ -699,7 +699,7 @@ export default function GenericEditor({
                 href={`/${schema.id === "blogs" ? "blogs" : schema.id}/${formData.slug}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[var(--muted)] hover:text-white bg-[var(--bg)] border border-[var(--border)] rounded-lg hover:border-[var(--gold)]/40 transition-all"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[var(--muted)] hover:text-white bg-[var(--bg)] border border-[var(--border)] rounded-lg hover:border-[var(--accent)] transition-all"
               >
                 <Eye className="w-3.5 h-3.5" /> Preview
               </a>
@@ -707,7 +707,7 @@ export default function GenericEditor({
             <button
               onClick={() => handleSave(false)}
               disabled={isSaving}
-              className="flex items-center gap-2 px-5 py-2 bg-[var(--gold)] text-black font-bold text-xs uppercase tracking-wider rounded-lg shadow-[0_0_12px_rgba(212,175,55,0.2)] hover:bg-yellow-400 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-5 py-2 bg-[var(--gold)] text-black font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-yellow-400 transition-colors disabled:opacity-50"
             >
               <Save className="w-3.5 h-3.5" />
               {isSaving ? "Saving..." : "Publish"}
@@ -720,7 +720,7 @@ export default function GenericEditor({
           <div className="max-w-4xl mx-auto space-y-7">
             {/* Analytics banner for blogs */}
             {formData.analytics && activeTab === schema.tabs[0].id && (
-              <div className="grid grid-cols-4 gap-3 p-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+              <div className="grid grid-cols-4 gap-3 p-4 bg-[var(--surface)] border border-[var(--border)] rounded-sm">
                 {[
                   { label: "Views", value: formData.analytics.views ?? 0, color: "text-blue-400" },
                   { label: "Likes", value: formData.analytics.likes ?? 0, color: "text-rose-400" },

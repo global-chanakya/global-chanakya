@@ -25,14 +25,14 @@ export default function AboutPage() {
 
         {/* Mission & Independence Cards */}
         <div className="grid md:grid-cols-2 gap-8 mt-20 mb-20 text-left">
-          <div className="p-8 rounded-2xl glass-card border border-[var(--border)] hover:-translate-y-1 transition-transform">
+          <div className="p-8 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:-translate-y-1 transition-transform">
             <Zap className="w-8 h-8 text-[var(--gold)] mb-6" />
             <h3 className="font-heading text-xl font-bold text-white mb-3">Our Mission</h3>
             <p className="text-[var(--muted)] leading-relaxed text-sm">
               To provide predictive, accurate, and unbiased strategic analysis of global events. We cut through the noise of mainstream media to deliver pure intelligence — evidence-based, contextualised, and forward-looking analysis that empowers our readers to make informed decisions about the world.
             </p>
           </div>
-          <div className="p-8 rounded-2xl glass-card border border-[var(--border)] hover:-translate-y-1 transition-transform">
+          <div className="p-8 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:-translate-y-1 transition-transform">
             <Shield className="w-8 h-8 text-[var(--cyan)] mb-6" />
             <h3 className="font-heading text-xl font-bold text-white mb-3">Our Independence</h3>
             <p className="text-[var(--muted)] leading-relaxed text-sm">
@@ -59,22 +59,22 @@ export default function AboutPage() {
         <div className="mb-20">
           <h2 className="font-heading text-2xl font-bold text-white mb-8">What We Cover</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)] hover:-translate-y-1 transition-transform">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:-translate-y-1 transition-transform">
               <Target className="w-6 h-6 text-[var(--gold)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Strategic Intelligence</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">In-depth analysis of great power competition, alliance systems, territorial disputes, and strategic flashpoints across every major region.</p>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)] hover:-translate-y-1 transition-transform">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:-translate-y-1 transition-transform">
               <Shield className="w-6 h-6 text-[var(--cyan)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Defence & Security</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">Military capability assessments, defence procurement analysis, nuclear doctrine updates, and security sector developments worldwide.</p>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)] hover:-translate-y-1 transition-transform">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:-translate-y-1 transition-transform">
               <BookOpen className="w-6 h-6 text-[var(--gold)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Foreign Policy</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">Diplomatic developments, bilateral and multilateral negotiations, treaty analysis, and shifts in foreign policy orientation among major and emerging powers.</p>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)] hover:-translate-y-1 transition-transform">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:-translate-y-1 transition-transform">
               <Globe className="w-6 h-6 text-[var(--cyan)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Economy & Trade</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">Geoeconomic analysis including trade wars, sanctions regimes, supply chain security, energy geopolitics, and the weaponisation of economic interdependence.</p>
@@ -101,17 +101,17 @@ export default function AboutPage() {
         <div className="mb-20">
           <h2 className="font-heading text-2xl font-bold text-white mb-8">Our Core Values</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)]">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
               <Award className="w-6 h-6 text-[var(--gold)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Accuracy Above All</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">We would rather be late and correct than first and wrong. Every claim is verified through our rigorous multi-source process before publication.</p>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)]">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
               <Users className="w-6 h-6 text-[var(--cyan)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Non-Partisan Analysis</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">We analyse all parties with equal rigour and do not align with any government, ideology, or geopolitical bloc. Our only allegiance is to the truth.</p>
             </div>
-            <div className="p-6 rounded-2xl glass-card border border-[var(--border)]">
+            <div className="p-6 rounded-sm bg-[var(--surface)] border border-[var(--border)]">
               <Heart className="w-6 h-6 text-[var(--gold)] mb-4" />
               <h3 className="font-heading text-base font-bold text-white mb-2">Open Access</h3>
               <p className="text-sm text-[var(--muted)] leading-relaxed">We believe geopolitical awareness should not be a privilege. All our flagship intelligence reports are freely accessible to our global community.</p>
@@ -134,15 +134,15 @@ export default function AboutPage() {
         <div className="pt-12 border-t border-[var(--border)]">
           <h2 className="font-heading text-xl font-bold text-white mb-6">Learn More</h2>
           <div className="grid sm:grid-cols-3 gap-4">
-            <Link href="/editorial-policy" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+            <Link href="/editorial-policy" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
               <h3 className="font-heading font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Editorial Policy</h3>
               <p className="text-sm text-[var(--muted)]">Our standards & principles</p>
             </Link>
-            <Link href="/methodology" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+            <Link href="/methodology" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
               <h3 className="font-heading font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Methodology</h3>
               <p className="text-sm text-[var(--muted)]">How we research & analyse</p>
             </Link>
-            <Link href="/contact" className="p-5 rounded-xl glass-card border border-[var(--border)] hover:border-[var(--gold)]/40 transition-colors group">
+            <Link href="/contact" className="p-5 rounded-sm bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group">
               <h3 className="font-heading font-bold text-white group-hover:text-[var(--gold)] transition-colors mb-1">Contact</h3>
               <p className="text-sm text-[var(--muted)]">Reach our editorial desk</p>
             </Link>

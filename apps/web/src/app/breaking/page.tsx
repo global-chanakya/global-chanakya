@@ -47,7 +47,7 @@ export default async function BreakingNewsPage() {
           breakingBlogs.map((blog: any, idx: number) => (
             <div key={blog._id?.toString() || idx} className="relative pl-8">
               {idx === 0 ? (
-                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
+                <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-red-500"></div>
               ) : (
                 <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gray-600 border-2 border-gray-950"></div>
               )}

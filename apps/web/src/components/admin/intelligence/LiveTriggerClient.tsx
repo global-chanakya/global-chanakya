@@ -99,7 +99,7 @@ export default function LiveTriggerClient() {
         <button
           onClick={fetchStatus}
           disabled={loading || triggering}
-          className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors disabled:opacity-50"
+          className="p-3 bg-white/5 hover:bg-white/10 rounded-sm transition-colors disabled:opacity-50"
           title="Refresh Status"
         >
           <RefreshCw className={`w-5 h-5 text-white/70 ${loading ? "animate-spin" : ""}`} />
@@ -107,7 +107,7 @@ export default function LiveTriggerClient() {
       </div>
 
       {error && (
-        <div className="mb-8 p-4 bg-[var(--danger)]/10 border border-[var(--danger)]/30 rounded-xl flex items-start gap-3">
+        <div className="mb-8 p-4 bg-[var(--danger)]/10 border border-[var(--danger)]/30 rounded-sm flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-[var(--danger)] shrink-0 mt-0.5" />
           <div className="text-[var(--danger)]">
             <p className="font-bold">Error</p>
@@ -118,7 +118,7 @@ export default function LiveTriggerClient() {
 
       {/* Zero State Fallback Banner */}
       {!error && statusData?.status === "SUCCESS" && statusData?.published === 0 && (
-        <div className="mb-8 p-4 bg-white/10 border border-white/20 rounded-xl flex items-start gap-3">
+        <div className="mb-8 p-4 bg-white/10 border border-white/20 rounded-sm flex items-start gap-3">
           <CheckCircle2 className="w-5 h-5 text-white/50 shrink-0 mt-0.5" />
           <div className="text-white">
             <p className="font-bold">Completed</p>
@@ -129,7 +129,7 @@ export default function LiveTriggerClient() {
 
       {/* Partial State Banner */}
       {!error && statusData?.status === "PARTIAL" && (
-        <div className="mb-8 p-4 bg-[var(--cyan)]/10 border border-[var(--cyan)]/20 rounded-xl flex items-start gap-3">
+        <div className="mb-8 p-4 bg-[var(--cyan)]/10 border border-[var(--border)] rounded-sm flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-[var(--cyan)] shrink-0 mt-0.5" />
           <div className="text-white">
             <p className="font-bold">Partial Completion</p>
@@ -140,7 +140,7 @@ export default function LiveTriggerClient() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Status Card */}
-        <div className="bg-[var(--surface)]/60 border border-[var(--border)] rounded-2xl p-6 relative overflow-hidden flex flex-col">
+        <div className="bg-[var(--surface)]/60 border border-[var(--border)] rounded-sm p-6 relative overflow-hidden flex flex-col">
           <div className="absolute top-0 right-0 p-6 pointer-events-none">
             {isRunning ? (
               <RefreshCw className="w-24 h-24 text-[var(--gold)]/5 animate-spin-slow" />
@@ -156,7 +156,7 @@ export default function LiveTriggerClient() {
           <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/40 mb-4">Current Status</p>
           
           <div className="flex items-center gap-3 mb-8">
-            <div className={`w-3 h-3 rounded-full shadow-[0_0_12px_currentColor] ${
+            <div className={`w-3 h-3 rounded-full  ${
               isRunning ? "bg-[var(--gold)] animate-pulse" : 
               (statusData?.status === "FAILED" || statusData?.status === "ERROR") ? "bg-[var(--danger)]" : 
               statusData?.status === "PARTIAL" ? "bg-[var(--cyan)]" : 
@@ -187,7 +187,7 @@ export default function LiveTriggerClient() {
         </div>
 
         {/* Action Card */}
-        <div className="bg-gradient-to-br from-[var(--cyan)]/10 to-transparent border border-[var(--cyan)]/30 rounded-2xl p-6 flex flex-col justify-center items-center text-center">
+        <div className="border border-[var(--border)] rounded-sm p-6 flex flex-col justify-center items-center text-center">
           <div className="w-16 h-16 rounded-full bg-[var(--cyan)]/20 flex items-center justify-center mb-6">
             <Zap className="w-8 h-8 text-[var(--cyan)]" />
           </div>
@@ -200,10 +200,10 @@ export default function LiveTriggerClient() {
             type="button"
             onClick={handleRunIntelligence}
             disabled={triggering || isRunning}
-            className={`flex items-center gap-2 px-8 py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-xl ${
+            className={`flex items-center gap-2 px-8 py-4 rounded-sm font-bold uppercase tracking-wider text-sm transition-all shadow-sm ${
               isRunning || triggering
                 ? "bg-white/10 text-white/50 cursor-not-allowed border border-white/10"
-                : "bg-[var(--cyan)] text-black hover:bg-[var(--cyan)]/90 hover:scale-[1.02] active:scale-95 shadow-[0_0_30px_var(--cyan)]"
+                : "bg-[var(--cyan)] text-black hover:bg-[var(--cyan)]/90 hover:scale-[1.02] active:scale-95 "
             }`}
           >
             {triggering || isRunning ? (
@@ -222,27 +222,27 @@ export default function LiveTriggerClient() {
       </div>
 
       {/* Latest Execution Stats */}
-      <div className="bg-[var(--surface)]/60 border border-[var(--border)] rounded-2xl p-6">
+      <div className="bg-[var(--surface)]/60 border border-[var(--border)] rounded-sm p-6">
         <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/40 mb-6">Latest Execution Statistics</p>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-sm p-4">
             <p className="text-xs text-white/50 font-medium mb-1">Processed</p>
             <p className="text-2xl font-bold text-white">{statusData?.processed ?? 0}</p>
           </div>
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-sm p-4">
             <p className="text-xs text-white/50 font-medium mb-1">Generated / Published</p>
             <p className="text-2xl font-bold text-[var(--gold)]">{statusData?.published ?? 0}</p>
           </div>
-          <div className="bg-white/5 rounded-xl p-4">
+          <div className="bg-white/5 rounded-sm p-4">
             <p className="text-xs text-white/50 font-medium mb-1">Deduplicated</p>
             <p className="text-2xl font-bold text-white/80">{statusData?.deduplicated ?? 0}</p>
           </div>
-          <div className="bg-[var(--danger)]/5 rounded-xl p-4 border border-[var(--danger)]/20">
+          <div className="bg-[var(--danger)]/5 rounded-sm p-4 border border-[var(--danger)]/20">
             <p className="text-xs text-[var(--danger)]/70 font-medium mb-1">Failed (Draft)</p>
             <p className="text-2xl font-bold text-[var(--danger)]">{statusData?.failed ?? 0}</p>
           </div>
-          <div className="bg-white/5 rounded-xl p-4 col-span-2 md:col-span-1">
+          <div className="bg-white/5 rounded-sm p-4 col-span-2 md:col-span-1">
             <p className="text-xs text-white/50 font-medium mb-1">Duration</p>
             <p className="text-2xl font-bold text-white/80">
               {statusData?.duration 

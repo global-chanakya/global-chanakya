@@ -15,7 +15,7 @@ export default function IntelligenceEventLoading() {
             <Skeleton className="w-40 h-5" />
           </div>
 
-          <div className="glass-card p-6 rounded-2xl mb-10 border border-[var(--border)]">
+          <div className="bg-[var(--surface)] p-6 rounded-sm mb-10 border border-[var(--border)]">
             <Skeleton className="w-48 h-6 mb-4" />
             <Skeleton className="w-full h-4 mb-2" />
             <Skeleton className="w-full h-4 mb-2" />

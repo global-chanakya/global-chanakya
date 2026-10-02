@@ -97,7 +97,7 @@ export default async function BlogsPage({
           <div>
             <div className="flex items-center gap-2 mb-3">
               {trending ? (
-                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--cyan)]/10 text-[var(--cyan)] text-[10px] font-bold uppercase tracking-[0.14em] rounded border border-[var(--cyan)]/20 shadow-[0_0_10px_rgba(6,182,212,0.1)]">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--cyan)]/10 text-[var(--cyan)] text-[10px] font-bold uppercase tracking-[0.14em] rounded border border-[var(--border)]">
                   <TrendingUp className="w-3.5 h-3.5" /> Trending Intel
                 </span>
               ) : category ? (
@@ -107,7 +107,7 @@ export default async function BlogsPage({
               ) : null}
             </div>
             
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold mb-4 text-white leading-tight tracking-tight drop-shadow-md">
+            <h1 className="font-heading text-4xl md:text-5xl font-extrabold mb-4 text-white leading-tight tracking-tight">
               {trending ? "Most Read Reports" : category ? `${category} Intelligence` : "Strategic Reports"}
             </h1>
             <p className="text-base md:text-lg text-white/80 font-medium">
@@ -125,7 +125,7 @@ export default async function BlogsPage({
               <input
                 type="text"
                 placeholder="Search intelligence..."
-                className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:border-[var(--cyan)]/50 focus:bg-[var(--surface)]/80 outline-none transition-all placeholder:text-[var(--muted)]"
+                className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-sm pl-10 pr-4 py-2.5 text-sm text-white focus:border-[var(--border)] focus:bg-[var(--surface)]/80 outline-none transition-all placeholder:text-[var(--muted)]"
               />
             </div>
           </div>
@@ -135,9 +135,9 @@ export default async function BlogsPage({
         <div className="flex flex-wrap gap-2 md:gap-3 mb-12">
           <Link
             href="/blogs"
-            className={`px-4 py-2 rounded-xl border text-[13px] font-bold uppercase tracking-[0.06em] transition-all duration-300 ${
+            className={`px-4 py-2 rounded-sm border text-[13px] font-bold uppercase tracking-[0.06em] transition-all duration-300 ${
               !category && !trending
-                ? "border-[var(--gold)]/50 bg-[var(--gold)]/10 text-[var(--gold)] shadow-[0_0_15px_rgba(212,175,55,0.15)]"
+                ? "border-[var(--accent)] bg-[var(--gold)]/10 text-[var(--gold)] "
                 : "border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:text-white hover:bg-[var(--elevated)] hover:border-[var(--border)]/80"
             }`}
           >
@@ -147,9 +147,9 @@ export default async function BlogsPage({
             <Link
               key={cat}
               href={`/blogs?category=${encodeURIComponent(cat)}`}
-              className={`px-4 py-2 rounded-xl border text-[13px] font-bold uppercase tracking-[0.06em] transition-all duration-300 ${
+              className={`px-4 py-2 rounded-sm border text-[13px] font-bold uppercase tracking-[0.06em] transition-all duration-300 ${
                 category === cat
-                  ? "border-[var(--cyan)]/50 bg-[var(--cyan)]/10 text-[var(--cyan)] shadow-[0_0_15px_rgba(6,182,212,0.15)]"
+                  ? "border-[var(--border)] bg-[var(--cyan)]/10 text-[var(--cyan)] "
                   : "border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:text-white hover:bg-[var(--elevated)] hover:border-[var(--border)]/80"
               }`}
             >
@@ -166,8 +166,8 @@ export default async function BlogsPage({
         {/* Blog Grid */}
         {blogs.length === 0 ? (
           // Empty state
-          <div className="flex flex-col items-center justify-center py-32 text-center rounded-2xl glass-card border border-[var(--border)] bg-[var(--surface)]/10">
-            <div className="w-16 h-16 rounded-2xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6 shadow-sm">
+          <div className="flex flex-col items-center justify-center py-32 text-center rounded-sm bg-[var(--surface)] border border-[var(--border)] bg-[var(--surface)]/10">
+            <div className="w-16 h-16 rounded-sm bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-6 shadow-sm">
               <Newspaper className="w-8 h-8 text-[var(--cyan)]" />
             </div>
             <h2 className="font-heading text-2xl font-bold text-white mb-3">
@@ -182,14 +182,14 @@ export default async function BlogsPage({
               {category && (
                 <Link
                   href="/blogs"
-                  className="px-6 py-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:text-white hover:bg-[var(--elevated)] transition-all text-sm font-bold uppercase tracking-[0.06em]"
+                  className="px-6 py-3 rounded-sm border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:text-white hover:bg-[var(--elevated)] transition-all text-sm font-bold uppercase tracking-[0.06em]"
                 >
                   View all reports
                 </Link>
               )}
               <Link
                 href="/auth/signup"
-                className="px-6 py-3 rounded-xl bg-[var(--gold)] text-[var(--bg)] hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm font-extrabold uppercase tracking-[0.06em] flex items-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                className="px-6 py-3 rounded-sm bg-[var(--gold)] text-[var(--bg)] hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm font-extrabold uppercase tracking-[0.06em] flex items-center gap-2"
               >
                 Join Platform <ArrowRight className="w-4 h-4" />
               </Link>
@@ -198,7 +198,7 @@ export default async function BlogsPage({
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogs.map((blog) => (
-              <Link key={blog._id.toString()} href={`/blogs/${blog.slug}`} className="group flex flex-col h-full glass-card rounded-2xl border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-[var(--gold)]/40 hover:shadow-xl hover:shadow-[var(--gold)]/10 bg-[var(--surface)]/20">
+              <Link key={blog._id.toString()} href={`/blogs/${blog.slug}`} className="group flex flex-col h-full bg-[var(--surface)] rounded-sm border border-[var(--border)] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-[var(--accent)] bg-[var(--surface)]/20">
                 <div className="relative aspect-[16/9] bg-[var(--surface)] overflow-hidden border-b border-[var(--border)]">
                   {blog.featuredImage ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -208,16 +208,16 @@ export default async function BlogsPage({
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--surface)] to-[var(--bg)] group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 )] group-hover:scale-105 transition-transform duration-500" />
                   )}
 
                   <div className="absolute top-3 left-3 md:top-4 md:left-4 z-10">
-                    <span className="inline-block px-2.5 py-1 rounded bg-[var(--surface)]/90 backdrop-blur-md text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--cyan)] border border-[var(--border)]">
+                    <span className="inline-block px-2.5 py-1 rounded bg-[var(--surface)]/90 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--cyan)] border border-[var(--border)]">
                       {blog.category}
                     </span>
                   </div>
                   {blog.visibility === "private" && (
-                    <div className="absolute top-3 right-3 md:top-4 md:right-4 z-10 px-3 py-1.5 bg-[var(--danger)]/90 backdrop-blur-md rounded text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-white flex items-center gap-1.5 shadow-[0_0_10px_var(--danger)]">
+                    <div className="absolute top-3 right-3 md:top-4 md:right-4 z-10 px-3 py-1.5 bg-[var(--danger)]/90 rounded text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-white flex items-center gap-1.5">
                       <Crown className="w-3.5 h-3.5" /> Clearance: High
                     </div>
                   )}

@@ -32,7 +32,7 @@ export default async function DashboardPage() {
         
         {/* Sidebar Navigation */}
         <div className="lg:col-span-1 space-y-2">
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] mb-6">
+          <div className="p-6 rounded-sm bg-white/[0.02] border border-white/[0.06] mb-6">
             <h2 className="text-xl font-bold mb-1">{session.user.name}</h2>
             <p className="text-sm text-neutral-500">{session.user.email}</p>
           </div>
@@ -66,14 +66,14 @@ export default async function DashboardPage() {
             </h3>
             
             {feed.length === 0 ? (
-              <div className="p-8 text-center border border-dashed border-white/10 rounded-2xl bg-white/[0.01]">
+              <div className="p-8 text-center border border-dashed border-white/10 rounded-sm bg-white/[0.01]">
                 <p className="text-neutral-500 mb-2">Your feed is empty.</p>
                 <p className="text-sm text-neutral-600">Follow countries and conflicts to generate personalized intelligence.</p>
               </div>
             ) : (
               <div className="space-y-4">
                 {feed.map((item) => (
-                  <div key={item.id} className="p-5 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-colors group relative overflow-hidden">
+                  <div key={item.id} className="p-5 rounded-sm border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-colors group relative overflow-hidden">
                     { (item.meta as any)?.severity === "critical" && <div className="absolute top-0 left-0 w-1 h-full bg-red-500" />}
                     
                     <div className="flex justify-between items-start mb-2">
@@ -104,7 +104,7 @@ export default async function DashboardPage() {
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {watchlist.map((w) => (
-                <div key={w._id as unknown as string} className="p-4 rounded-xl border border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
+                <div key={w._id as unknown as string} className="p-4 rounded-sm border border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
                   <div>
                     <span className="text-xs text-neutral-500 uppercase">{w.entityType}</span>
                     {/* Real app would populate entity name here */}

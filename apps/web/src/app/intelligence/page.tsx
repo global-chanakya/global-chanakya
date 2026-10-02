@@ -66,8 +66,8 @@ export default async function IntelligencePage() {
 
         {/* Intelligence Command Center Quick Links */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <Link href="/intelligence/ask" className="group p-6 glass-card rounded-2xl border border-[var(--border)] hover:border-[var(--gold)]/50 transition-all flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[var(--gold)]/10 flex items-center justify-center border border-[var(--gold)]/20 text-[var(--gold)]">
+          <Link href="/intelligence/ask" className="group p-6 bg-[var(--surface)] rounded-sm border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-sm bg-[var(--gold)]/10 flex items-center justify-center border border-[var(--accent)] text-[var(--gold)]">
               <Compass className="w-6 h-6" />
             </div>
             <div>
@@ -79,8 +79,8 @@ export default async function IntelligencePage() {
             </div>
           </Link>
           
-          <Link href="/intelligence/india-impact" className="group p-6 glass-card rounded-2xl border border-[var(--border)] hover:border-[var(--cyan)]/50 transition-all flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[var(--cyan)]/10 flex items-center justify-center border border-[var(--cyan)]/20 text-[var(--cyan)]">
+          <Link href="/intelligence/india-impact" className="group p-6 bg-[var(--surface)] rounded-sm border border-[var(--border)] hover:border-[var(--border)] transition-all flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-sm bg-[var(--cyan)]/10 flex items-center justify-center border border-[var(--border)] text-[var(--cyan)]">
               <Activity className="w-6 h-6" />
             </div>
             <div>
@@ -92,8 +92,8 @@ export default async function IntelligencePage() {
             </div>
           </Link>
 
-          <Link href="/intelligence/scenarios" className="group p-6 glass-card rounded-2xl border border-[var(--border)] hover:border-purple-500/50 transition-all flex flex-col gap-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 text-purple-400">
+          <Link href="/intelligence/scenarios" className="group p-6 bg-[var(--surface)] rounded-sm border border-[var(--border)] hover:border-purple-500/50 transition-all flex flex-col gap-4">
+            <div className="w-12 h-12 rounded-sm bg-purple-500/10 flex items-center justify-center border border-purple-500/20 text-purple-400">
               <Zap className="w-6 h-6" />
             </div>
             <div>
@@ -114,7 +114,7 @@ export default async function IntelligencePage() {
            </h2>
            <div className="flex gap-2">
              {["ALL", "CRITICAL", "HIGH RISK"].map(filter => (
-               <button key={filter} className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] border ${filter === 'ALL' ? 'bg-[var(--cyan)]/10 text-[var(--cyan)] border-[var(--cyan)]/30' : 'bg-transparent text-[var(--muted)] border-[var(--border)] hover:border-white/20'}`}>
+               <button key={filter} className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] border ${filter === 'ALL' ? 'bg-[var(--cyan)]/10 text-[var(--cyan)] border-[var(--border)]' : 'bg-transparent text-[var(--muted)] border-[var(--border)] hover:border-white/20'}`}>
                  {filter}
                </button>
              ))}
