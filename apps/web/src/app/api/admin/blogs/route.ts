@@ -9,6 +9,7 @@ import { PushService } from "@/lib/notifications/push.service";
 import { revalidateTag, revalidatePath } from "next/cache";
 import { SeoPreflightService } from "@/modules/seo/services/seo-preflight.service";
 import { PublishPipelineService } from "@/modules/seo/services/publish-pipeline.service";
+import { waitUntil } from "@vercel/functions";
 
 // Give Vercel 30s before cutting off the function
 export const maxDuration = 30;
@@ -196,7 +197,6 @@ export async function POST(req: NextRequest) {
     const blog = await BlogService.createBlog(newBlogData as any);
 
     if (blog.status === "published") {
-      const { waitUntil } = require("@vercel/functions");
       waitUntil(
         PublishPipelineService.execute(blog._id.toString()).catch(e =>
           console.error("[PublishPipeline] POST failed:", e)
@@ -274,7 +274,6 @@ export async function PATCH(req: NextRequest) {
     if (!updated) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
 
     if (updated.status === "published") {
-      const { waitUntil } = require("@vercel/functions");
       waitUntil(
         PublishPipelineService.execute(id).catch(e =>
           console.error("[PublishPipeline] PATCH failed:", e)
@@ -284,7 +283,6 @@ export async function PATCH(req: NextRequest) {
         waitUntil(PushService.notifyBlog(updated).catch(e => console.error("[PushService] Failed:", e)));
       }
     } else {
-      const { waitUntil } = require("@vercel/functions");
       waitUntil(ragIndexerService.unindexBlog(id).catch(e => console.error("RAG Unindexing Failed:", e)));
     }
 
