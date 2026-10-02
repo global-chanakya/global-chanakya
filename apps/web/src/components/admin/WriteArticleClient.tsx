@@ -491,6 +491,27 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
     setPublishing(true);
     setPublishStep(1);
 
+    if (form.featuredImage && (!form.featuredImageWidth || !form.featuredImageHeight)) {
+      try {
+        const dimensions = await new Promise<{width: number, height: number}>((resolve, reject) => {
+          const img = new window.Image();
+          img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+          img.onerror = () => reject(new Error("Unable to read featured image dimensions. Please verify the image URL."));
+          img.src = form.featuredImage;
+        });
+        
+        // Update local form state right before payload generation
+        form.featuredImageWidth = dimensions.width;
+        form.featuredImageHeight = dimensions.height;
+        setForm(prev => ({ ...prev, featuredImageWidth: dimensions.width, featuredImageHeight: dimensions.height }));
+      } catch (err: any) {
+        setPublishError(err.message);
+        setPublishing(false);
+        setPublishStep(0);
+        return;
+      }
+    }
+
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 45000);
 

@@ -56,6 +56,7 @@ export const createBlogSchema = z.object({
   leaders: z.array(z.string()).optional(),
   conflicts: z.array(z.string()).optional(),
   organizations: z.array(z.string()).optional(),
+  topics: z.array(z.string()).optional(),
 });
 
 // ─── Update Blog Schema ──────────────────────────────────────────────────────

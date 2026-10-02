@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       isTrending, commentsEnabled, seo, featuredImage, contentType,
       ogImage, aiSummary, reportType, citations,
       publishAt, unpublishAt, isBreaking, breakingUntil, isFeatured, featuredUntil,
-      countries, leaders, conflicts, organizations } = validation.data;
+      countries, leaders, conflicts, organizations, topics, featuredImageWidth, featuredImageHeight } = validation.data;
 
     // Get author ObjectId from the authenticated session (never trust client-provided authorId)
     let authorObjectId: mongoose.Types.ObjectId;
@@ -103,6 +103,9 @@ export async function POST(req: NextRequest) {
           leaders: leaders ?? [],
           conflicts: conflicts ?? [],
           organizations: organizations ?? [],
+          topics: topics ?? [],
+          featuredImageWidth: featuredImageWidth,
+          featuredImageHeight: featuredImageHeight,
           seo: {
             focusKeyword: seo?.focusKeyword || "",
             title: seo?.title || title,
@@ -167,6 +170,9 @@ export async function POST(req: NextRequest) {
       leaders: (leaders ?? []).map((id: string) => new mongoose.Types.ObjectId(id)),
       conflicts: (conflicts ?? []).map((id: string) => new mongoose.Types.ObjectId(id)),
       organizations: (organizations ?? []).map((id: string) => new mongoose.Types.ObjectId(id)),
+      topics: (topics ?? []).map((id: string) => new mongoose.Types.ObjectId(id)),
+      featuredImageWidth,
+      featuredImageHeight,
       seo: {
         focusKeyword: seo?.focusKeyword || "",
         title: seo?.title || title,
@@ -224,7 +230,8 @@ export async function PATCH(req: NextRequest) {
       "publishAt", "unpublishAt", "isBreaking", "breakingUntil",
       "isFeatured", "featuredUntil", "citations", "contentType",
       "entityRelations", "draftSnapshot", "previousVersions",
-      "countries", "leaders", "conflicts", "organizations",
+      "countries", "leaders", "conflicts", "organizations", "topics",
+      "featuredImageWidth", "featuredImageHeight",
     ];
 
     const updateData: Record<string, unknown> = {};

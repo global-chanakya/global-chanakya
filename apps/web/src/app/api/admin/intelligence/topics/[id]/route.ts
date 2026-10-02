@@ -4,16 +4,17 @@ import dbConnect from "@/lib/mongoose";
 import { Topic } from "@/lib/models/Topic";
 import { Blog } from "@/lib/models/Blog";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session || session.user.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     await dbConnect();
     
-    const topic = await Topic.findById(params.id).lean();
+    const topic = await Topic.findById(id).lean();
     if (!topic) return NextResponse.json({ error: "Not found" }, { status: 404 });
     
-    const usageCount = await Blog.countDocuments({ topics: params.id });
+    const usageCount = await Blog.countDocuments({ topics: id });
     
     return NextResponse.json({ ...topic, usageCount });
   } catch (err: any) {
@@ -21,14 +22,15 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session || session.user.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     await dbConnect();
     
     const body = await req.json();
-    const topic = await Topic.findByIdAndUpdate(params.id, { $set: body }, { new: true });
+    const topic = await Topic.findByIdAndUpdate(id, { $set: body }, { new: true });
     
     if (!topic) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(topic);
@@ -37,16 +39,17 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session || session.user.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     await dbConnect();
     
-    const count = await Blog.countDocuments({ topics: params.id });
+    const count = await Blog.countDocuments({ topics: id });
     if (count > 0) return NextResponse.json({ error: "Cannot permanently delete this entity because it is referenced by active blogs. Archive it instead." }, { status: 400 });
     
-    const topic = await Topic.findByIdAndDelete(params.id);
+    const topic = await Topic.findByIdAndDelete(id);
     if (!topic) return NextResponse.json({ error: "Not found" }, { status: 404 });
     
     return NextResponse.json({ success: true });
