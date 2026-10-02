@@ -20,6 +20,7 @@ export const navItems = [
 
   // Intelligence
   { href: "/gc-control-9x7k/intelligence", label: "Live Events", icon: Zap, group: "Intelligence" },
+  { href: "/gc-control-9x7k/intelligence/topics", label: "Topics", icon: Database, group: "Intelligence" },
   { href: "/gc-control-9x7k/intelligence/countries", label: "Countries", icon: Database, group: "Intelligence" },
   { href: "/gc-control-9x7k/intelligence/leaders", label: "Leaders", icon: Database, group: "Intelligence" },
   { href: "/gc-control-9x7k/intelligence/conflicts", label: "Conflicts", icon: Database, group: "Intelligence" },

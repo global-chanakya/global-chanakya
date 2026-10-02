@@ -212,6 +212,26 @@ export const SCHEMAS: Record<string, EntitySchema> = {
         ]
       }
     ]
+  },
+  topics: {
+    id: "topics",
+    name: "Topic",
+    apiPath: "/api/admin/intelligence/topics",
+    frontendBasePath: "/gc-control-9x7k/intelligence/topics",
+    tabs: [
+      {
+        id: "main",
+        label: "General",
+        fields: [
+          { name: "name", label: "Name", type: "text", required: true },
+          { name: "slug", label: "Slug", type: "text", required: true },
+          { name: "description", label: "Description", type: "textarea" },
+          { name: "status", label: "Status", type: "select", options: [{label: "Active", value: "active"}, {label: "Inactive", value: "inactive"}] },
+        ]
+      },
+      SEO_TAB,
+      MEDIA_TAB
+    ]
   }
 };
 
