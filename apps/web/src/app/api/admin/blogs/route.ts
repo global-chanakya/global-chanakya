@@ -68,9 +68,13 @@ export async function POST(req: NextRequest) {
       publishAt, unpublishAt, isBreaking, breakingUntil, isFeatured, featuredUntil,
       countries, leaders, conflicts, organizations } = validation.data;
 
-    // Get author ObjectId
+    // Get author ObjectId from the authenticated session (never trust client-provided authorId)
     let authorObjectId: mongoose.Types.ObjectId;
-    authorObjectId = new mongoose.Types.ObjectId();
+    try {
+      authorObjectId = new mongoose.Types.ObjectId(session.user.id);
+    } catch {
+      return NextResponse.json({ error: "Invalid session user ID" }, { status: 400 });
+    }
 
     // Handle slug conflict: if slug exists, append timestamp suffix
     let finalSlug = slug;

@@ -35,6 +35,8 @@ export const createBlogSchema = z.object({
   isTrending: z.boolean().optional().default(false),
   commentsEnabled: z.boolean().optional().default(true),
   featuredImage: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  featuredImageWidth: z.number().optional(),
+  featuredImageHeight: z.number().optional(),
   ogImage: z.string().url("OG image must be a valid URL").optional().or(z.literal("")),
   seo: seoSchema,
   aiSummary: z.string().max(500, "AI Summary max 500 chars").optional(),

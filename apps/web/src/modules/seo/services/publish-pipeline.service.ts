@@ -1,6 +1,5 @@
 import { Blog } from "@/lib/models/Blog";
 import { revalidateTag, revalidatePath } from "next/cache";
-import { SeoMetadataService } from "./seo-metadata.service";
 import crypto from "crypto";
 
 export class PublishPipelineService {
@@ -32,40 +31,7 @@ export class PublishPipelineService {
         console.error("[PublishPipeline] Cache invalidation failed:", cacheErr);
       }
 
-      // 2. AI-based Search Intent Metadata Enrichment
-      try {
-        if (!blog.searchIntent || blog.seo?.title === blog.title) {
-          const aiMeta = await SeoMetadataService.generateSearchIntentMetadata(
-            blog.title,
-            blog.content,
-            blog.category
-          ).catch(() => null);
-
-          if (aiMeta) {
-            const updateFields: Record<string, unknown> = {
-              searchIntent: aiMeta.searchIntent,
-              timeSensitivity: aiMeta.timeSensitivity,
-            };
-            if (blog.seo?.title === blog.title && aiMeta.seoTitle) {
-              updateFields["seo.title"] = aiMeta.seoTitle;
-            }
-            if (
-              (!blog.seo?.description || blog.seo.description === blog.excerpt) &&
-              aiMeta.seoDescription
-            ) {
-              updateFields["seo.description"] = aiMeta.seoDescription;
-            }
-            if (blog.contentType === "standard" && aiMeta.contentType) {
-              updateFields.contentType = aiMeta.contentType;
-            }
-            await Blog.findByIdAndUpdate(blogId, { $set: updateFields });
-          }
-        }
-      } catch (aiErr) {
-        console.error("[PublishPipeline] AI Metadata generation failed:", aiErr);
-      }
-
-      // 3. Semantic Embedding Generation
+      // 2. Semantic Embedding Generation (Non-blocking, background AI enrichment)
       try {
         const contentToHash = `${blog.title}\n${blog.category}\n${blog.tags?.join(",")}\n${blog.excerpt}\n${blog.content.substring(0, 3000)}`;
         const currentHash = crypto.createHash('md5').update(contentToHash).digest('hex');

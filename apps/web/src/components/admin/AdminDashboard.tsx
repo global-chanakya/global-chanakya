@@ -2,7 +2,7 @@
 
 import { Users, Newspaper, ExternalLink, ShieldAlert, PenTool, LayoutDashboard, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import PublishingEngineWidget from "./PublishingEngineWidget";
+import { TrendingDown, Globe, Eye, UserCheck, Play, Save } from "lucide-react";
 
 interface Stats {
   totalUsers: number;
@@ -155,9 +155,6 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
                 </p>
               </div>
             </div>
-            
-            {/* Engine Widget */}
-            <PublishingEngineWidget />
           </div>
 
         </div>
