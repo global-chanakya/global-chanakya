@@ -80,7 +80,10 @@ export class RelatedArticleService {
         { conflicts: { $in: sourceBlog.conflicts || [] } },
         { publishAt: { $gt: oneYearAgo } }
       ]
-    }).lean();
+    })
+    .select("_id title slug category publishAt tags topics countries leaders conflicts embedding")
+    .limit(100)
+    .lean();
 
     // 2. Score candidates
     const scored = candidates.map((candidate: any) => {
@@ -157,12 +160,16 @@ export class RelatedArticleService {
     // Fallback if not enough
     if (related.length < limit) {
       const needed = limit - related.length;
-      const relatedIds = related.map(r => r._id);
+      const relatedIds = related.map((r: any) => r._id);
       const fallback = await Blog.find({
         status: "published",
         _id: { $ne: sourceBlog._id, $nin: relatedIds },
         category: sourceBlog.category
-      }).sort({ publishAt: -1 }).limit(needed).lean();
+      })
+      .select("_id title slug category publishAt")
+      .sort({ publishAt: -1 })
+      .limit(needed)
+      .lean();
       
       related = [...related, ...fallback];
     }

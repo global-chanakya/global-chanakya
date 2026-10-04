@@ -42,39 +42,40 @@ const getCachedBlog = unstable_cache(
 );
 
 const getCachedRelatedBlogs = unstable_cache(
-  async (blog: any) => {
+  async (blogId: string) => {
     await dbConnect();
+    const sourceBlog = await Blog.findById(blogId).select("_id category tags topics countries leaders conflicts embedding").lean();
+    if (!sourceBlog) return [];
     const { RelatedArticleService } = await import("@/modules/seo/services/related-article.service");
-    const related = await RelatedArticleService.getHighlyRelevantArticles(blog, 6);
+    const related = await RelatedArticleService.getHighlyRelevantArticles(sourceBlog, 6);
     return JSON.parse(JSON.stringify(related));
   },
-  ["related-blogs-cache-v2"],
+  ["related-blogs-cache-v3"],
   { revalidate: 3600, tags: ["blogs"] }
 );
 
 const getCachedAdjacentBlogs = unstable_cache(
-  async (blog: any) => {
+  async (blogId: string, category: string, dateQueryStr: string) => {
     await dbConnect();
-    // Use publishAt or createdAt for chronological sorting
-    const dateQuery = blog.publishAt || blog.createdAt;
+    const dateQuery = new Date(dateQueryStr);
     
     // Find the next older article in the same category
     const prev = await Blog.findOne({
       status: "published",
-      category: blog.category,
+      category: category,
       $or: [
         { publishAt: { $lt: dateQuery } },
-        { publishAt: dateQuery, _id: { $lt: blog._id } }
+        { publishAt: dateQuery, _id: { $lt: blogId } }
       ]
     }).sort({ publishAt: -1, _id: -1 }).select("slug title category").lean();
 
     // Find the next newer article in the same category
     const next = await Blog.findOne({
       status: "published",
-      category: blog.category,
+      category: category,
       $or: [
         { publishAt: { $gt: dateQuery } },
-        { publishAt: dateQuery, _id: { $gt: blog._id } }
+        { publishAt: dateQuery, _id: { $gt: blogId } }
       ]
     }).sort({ publishAt: 1, _id: 1 }).select("slug title category").lean();
 
@@ -83,7 +84,7 @@ const getCachedAdjacentBlogs = unstable_cache(
       next: next ? JSON.parse(JSON.stringify(next)) : null
     };
   },
-  ["adjacent-blogs-cache-v1"],
+  ["adjacent-blogs-cache-v2"],
   { revalidate: 3600, tags: ["blogs"] }
 );
 
@@ -150,11 +151,23 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
     notFound();
   }
 
-  // Get related blogs from cache
-  const relatedBlogs = await getCachedRelatedBlogs(blog);
+  // Fetch related and adjacent concurrently with primitive cache keys
+  const dateStr = (blog.publishAt || blog.createdAt).toString();
   
-  // Get adjacent blogs for chronological crawl paths
-  const adjacentBlogs = await getCachedAdjacentBlogs(blog);
+  const [relatedBlogsResult, adjacentBlogsResult] = await Promise.allSettled([
+    getCachedRelatedBlogs(blog._id.toString()),
+    getCachedAdjacentBlogs(blog._id.toString(), blog.category, dateStr)
+  ]);
+
+  const relatedBlogs = relatedBlogsResult.status === "fulfilled" ? relatedBlogsResult.value : [];
+  if (relatedBlogsResult.status === "rejected") {
+    console.error("[BlogPage] Failed to fetch related blogs:", relatedBlogsResult.reason);
+  }
+
+  const adjacentBlogs = adjacentBlogsResult.status === "fulfilled" ? adjacentBlogsResult.value : { prev: null, next: null };
+  if (adjacentBlogsResult.status === "rejected") {
+    console.error("[BlogPage] Failed to fetch adjacent blogs:", adjacentBlogsResult.reason);
+  }
 
   const readTime = Math.max(1, calculateReadingTime(blog.content.replace(/<[^>]*>/g, "")));
   const publishDate = formatDate(blog.publishAt, "long");
