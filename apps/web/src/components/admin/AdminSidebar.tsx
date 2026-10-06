@@ -18,15 +18,6 @@ export const navItems = [
   { href: "/gc-control-9x7k/platform-seo/new", label: "Create Platform SEO", icon: PenTool, group: "Platform SEO" },
   { href: "/gc-control-9x7k/platform-seo/gsc", label: "GSC Intelligence", icon: Activity, group: "Platform SEO" },
 
-  // Intelligence
-  { href: "/gc-control-9x7k/intelligence", label: "Live Events", icon: Zap, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/topics", label: "Topics", icon: Database, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/countries", label: "Countries", icon: Database, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/leaders", label: "Leaders", icon: Database, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/conflicts", label: "Conflicts", icon: Database, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/entity-resolution", label: "Entity Resolution", icon: Database, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/config", label: "System Config", icon: Database, group: "Intelligence" },
-  { href: "/gc-control-9x7k/intelligence/trigger", label: "Manual Trigger", icon: Zap, group: "Intelligence" },
 
   // Media & Growth (Temporarily disabled due to 404s)
   // { href: "/gc-control-9x7k/media", label: "Media Library", icon: ImageIcon, group: "Assets" },

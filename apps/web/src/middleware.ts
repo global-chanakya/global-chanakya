@@ -80,7 +80,6 @@ export const config = {
     '/profile/:path*',
     '/api/admin/:path*',
     '/api/profile/:path*',
-    '/api/auth/:path*',
-    '/api/intelligence/internal/:path*'
+    '/api/auth/:path*'
   ],
 };

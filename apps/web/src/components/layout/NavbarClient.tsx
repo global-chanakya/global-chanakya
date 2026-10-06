@@ -22,7 +22,6 @@ interface NavbarClientProps {
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Intelligence", href: "/intelligence" },
   { label: "Reports", href: "/blogs" },
   { label: "Topics", href: "/topics" },
   { label: "About", href: "/about" },

@@ -7,7 +7,7 @@ export interface FormattedContext {
     url: string | null;
     publishedTime: string;
     retrievedTime: string;
-    type: "Primary" | "Government" | "Think Tank" | "Media" | "Analysis" | "Live Intelligence";
+    type: "Primary" | "Government" | "Think Tank" | "Media" | "Analysis" | "External Source";
   }[];
 }
 
@@ -47,14 +47,14 @@ export class ContextBuilder {
     }
 
     if (liveMap.size > 0) {
-      promptText += `<LIVE_INTELLIGENCE_EVENTS>\n`;
-      promptText += `The following are breaking live intelligence events from external verified sources. Treat them as secondary live data.\n\n`;
+      promptText += `<EXTERNAL_EVENTS>\n`;
+      promptText += `The following are breaking external events from verified sources. Treat them as secondary data.\n\n`;
       for (const [_, chunk] of liveMap.entries()) {
         const dateStr = chunk.publishedAt ? new Date(chunk.publishedAt).toISOString().split('T')[0] : "Unknown Date";
-        promptText += `[Live Event: ${chunk.title} (${dateStr}) | Source: ${chunk.sourceName}]\n`;
+        promptText += `[External Event: ${chunk.title} (${dateStr}) | Source: ${chunk.sourceName}]\n`;
         promptText += `${chunk.content}\n\n`;
       }
-      promptText += `</LIVE_INTELLIGENCE_EVENTS>\n\n`;
+      promptText += `</EXTERNAL_EVENTS>\n\n`;
     }
 
     // Build unique source objects
@@ -64,7 +64,7 @@ export class ContextBuilder {
     for (const [_, source] of internalMap.entries()) {
       sources.push({
         name: `Global Chanakya: ${source.title}`,
-        url: `/intelligence/${source.slug}`,
+        url: `/blogs/${source.slug}`,
         publishedTime: source.publishedAt ? new Date(source.publishedAt).toISOString() : nowStr,
         retrievedTime: nowStr,
         type: "Analysis"
@@ -77,7 +77,7 @@ export class ContextBuilder {
         url: source.url || null,
         publishedTime: source.publishedAt ? new Date(source.publishedAt).toISOString() : nowStr,
         retrievedTime: nowStr,
-        type: "Live Intelligence"
+        type: "External Source"
       });
     }
 

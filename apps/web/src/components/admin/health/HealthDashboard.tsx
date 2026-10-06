@@ -12,7 +12,6 @@ export default function HealthDashboard() {
     cron: "checking"
   });
 
-  const [liveHealth, setLiveHealth] = useState<any>(null);
 
   const checkHealth = () => {
     setHealth({
@@ -24,14 +23,7 @@ export default function HealthDashboard() {
       cron: "checking"
     });
 
-    fetch("/api/admin/intelligence/health")
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          setLiveHealth(data);
-        }
-      })
-      .catch(console.error);
+
 
     setTimeout(() => {
       setHealth({
@@ -109,47 +101,7 @@ export default function HealthDashboard() {
         })}
       </div>
 
-      <div>
-        <h2 className="text-2xl font-bold text-white mb-6">Live Intelligence Engine</h2>
-        {liveHealth ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">Active Events</div>
-              <div className="text-2xl font-bold text-white">{liveHealth.events.active}</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">Archived Events</div>
-              <div className="text-2xl font-bold text-[var(--muted)]">{liveHealth.events.archived}</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">Last Refresh</div>
-              <div className="text-sm font-bold text-white truncate" title={liveHealth.lastRefresh}>{new Date(liveHealth.lastRefresh).toLocaleString()}</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">Ingestion Duration</div>
-              <div className="text-2xl font-bold text-white">{liveHealth.ingestionStats.durationMs}ms</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">BBC Provider</div>
-              <div className={`text-sm font-bold ${liveHealth.providers.bbc === 'HEALTHY' ? 'text-green-500' : 'text-red-500'}`}>{liveHealth.providers.bbc}</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">Al Jazeera Provider</div>
-              <div className={`text-sm font-bold ${liveHealth.providers.alJazeera === 'HEALTHY' ? 'text-green-500' : 'text-red-500'}`}>{liveHealth.providers.alJazeera}</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">UN News Provider</div>
-              <div className={`text-sm font-bold ${liveHealth.providers.unNews === 'HEALTHY' ? 'text-green-500' : 'text-red-500'}`}>{liveHealth.providers.unNews}</div>
-            </div>
-            <div className="bg-[var(--surface)] p-4 rounded-lg border border-[var(--border)]">
-              <div className="text-[var(--muted)] text-sm mb-1">Last Duplicates</div>
-              <div className="text-2xl font-bold text-yellow-500">{liveHealth.ingestionStats.duplicates}</div>
-            </div>
-          </div>
-        ) : (
-          <div className="text-[var(--muted)]">Loading Live Engine metrics...</div>
-        )}
-      </div>
+
     </div>
   );
 }

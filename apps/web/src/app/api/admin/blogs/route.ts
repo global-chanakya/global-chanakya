@@ -4,7 +4,8 @@ import dbConnect from "@/lib/mongoose";
 import { BlogService } from "@/modules/blog/services/blog.service";
 import mongoose from "mongoose";
 import { createBlogSchema } from "@/lib/validators/blog.schema";
-import { ragIndexerService } from "@/modules/intelligence/services/ragIndexer.service";
+
+import { semanticIndexerService } from "@/modules/seo/services/semanticIndexer.service";
 import { PushService } from "@/lib/notifications/push.service";
 import { revalidateTag, revalidatePath } from "next/cache";
 import { SeoPreflightService } from "@/modules/seo/services/seo-preflight.service";
@@ -134,10 +135,10 @@ export async function POST(req: NextRequest) {
           }
           revalidatePath("/sitemap.xml", "layout");
           revalidatePath("/sitemap-index.xml");
-          ragIndexerService.indexBlog(updated._id.toString()).catch(e => console.error("RAG Indexing Failed:", e));
+
           await PushService.notifyBlog(updated).catch(e => console.error("[PushService] Failed:", e));
         } else {
-          ragIndexerService.unindexBlog(existing._id.toString()).catch(e => console.error("RAG Unindexing Failed:", e));
+          semanticIndexerService.unindexBlog(existing._id.toString()).catch(e => console.error("Semantic Unindexing Failed:", e));
         }
         return NextResponse.json({ success: true, id: updated!._id.toString(), slug: updated!.slug }, { status: 200 });
       }
@@ -290,7 +291,7 @@ export async function PATCH(req: NextRequest) {
         waitUntil(PushService.notifyBlog(updated).catch(e => console.error("[PushService] Failed:", e)));
       }
     } else {
-      waitUntil(ragIndexerService.unindexBlog(id).catch(e => console.error("RAG Unindexing Failed:", e)));
+      waitUntil(semanticIndexerService.unindexBlog(id).catch(e => console.error("Semantic Unindexing Failed:", e)));
     }
 
     return NextResponse.json({ success: true });
@@ -313,7 +314,7 @@ export async function DELETE(req: NextRequest) {
     const blogToDelete = await BlogService.getBlogById(id);
     if (!blogToDelete) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
 
-    await ragIndexerService.unindexBlog(id).catch(e => console.error("RAG Unindexing Failed:", e));
+    await semanticIndexerService.unindexBlog(id).catch(e => console.error("Semantic Unindexing Failed:", e));
     const deleted = await BlogService.deleteBlog(id);
     if (!deleted) return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
     

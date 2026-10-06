@@ -8,7 +8,7 @@ export const revalidate = 300; // revalidate every 5 minutes
 
 export const metadata: Metadata = {
   title: "Strategic Intelligence Hub | Global Chanakya — Geopolitical Analysis Platform",
-  description: "Explore in-depth geopolitical intelligence, strategic conflict analysis, regional power shifts, global diplomacy, defense strategy, and real-time intelligence insights from Global Chanakya.",
+  description: "Explore in-depth geopolitical intelligence, strategic conflict analysis, regional power shifts, global diplomacy, and defense strategy from Global Chanakya.",
   keywords: "geopolitical analysis, global conflict intelligence, strategic intelligence platform, india geopolitics, world politics analysis, defense intelligence, foreign policy insights, international relations",
   robots: { index: false, follow: false },
   alternates: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Strategic Intelligence Hub | Global Chanakya",
-    description: "In-depth geopolitical intelligence, strategic conflict analysis, and real-time intelligence insights.",
+    description: "In-depth geopolitical intelligence and strategic conflict analysis.",
     url: "https://www.globalchanakya.in/platformseo",
     siteName: "Global Chanakya",
     locale: "en_US",

@@ -55,12 +55,14 @@ export class PublishPipelineService {
         console.error("[PublishPipeline] Embedding generation failed:", embErr);
       }
 
+
+
       // 4. Chunk Indexing (for Vector Search)
       try {
-        const { ragIndexerService } = await import("@/modules/intelligence/services/ragIndexer.service");
-        await ragIndexerService.indexBlog(blogId);
+        const { semanticIndexerService } = await import("@/modules/seo/services/semanticIndexer.service");
+        await semanticIndexerService.indexBlog(blogId);
       } catch (ragErr) {
-        console.error("[PublishPipeline] RAG indexing failed:", ragErr);
+        console.error("[PublishPipeline] Semantic indexing failed:", ragErr);
       }
 
       // 5. Progress SEO status

@@ -26,7 +26,7 @@ export default async function BreakingNewsPage() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
             </span>
-            Live Intelligence Alerts
+            Breaking Alerts
           </h1>
           <p className="text-gray-400 mt-2">Real-time breaking reports directly from the Analyst Desk.</p>
         </div>

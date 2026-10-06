@@ -118,7 +118,7 @@ export class PushService {
       eventId: eventDoc._id.toString(),
       title: `New Intelligence – ${eventDoc.title}`,
       body: eventDoc.summary?.slice(0, 120) ?? 'A new intelligence report has been published.',
-      url: `/intelligence/${eventDoc.slug}`,
+      url: `/blogs/${eventDoc.slug}`,
       icon: '/favicon.svg', // fallback – will be replaced by a real icon if available
       type: 'INTELLIGENCE',
     } as NotificationPayload;

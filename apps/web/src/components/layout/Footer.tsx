@@ -73,7 +73,6 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <h4 className="text-white text-sm font-bold uppercase tracking-[0.06em]">Explore</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/intelligence" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Intelligence</Link></li>
               <li><Link href="/blogs" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Reports</Link></li>
               <li><Link href="/topics" className="text-sm text-[var(--slate-200)] hover:text-[var(--gold)] transition-colors">Topics</Link></li>
             </ul>

@@ -16,7 +16,7 @@ export async function GET() {
 
 Welcome to the machine-readable version of Global Chanakya. This endpoint exposes key geopolitical insights for AI indexing.
 
-## Latest Intelligence
+## Latest Reports
 
 `;
 

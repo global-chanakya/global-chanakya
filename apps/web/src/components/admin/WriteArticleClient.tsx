@@ -220,10 +220,10 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
     (async () => {
       try {
         const [tRes, cRes, lRes, coRes] = await Promise.allSettled([
-          fetch("/api/admin/intelligence/topics").then(r => r.ok ? r.json() : []),
-          fetch("/api/admin/intelligence/countries").then(r => r.ok ? r.json() : []),
-          fetch("/api/admin/intelligence/leaders").then(r => r.ok ? r.json() : []),
-          fetch("/api/admin/intelligence/conflicts").then(r => r.ok ? r.json() : []),
+          Promise.resolve([]),
+          Promise.resolve([]),
+          Promise.resolve([]),
+          Promise.resolve([]),
         ]);
         if (tRes.status === "fulfilled") setEntityTopics(tRes.value);
         if (cRes.status === "fulfilled") setEntityCountries(cRes.value);

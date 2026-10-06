@@ -161,8 +161,8 @@ export const SCHEMAS: Record<string, EntitySchema> = {
   countries: {
     id: "countries",
     name: "Country",
-    apiPath: "/api/admin/intelligence/countries",
-    frontendBasePath: "/gc-control-9x7k/intelligence/countries",
+    apiPath: "/api/admin/entities/countries",
+    frontendBasePath: "/gc-control-9x7k/entities/countries",
     tabs: [
       {
         id: "main",
@@ -179,8 +179,8 @@ export const SCHEMAS: Record<string, EntitySchema> = {
   leaders: {
     id: "leaders",
     name: "Leader",
-    apiPath: "/api/admin/intelligence/leaders",
-    frontendBasePath: "/gc-control-9x7k/intelligence/leaders",
+    apiPath: "/api/admin/entities/leaders",
+    frontendBasePath: "/gc-control-9x7k/entities/leaders",
     tabs: [
       {
         id: "main",
@@ -198,8 +198,8 @@ export const SCHEMAS: Record<string, EntitySchema> = {
   conflicts: {
     id: "conflicts",
     name: "Conflict",
-    apiPath: "/api/admin/intelligence/conflicts",
-    frontendBasePath: "/gc-control-9x7k/intelligence/conflicts",
+    apiPath: "/api/admin/entities/conflicts",
+    frontendBasePath: "/gc-control-9x7k/entities/conflicts",
     tabs: [
       {
         id: "main",
@@ -216,8 +216,8 @@ export const SCHEMAS: Record<string, EntitySchema> = {
   topics: {
     id: "topics",
     name: "Topic",
-    apiPath: "/api/admin/intelligence/topics",
-    frontendBasePath: "/gc-control-9x7k/intelligence/topics",
+    apiPath: "/api/admin/entities/topics",
+    frontendBasePath: "/gc-control-9x7k/entities/topics",
     tabs: [
       {
         id: "main",

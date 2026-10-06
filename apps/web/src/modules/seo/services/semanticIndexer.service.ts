@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import { SystemConfig } from "@/lib/models/SystemConfig";
 import { redisCache } from "@/lib/cache/redis.cache";
 
-export class RAGIndexerService {
+export class SemanticIndexerService {
   async incrementCorpusVersion(): Promise<void> {
     try {
       const config = await SystemConfig.findOneAndUpdate(
@@ -119,4 +119,4 @@ export class RAGIndexerService {
   }
 }
 
-export const ragIndexerService = new RAGIndexerService();
+export const semanticIndexerService = new SemanticIndexerService();

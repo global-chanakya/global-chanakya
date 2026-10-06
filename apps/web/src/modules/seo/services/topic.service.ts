@@ -37,7 +37,7 @@ export class TopicService {
   }
 
   /**
-   * Fetches the "Intelligence Command Center" payload for a specific topic slug.
+   * Fetches the "Topic Dashboard" payload for a specific topic slug.
    */
   static async getTopicHubData(slug: string) {
     await dbConnect();
