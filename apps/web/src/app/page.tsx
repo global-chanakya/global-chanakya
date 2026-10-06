@@ -9,24 +9,7 @@ import { BlogService } from "@/modules/blog/services/blog.service";
 import { formatViews } from "@/lib/formatViews";
 import type { TrendingBlog } from "@/lib/trending";
 import { BannerAd } from "@/components/ads/AdUnit";
-import { IntelligenceCard } from "@/components/intelligence/IntelligenceCard";
-import { IntelligenceEvent } from "@/lib/models/IntelligenceEvent";
 import dbConnect from "@/lib/mongoose";
-import { ensureFreshLiveIntelligence } from "@/lib/intelligence/live/demandRefresh";
-import { unstable_cache } from "next/cache";
-
-const getCachedLiveEvents = unstable_cache(
-  async () => {
-    await dbConnect();
-    return IntelligenceEvent.find({ status: "published", enrichmentStatus: "COMPLETED" })
-      .sort({ publishedAt: -1 })
-      .limit(3)
-      .select("slug title publishedAt region category summary whyItMatters indiaImpact riskLevel confidence sourceNames sourceUrls discoveredAt")
-      .lean();
-  },
-  ["homepage-live-events"],
-  { revalidate: 60 }
-);
 
 export const revalidate = 60;
 
@@ -206,9 +189,6 @@ function BlogCard({ blog, variant = "default", isViral = false }: { blog: Trendi
 export default async function Home() {
   await dbConnect();
   
-  // Trigger demand-driven refresh safely in the background
-  ensureFreshLiveIntelligence().catch(err => console.error("[Home] Demand refresh error:", err));
-  
   const theatresPromise = BlogService.getActiveCategories().then((categories) => {
     return { theatres: categories };
   });
@@ -217,43 +197,15 @@ export default async function Home() {
     trendingBlogs, 
     latestBlogs, 
     mostViewedBlog7Days, 
-    rawLiveEvents,
     theatresData
   ] = await Promise.all([
     BlogService.getTrendingBlogs(6),
     BlogService.getLatestBlogs(6),
     BlogService.getMostViewedBlogPast7Days(),
-    getCachedLiveEvents(),
     theatresPromise
   ]);
 
   const { theatres } = theatresData;
-
-  const liveEvents = rawLiveEvents.map((event: any) => ({
-    id: event.slug,
-    headline: event.title,
-    timestamp: event.publishedAt ? new Date(event.publishedAt).toISOString() : new Date().toISOString(),
-    region: event.region || "Global",
-    topic: event.category || "Intelligence",
-    summary: event.summary,
-    whyItMatters: event.whyItMatters || "No strategic summary available.",
-    indiaImpact: event.indiaImpact || "NEUTRAL",
-    riskLevel: event.riskLevel || "LOW",
-    confidence: event.confidence || "MODERATE",
-    entities: [],
-    sourceMetadata: {
-      sources: event.sourceNames?.map((name: string, idx: number) => ({
-        name,
-        url: event.sourceUrls?.[idx],
-        publishedTime: event.publishedAt ? new Date(event.publishedAt).toISOString() : undefined,
-        retrievedTime: event.discoveredAt ? new Date(event.discoveredAt).toISOString() : undefined,
-        type: "Media"
-      })) || [],
-      sourceCount: event.sourceNames?.length || 1,
-      freshness: "Recently Updated",
-      methodology: "Real-time AI enriched extraction"
-    }
-  }));
 
   const mostViewedBlogId = mostViewedBlog7Days?._id;
   const featuredBlog = mostViewedBlog7Days || latestBlogs[0] || trendingBlogs[0];
@@ -343,34 +295,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─── LATEST INTELLIGENCE (Replaces Breaking Intel) ─── */}
-      <section className="py-16 border-b border-[var(--border-dark)] bg-[var(--navy-surface)]">
-        <div className="container mx-auto max-w-7xl px-6 md:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10 border-b border-[var(--border-dark)] pb-6 gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-sm bg-[var(--navy-deep)] border border-[var(--border-dark)] flex items-center justify-center shrink-0">
-                <Activity className="w-5 h-5 text-[var(--gold)]" />
-              </div>
-              <div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-[var(--white)] tracking-tight">Latest Intelligence</h2>
-                <p className="text-[var(--slate-200)] text-[10px] md:text-sm mt-1 uppercase tracking-[0.14em] font-semibold">Real-time assessments</p>
-              </div>
-            </div>
-            <Link
-              href={`/intelligence`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-[var(--navy-deep)] border border-[var(--border-dark)] text-xs font-bold uppercase tracking-[0.06em] text-[var(--white)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all duration-300"
-            >
-              Command Center <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
-             {liveEvents.map((item: any) => (
-                <IntelligenceCard key={item.id} item={item} />
-             ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ─── FEATURED ANALYSIS (Trending) ─── */}
       {hasTrending && (

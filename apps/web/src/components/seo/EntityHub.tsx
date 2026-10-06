@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { Database, Network, Crosshair, Newspaper } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RelatedIntelligence } from "@/components/shared/RelatedIntelligence";
-import { EntityIntelligenceExplorer } from "@/components/intelligence/EntityIntelligenceExplorer";
-import { MOCK_COUNTRY_INTELLIGENCE } from "@/lib/intelligence/mockData";
+
 import { SITE_URL } from "@/constants";
 
 interface EntityHubProps {
@@ -87,8 +86,7 @@ export function EntityHub({
               </div>
             )}
             
-            {/* INJECTED INTELLIGENCE EXPLORER MOCK */}
-            <EntityIntelligenceExplorer intelligence={MOCK_COUNTRY_INTELLIGENCE} />
+
           </div>
 
           <aside className="lg:col-span-4 flex flex-col gap-8">

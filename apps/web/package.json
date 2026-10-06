@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "worker:intelligence": "npx tsx workers/intelligence-worker.ts",
-    "worker:intelligence:test": "INTELLIGENCE_POLL_INTERVAL_MS=10000 npx tsx workers/intelligence-worker.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.2",
@@ -35,7 +33,6 @@
     "date-fns": "^4.1.0",
     "google-auth-library": "^10.9.0",
     "googleapis": "^182.0.0",
-    "groq-sdk": "^1.5.0",
     "helmet": "^8.1.0",
     "isomorphic-dompurify": "^3.18.0",
     "lucide-react": "^0.400.0",

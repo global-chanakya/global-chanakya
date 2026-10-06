@@ -7,11 +7,7 @@ export function register() {
       tracesSampleRate: 1,
     });
 
-    if (process.env.NODE_ENV !== "test") {
-      import("./lib/intelligence/live/daemon").then(({ startLiveIntelligenceDaemon }) => {
-        startLiveIntelligenceDaemon();
-      });
-    }
+
   }
 
   if (process.env.NEXT_RUNTIME === "edge") {
