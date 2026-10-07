@@ -39,7 +39,7 @@ export default async function DashboardPage() {
 
           <nav className="flex flex-col gap-1">
             <a href="#feed" className="flex items-center justify-between p-3 rounded-lg bg-blue-500/10 text-blue-400 font-medium border border-blue-500/20">
-              <span className="flex items-center gap-2"><Activity className="w-4 h-4" /> Intelligence Feed</span>
+              <span className="flex items-center gap-2"><Activity className="w-4 h-4" /> Activity Feed</span>
             </a>
             <a href="#watchlist" className="flex items-center justify-between p-3 rounded-lg hover:bg-white/[0.02] text-neutral-400 hover:text-white transition-colors">
               <span className="flex items-center gap-2"><Shield className="w-4 h-4" /> Watchlist</span>

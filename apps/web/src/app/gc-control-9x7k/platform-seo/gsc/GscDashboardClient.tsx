@@ -93,7 +93,7 @@ export default function GscDashboardClient() {
             </div>
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</div>
-              <p className="text-sm text-gray-300">Return to this dashboard to view intelligence reports.</p>
+              <p className="text-sm text-gray-300">Return to this dashboard to view SEO reports.</p>
             </div>
           </div>
         </div>

@@ -7,8 +7,8 @@ import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Breaking Intelligence Alerts | Global Chanakya",
-  description: "Live strategic updates and breaking geopolitical intelligence.",
+  title: "Breaking News & Alerts | Global Chanakya Intelligence",
+  description: "Latest breaking news and geopolitical updates from the newsroom.",
 };
 
 // ISR near real-time (60 seconds)
@@ -28,10 +28,7 @@ export default async function BreakingNewsPage() {
             </span>
             Breaking Alerts
           </h1>
-          <p className="text-gray-400 mt-2">Real-time breaking reports directly from the Analyst Desk.</p>
-        </div>
-        <div className="bg-red-500/10 text-red-400 border border-red-500/30 px-4 py-2 rounded-lg font-bold flex items-center gap-2">
-          <Zap className="w-5 h-5" /> Active Liveblog
+          <p className="text-gray-400 mt-2">Latest breaking reports from the newsroom.</p>
         </div>
       </header>
 
@@ -40,7 +37,7 @@ export default async function BreakingNewsPage() {
           <div className="pl-8 py-8">
             <EmptyState 
               title="No Breaking Alerts" 
-              description="The global situation is currently stable. No critical intelligence reports are unfolding at this minute." 
+              description="No breaking reports are currently available." 
             />
           </div>
         ) : (

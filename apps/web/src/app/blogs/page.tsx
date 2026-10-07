@@ -34,8 +34,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Latest Intel",
-    description: "Read the latest geopolitical reports and intelligence briefs.",
+    title: "Latest Reports",
+    description: "Read the latest geopolitical reports and analysis.",
     alternates: {
       canonical,
     },

@@ -241,14 +241,14 @@ export default async function Home() {
                   href="/blogs"
                   className="w-full sm:w-auto px-8 py-4 bg-[var(--gold)] text-[var(--navy-deep)] text-sm font-extrabold uppercase tracking-[0.06em] rounded-sm hover:bg-[var(--gold-light)] transition-all flex items-center justify-center gap-3 shadow-sm border border-[var(--gold)]"
                 >
-                  Explore Intelligence
+                  Explore Analysis
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/topics"
+                  href="/blogs"
                   className="w-full sm:w-auto px-8 py-4 border border-[var(--border-dark)] bg-transparent text-sm font-bold uppercase tracking-[0.06em] text-[var(--white)] hover:bg-[var(--navy-surface)] transition-all rounded-sm text-center"
                 >
-                  View Topics
+                  View Reports
                 </Link>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default async function Home() {
       <section className="py-16 md:py-24 border-b border-[var(--border-dark)] bg-[var(--navy-surface)]">
         <div className="container mx-auto max-w-7xl px-6 md:px-8">
           <div className="text-center mb-10 md:mb-12">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--white)] mb-4 tracking-tight">Explore Intelligence by Topic</h2>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--white)] mb-4 tracking-tight">Explore Analysis by Topic</h2>
             <p className="text-[var(--slate-200)] text-[10px] md:text-sm font-bold uppercase tracking-[0.14em]">Deep dive into specialized research areas</p>
           </div>
           

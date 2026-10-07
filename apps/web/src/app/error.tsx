@@ -23,9 +23,9 @@ export default function GlobalError({
           <AlertTriangle className="w-10 h-10 text-red-500" />
         </div>
         
-        <h1 className="text-4xl font-bold text-white mb-4">System Anomaly</h1>
+        <h1 className="text-4xl font-bold text-white mb-4">System Error</h1>
         <p className="text-neutral-400 mb-8 leading-relaxed">
-          Our intelligence array encountered an unexpected issue while processing your request. Please try again.
+          We encountered an unexpected error while processing your request. Please try again.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -34,14 +34,14 @@ export default function GlobalError({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm bg-red-500 text-white font-medium hover:bg-red-600 transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
-            Re-Initialize
+            Try Again
           </button>
           <Link
             href="/"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm bg-neutral-900 text-neutral-300 font-medium hover:bg-neutral-800 hover:text-white transition-colors border border-neutral-800"
           >
             <ArrowLeft className="w-4 h-4" />
-            Return to Base
+            Back to Home
           </Link>
         </div>
       </div>

@@ -123,7 +123,7 @@ export function PWAInstallPrompt() {
       <p className="text-[13px] text-[var(--secondary)] leading-relaxed">
         {isIOS 
           ? "Add Global Chanakya to your Home Screen for quick access." 
-          : "Get faster access to the latest intelligence, analysis and platform updates."}
+          : "Get faster access to the latest reports, analysis and platform updates."}
       </p>
 
       {showManualInstruction && (

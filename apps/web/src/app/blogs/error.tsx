@@ -22,9 +22,9 @@ export default function EntityError({
           <AlertCircle className="w-8 h-8 text-red-400" />
         </div>
         
-        <h1 className="text-xl font-bold text-white mb-2">Intel Retrieval Failed</h1>
+        <h1 className="text-xl font-bold text-white mb-2">Load Failed</h1>
         <p className="text-neutral-400 mb-8 text-sm leading-relaxed">
-          We couldn't load this intelligence profile. The data may be temporarily unavailable or requires higher clearance.
+          We couldn't load this page. The data may be temporarily unavailable.
         </p>
 
         <div className="flex flex-col gap-3">
@@ -40,7 +40,7 @@ export default function EntityError({
             className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/5 text-white font-medium rounded-sm hover:bg-white/10 transition-colors border border-white/10"
           >
             <ArrowLeft className="w-4 h-4" />
-            Return to Base
+            Back to Home
           </Link>
         </div>
       </div>
