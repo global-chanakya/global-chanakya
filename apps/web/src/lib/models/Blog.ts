@@ -27,11 +27,7 @@ export interface IBlog extends Document {
   ogImage?: string;
   category: string;
   categoryId?: mongoose.Types.ObjectId;
-  topics?: mongoose.Types.ObjectId[];
-  countries?: mongoose.Types.ObjectId[];
   regions?: mongoose.Types.ObjectId[];
-  leaders?: mongoose.Types.ObjectId[];
-  conflicts?: mongoose.Types.ObjectId[];
   organizations?: mongoose.Types.ObjectId[];
   reportType?: string;
   tags: string[];
@@ -79,8 +75,6 @@ export interface IBlog extends Document {
   contentType: "standard" | "platform-seo" | "breaking_news" | "geopolitical_analysis" | "defence_analysis" | "economic_analysis" | "strategic_analysis" | "explainer" | "country_analysis" | "conflict_update" | "trade_energy_analysis";
   timeSensitivity?: "high" | "medium" | "low";
   searchIntent?: "informational" | "transactional" | "navigational" | "commercial";
-  primaryTopic?: mongoose.Types.ObjectId;
-  primaryEntity?: mongoose.Types.ObjectId;
   seoStatus?: "PUBLISHED" | "SITEMAP_INCLUDED" | "DISCOVERABLE" | "INDEXING_CHECK_REQUIRED" | "INDEXED" | "LOW_IMPRESSION" | "LOW_CTR" | "NEEDS_REVIEW";
   embedding?: number[];
   embeddingContentHash?: string;
@@ -169,11 +163,7 @@ const BlogSchema = new Schema<IBlog>(
     }],
     reviewedAt: { type: Date },
     categoryId: { type: Schema.Types.ObjectId, ref: "Category" },
-    topics: [{ type: Schema.Types.ObjectId, ref: "Topic" }],
-    countries: [{ type: Schema.Types.ObjectId, ref: "Country" }],
     regions: [{ type: Schema.Types.ObjectId, ref: "Region" }],
-    leaders: [{ type: Schema.Types.ObjectId, ref: "Leader" }],
-    conflicts: [{ type: Schema.Types.ObjectId, ref: "Conflict" }],
     organizations: [{ type: Schema.Types.ObjectId, ref: "Organization" }],
     contentType: {
       type: String,
@@ -182,8 +172,6 @@ const BlogSchema = new Schema<IBlog>(
     },
     timeSensitivity: { type: String, enum: ["high", "medium", "low"] },
     searchIntent: { type: String },
-    primaryTopic: { type: Schema.Types.ObjectId, ref: "Topic" },
-    primaryEntity: { type: Schema.Types.ObjectId, ref: "Country" }, // Simplification
     seoStatus: { 
       type: String, 
       enum: ["PUBLISHED", "SITEMAP_INCLUDED", "DISCOVERABLE", "INDEXING_CHECK_REQUIRED", "INDEXED", "LOW_IMPRESSION", "LOW_CTR", "NEEDS_REVIEW"],
@@ -291,11 +279,7 @@ BlogSchema.index({ "analytics.views": -1 });
 
 // Relational Taxonomy Compound Indexes (supports exact match + status filter + sort)
 BlogSchema.index({ categoryId: 1, status: 1, publishAt: -1 });
-BlogSchema.index({ topics: 1, status: 1, publishAt: -1 });
-BlogSchema.index({ countries: 1, status: 1, publishAt: -1 });
 BlogSchema.index({ regions: 1, status: 1, publishAt: -1 });
-BlogSchema.index({ leaders: 1, status: 1, publishAt: -1 });
-BlogSchema.index({ conflicts: 1, status: 1, publishAt: -1 });
 BlogSchema.index({ organizations: 1, status: 1, publishAt: -1 });
 
 export const Blog =

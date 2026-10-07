@@ -52,11 +52,7 @@ export const createBlogSchema = z.object({
   featuredUntil: z.string().or(z.date()).optional().or(z.literal("")),
 
   // Entity relations (ObjectId strings)
-  countries: z.array(z.string()).optional(),
-  leaders: z.array(z.string()).optional(),
-  conflicts: z.array(z.string()).optional(),
   organizations: z.array(z.string()).optional(),
-  topics: z.array(z.string()).optional(),
 });
 
 // ─── Update Blog Schema ──────────────────────────────────────────────────────

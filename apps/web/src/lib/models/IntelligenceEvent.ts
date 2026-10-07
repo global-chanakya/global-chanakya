@@ -6,10 +6,7 @@ export interface IIntelligenceEvent extends Document {
   summary: string;
   content: string;
   region?: string;
-  countries?: mongoose.Types.ObjectId[];
-  leaders?: mongoose.Types.ObjectId[];
   organizations?: mongoose.Types.ObjectId[];
-  conflicts?: mongoose.Types.ObjectId[];
   category?: string;
   eventType?: string; // e.g. "BREAKING", "ANALYSIS", "DIPLOMACY"
   importance: number; // 1 to 100
@@ -40,10 +37,7 @@ const IntelligenceEventSchema = new Schema<IIntelligenceEvent>(
     summary: { type: String, required: true },
     content: { type: String, required: true },
     region: { type: String },
-    countries: [{ type: Schema.Types.ObjectId, ref: "Country" }],
-    leaders: [{ type: Schema.Types.ObjectId, ref: "Leader" }],
     organizations: [{ type: Schema.Types.ObjectId, ref: "Organization" }],
-    conflicts: [{ type: Schema.Types.ObjectId, ref: "Conflict" }],
     category: { type: String, index: true },
     eventType: { type: String, index: true },
     importance: { type: Number, default: 50, index: true },

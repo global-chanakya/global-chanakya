@@ -41,24 +41,11 @@ export function generateArticleSchema(blog: any) {
 
   // Related Entities mapped to schema.org "about" or "mentions"
   const aboutEntities: any[] = [];
-  
-  if (blog.countries && Array.isArray(blog.countries)) {
-    blog.countries.forEach((c: any) => aboutEntities.push({ "@type": "Country", name: c.name || c }));
-  }
-  if (blog.leaders && Array.isArray(blog.leaders)) {
-    blog.leaders.forEach((l: any) => aboutEntities.push({ "@type": "Person", name: l.name || l }));
-  }
   if (blog.organizations && Array.isArray(blog.organizations)) {
     blog.organizations.forEach((o: any) => aboutEntities.push({ "@type": "Organization", name: o.name || o }));
   }
-  if (blog.topics && Array.isArray(blog.topics)) {
-    blog.topics.forEach((t: any) => aboutEntities.push({ "@type": "Thing", name: t.name || t }));
-  }
   if (blog.regions && Array.isArray(blog.regions)) {
     blog.regions.forEach((r: any) => aboutEntities.push({ "@type": "Place", name: r.name || r }));
-  }
-  if (blog.conflicts && Array.isArray(blog.conflicts)) {
-    blog.conflicts.forEach((c: any) => aboutEntities.push({ "@type": "Event", name: c.name || c }));
   }
   
   const keywordsStr = blog.tags?.join(", ") || (blog.seo?.keywords && Array.isArray(blog.seo.keywords) ? blog.seo.keywords.join(", ") : "");

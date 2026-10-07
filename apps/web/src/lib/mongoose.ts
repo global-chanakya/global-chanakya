@@ -8,11 +8,7 @@ declare global {
 // Pre-register models to ensure populate() can resolve references across isolated Next.js execution contexts
 import "./models/User";
 import "./models/Category";
-import "./models/Topic";
-import "./models/Country";
 import "./models/Region";
-import "./models/Leader";
-import "./models/Conflict";
 import "./models/Organization";
 import "./models/Blog";
 

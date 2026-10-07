@@ -3,11 +3,7 @@ import dbConnect from "@/lib/mongoose";
 import mongoose from "mongoose";
 import { Blog } from "@/lib/models/Blog";
 import "@/lib/models/Category";
-import "@/lib/models/Topic";
-import "@/lib/models/Country";
 import "@/lib/models/Region";
-import "@/lib/models/Leader";
-import "@/lib/models/Conflict";
 import "@/lib/models/Organization";
 
 export interface EntityQueryResult {
@@ -87,27 +83,19 @@ export class EntityService {
       [relationshipField]: new mongoose.Types.ObjectId(entityId),
       status: "published"
     })
-      .select("countries regions topics leaders conflicts organizations categoryId")
+      .select("regions organizations categoryId")
       .sort({ publishAt: -1 })
       .limit(20)
       .lean();
 
     const relatedIds = {
-      countries: new Set<string>(),
       regions: new Set<string>(),
-      topics: new Set<string>(),
-      leaders: new Set<string>(),
-      conflicts: new Set<string>(),
       organizations: new Set<string>(),
       categories: new Set<string>()
     };
 
     recentArticles.forEach(article => {
-      if (article.countries) article.countries.forEach((id: any) => relatedIds.countries.add(id.toString()));
       if (article.regions) article.regions.forEach((id: any) => relatedIds.regions.add(id.toString()));
-      if (article.topics) article.topics.forEach((id: any) => relatedIds.topics.add(id.toString()));
-      if (article.leaders) article.leaders.forEach((id: any) => relatedIds.leaders.add(id.toString()));
-      if (article.conflicts) article.conflicts.forEach((id: any) => relatedIds.conflicts.add(id.toString()));
       if (article.organizations) article.organizations.forEach((id: any) => relatedIds.organizations.add(id.toString()));
       if (article.categoryId) relatedIds.categories.add(article.categoryId.toString());
     });
@@ -129,22 +117,14 @@ export class EntityService {
       return docs.map((d: any) => ({ name: d.name, slug: d.slug, type: modelName.toLowerCase() }));
     };
 
-    const [countries, regions, topics, leaders, conflicts, organizations, categories] = await Promise.all([
-      populateSet("Country", relatedIds.countries),
+    const [regions, organizations, categories] = await Promise.all([
       populateSet("Region", relatedIds.regions),
-      populateSet("Topic", relatedIds.topics),
-      populateSet("Leader", relatedIds.leaders),
-      populateSet("Conflict", relatedIds.conflicts),
       populateSet("Organization", relatedIds.organizations),
       populateSet("Category", relatedIds.categories),
     ]);
 
     return {
-      countries,
       regions,
-      topics,
-      leaders,
-      conflicts,
       organizations,
       categories
     };

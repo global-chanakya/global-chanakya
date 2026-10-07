@@ -7,6 +7,7 @@ import { SITE_URL } from '@/constants';
 import { getStaticSitemaps } from '@/modules/seo/sitemap-static';
 import { getPlatformSeoSitemaps } from '@/modules/seo/sitemap-platformseo';
 import { getEntitySitemaps } from '@/modules/seo/sitemap-entity';
+import { getTopicSitemaps } from '@/modules/seo/sitemap-topics';
 
 const BLOGS_PER_SITEMAP = 1000;
 export const revalidate = 600;
@@ -25,10 +26,7 @@ export async function generateSitemaps() {
       { id: 'static' },
       { id: 'categories' },
       { id: 'topics' },
-      { id: 'countries' },
       { id: 'regions' },
-      { id: 'leaders' },
-      { id: 'conflicts' },
       { id: 'organizations' },
       { id: 'authors' }
     ];
@@ -66,11 +64,8 @@ export default async function sitemap({
 
   // Entity Hubs
   if (id === 'categories') return getEntitySitemaps('Category', 'categories', 'categoryId');
-  if (id === 'topics') return getEntitySitemaps('Topic', 'topics', 'topics');
-  if (id === 'countries') return getEntitySitemaps('Country', 'countries', 'countries');
+  if (id === 'topics') return getTopicSitemaps();
   if (id === 'regions') return getEntitySitemaps('Region', 'regions', 'regions');
-  if (id === 'leaders') return getEntitySitemaps('Leader', 'leaders', 'leaders');
-  if (id === 'conflicts') return getEntitySitemaps('Conflict', 'conflicts', 'conflicts');
   if (id === 'organizations') return getEntitySitemaps('Organization', 'organizations', 'organizations');
 
   if (id === 'authors') {

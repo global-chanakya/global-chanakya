@@ -61,10 +61,6 @@ interface FormData {
   featuredUntil: string;
   publishAt: string;
   unpublishAt: string;
-  topics: string;
-  countries: string;
-  leaders: string;
-  conflicts: string;
   organizations: string;
   references: string;
   featuredImageWidth?: number;
@@ -79,7 +75,6 @@ interface ValidationErrors {
   title?: string; slug?: string; excerpt?: string; content?: string; category?: string;
   canonicalUrl?: string; seoTitle?: string; seoDescription?: string;
   publishAt?: string; unpublishAt?: string; references?: string; featuredImage?: string;
-  topics?: string;
 }
 
 interface PublishResult { id: string; slug: string; }
@@ -147,10 +142,6 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
   const [touched, setTouched] = useState<Set<string>>(new Set());
 
   // ─── Entity caches ─────────────────────────────────────────────────────────
-  const [entityTopics, setEntityTopics] = useState<EntityOption[]>([]);
-  const [entityCountries, setEntityCountries] = useState<EntityOption[]>([]);
-  const [entityLeaders, setEntityLeaders] = useState<EntityOption[]>([]);
-  const [entityConflicts, setEntityConflicts] = useState<EntityOption[]>([]);
 
   // ─── Form ──────────────────────────────────────────────────────────────────
   const [form, setForm] = useState<FormData>({
@@ -163,7 +154,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
     isBreaking: false, breakingUntil: "",
     isFeatured: false, featuredUntil: "",
     publishAt: "", unpublishAt: "",
-    topics: "", countries: "", leaders: "", conflicts: "", organizations: "",
+    organizations: "",
     references: "",
     featuredImageWidth: 0,
     featuredImageHeight: 0,
@@ -217,20 +208,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
 
   // ─── Fetch entities ────────────────────────────────────────────────────────
   useEffect(() => {
-    (async () => {
-      try {
-        const [tRes, cRes, lRes, coRes] = await Promise.allSettled([
-          Promise.resolve([]),
-          Promise.resolve([]),
-          Promise.resolve([]),
-          Promise.resolve([]),
-        ]);
-        if (tRes.status === "fulfilled") setEntityTopics(tRes.value);
-        if (cRes.status === "fulfilled") setEntityCountries(cRes.value);
-        if (lRes.status === "fulfilled") setEntityLeaders(lRes.value);
-        if (coRes.status === "fulfilled") setEntityConflicts(coRes.value);
-      } catch { /* entities are optional */ }
-    })();
+    // Entities like organizations could be fetched here in the future
   }, []);
 
   // ─── Load article for editing ──────────────────────────────────────────────
@@ -269,10 +247,6 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
             featuredUntil: toDatetimeLocal(blog.featuredUntil),
             publishAt: toDatetimeLocal(blog.publishAt),
             unpublishAt: toDatetimeLocal(blog.unpublishAt),
-            topics: (blog.topics ?? []).map((e: any) => typeof e === "object" ? e._id || e : e).join(", "),
-            countries: (blog.countries ?? []).map((e: any) => typeof e === "object" ? e._id || e : e).join(", "),
-            leaders: (blog.leaders ?? []).map((e: any) => typeof e === "object" ? e._id || e : e).join(", "),
-            conflicts: (blog.conflicts ?? []).map((e: any) => typeof e === "object" ? e._id || e : e).join(", "),
             organizations: (blog.organizations ?? []).map((e: any) => typeof e === "object" ? e._id || e : e).join(", "),
             references: (blog.citations ?? []).map((c: any) => c.url || "").filter(Boolean).join("\n"),
             featuredImageWidth: blog.featuredImageWidth || 0,
@@ -351,9 +325,6 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
       if (form.seoDescription && form.seoDescription.length > 200) {
         errs.seoDescription = "Meta description exceeds 200 characters";
       }
-      if (!form.topics || form.topics.trim().length === 0) {
-        errs.topics = "At least one topic is required for publishing";
-      }
     }
 
     return errs;
@@ -388,10 +359,6 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
       featuredUntil: form.featuredUntil || undefined,
       publishAt: form.publishAt || undefined,
       unpublishAt: form.unpublishAt || undefined,
-      topics: form.topics.split(",").map(s => s.trim()).filter(Boolean),
-      countries: form.countries.split(",").map(s => s.trim()).filter(Boolean),
-      leaders: form.leaders.split(",").map(s => s.trim()).filter(Boolean),
-      conflicts: form.conflicts.split(",").map(s => s.trim()).filter(Boolean),
       organizations: form.organizations.split(",").map(s => s.trim()).filter(Boolean),
       citations: refsArray,
       featuredImageWidth: form.featuredImageWidth || undefined,
@@ -574,7 +541,6 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
     content: !!form.content && form.content.length >= 300 && hasH2OrH3,
     featuredImage: !!form.featuredImage,
     category: !!form.category,
-    topics: form.topics.split(",").map(s => s.trim()).filter(Boolean).length > 0,
     tags: form.tags.split(",").map(t => t.trim()).filter(Boolean).length > 0,
     seoTitle: seoTitleLen >= 10 && seoTitleLen <= 70,
     seoDesc: seoDescLen >= 50 && seoDescLen <= 200,
@@ -724,7 +690,6 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
 
               <ChecklistSection title="Discovery">
                 <CheckItem ok={checks.category} label="Category" />
-                <CheckItem ok={checks.topics} label="At least one Topic (Entities)" />
                 <CheckItem ok={checks.tags} label="At least one tag" />
                 <CheckItem ok={checks.robots} label="Robots directive set" />
               </ChecklistSection>
@@ -1333,43 +1298,7 @@ export default function WriteArticleClient({ authorId }: { authorId: string }) {
                   </div>
                 </div>
 
-                {/* Row 5: Entity selectors */}
-                <div>
-                  <p className={`${labelClass} mb-4`}>Linked Entities <span className="text-red-400">*</span></p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div>
-                      <EntitySelector
-                        label="Topic"
-                        entities={entityTopics}
-                        value={form.topics}
-                        onChange={v => update("topics", v)}
-                        color="blue"
-                      />
-                      {fieldError("topics")}
-                    </div>
-                    <EntitySelector
-                      label="Country"
-                      entities={entityCountries}
-                      value={form.countries}
-                      onChange={v => update("countries", v)}
-                      color="blue"
-                    />
-                    <EntitySelector
-                      label="Leader"
-                      entities={entityLeaders}
-                      value={form.leaders}
-                      onChange={v => update("leaders", v)}
-                      color="purple"
-                    />
-                    <EntitySelector
-                      label="Conflict"
-                      entities={entityConflicts}
-                      value={form.conflicts}
-                      onChange={v => update("conflicts", v)}
-                      color="red"
-                    />
-                  </div>
-                </div>
+                {/* Entity selectors (moved or removed) */}
               </div>
             </section>
 
@@ -1477,55 +1406,3 @@ function CheckItem({ ok, label, warning, warningMsg }: { ok: boolean; label: str
   );
 }
 
-function EntitySelector({
-  label, entities, value, onChange, color
-}: {
-  label: string;
-  entities: EntityOption[];
-  value: string;
-  onChange: (v: string) => void;
-  color: "blue" | "purple" | "red";
-}) {
-  const colors = {
-    blue: "bg-blue-500/10 text-blue-300 border-blue-500/20",
-    purple: "bg-purple-500/10 text-purple-300 border-purple-500/20",
-    red: "bg-red-500/10 text-red-300 border-red-500/20",
-  };
-  const selectedIds = value.split(",").map(s => s.trim()).filter(Boolean);
-
-  return (
-    <div>
-      <label className="block text-[11px] text-gray-400 font-semibold mb-1.5 uppercase tracking-widest">Linked {label}</label>
-      <select
-        value=""
-        onChange={e => {
-          if (!e.target.value) return;
-          if (!selectedIds.includes(e.target.value)) {
-            onChange([...selectedIds, e.target.value].join(", "));
-          }
-        }}
-        className="w-full px-3.5 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[var(--border)] transition-all bg-[#0d0d17]"
-      >
-        <option value="" className="bg-[#0d0d17]">— Add {label} —</option>
-        {entities.map(e => (
-          <option key={e._id} value={e._id} className="bg-[#0d0d17]">{e.name}</option>
-        ))}
-      </select>
-      {selectedIds.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mt-2">
-          {selectedIds.map(id => (
-            <span key={id} className={`px-2 py-0.5 rounded-md text-[10px] border flex items-center gap-1 ${colors[color]}`}>
-              {entities.find(e => e._id === id)?.name || id.slice(-6)}
-              <button
-                type="button"
-                onClick={() => onChange(selectedIds.filter(s => s !== id).join(", "))}
-                className="hover:text-white transition-colors ml-0.5"
-                aria-label={`Remove ${label}`}
-              >×</button>
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}

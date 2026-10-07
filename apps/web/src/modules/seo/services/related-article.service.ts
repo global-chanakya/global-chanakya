@@ -74,14 +74,11 @@ export class RelatedArticleService {
         { _id: { $in: Array.from(candidateIds) } },
         { category: sourceBlog.category },
         { tags: { $in: sourceBlog.tags || [] } },
-        { topics: { $in: sourceBlog.topics || [] } },
-        { countries: { $in: sourceBlog.countries || [] } },
-        { leaders: { $in: sourceBlog.leaders || [] } },
-        { conflicts: { $in: sourceBlog.conflicts || [] } },
+        { organizations: { $in: sourceBlog.organizations || [] } },
         { publishAt: { $gt: oneYearAgo } }
       ]
     })
-    .select("_id title slug category publishAt tags topics countries leaders conflicts embedding")
+    .select("_id title slug category publishAt tags organizations embedding")
     .limit(100)
     .lean();
 
@@ -106,22 +103,11 @@ export class RelatedArticleService {
         else if (semSim < 0.5) score -= 10; // Penalize truly unrelated
       }
       
-      // Topic overlap (high weight)
-      const commonTopics = candidate.topics?.filter((t: any) => 
-        sourceBlog.topics?.some((st: any) => st.toString() === t.toString())
+      // Entity overlap (organizations) - high weight
+      const commonOrganizations = candidate.organizations?.filter((o: any) => 
+        sourceBlog.organizations?.some((so: any) => so.toString() === o.toString())
       ) || [];
-      score += commonTopics.length * 15;
-
-      // Entity overlap (countries, leaders, conflicts) - high weight
-      const commonCountries = candidate.countries?.filter((c: any) => 
-        sourceBlog.countries?.some((sc: any) => sc.toString() === c.toString())
-      ) || [];
-      score += commonCountries.length * 10;
-      
-      const commonLeaders = candidate.leaders?.filter((l: any) => 
-        sourceBlog.leaders?.some((sl: any) => sl.toString() === l.toString())
-      ) || [];
-      score += commonLeaders.length * 10;
+      score += commonOrganizations.length * 10;
 
       // Category match (medium weight)
       if (candidate.category === sourceBlog.category) {

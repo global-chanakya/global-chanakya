@@ -34,7 +34,6 @@ export async function GET(req: NextRequest) {
 
     const blog = await Blog.findById(blogId)
       .populate("author", "name")
-      .populate("topics", "name")
       .lean();
 
     if (!blog) {
@@ -161,7 +160,6 @@ export async function GET(req: NextRequest) {
       h1OrHeadings: /<h[1-6]/.test(blog.content),
       category: !!blog.category,
       tags: blog.tags?.length > 0,
-      topic: !!(blog as any).topics?.length || !!(blog as any).primaryTopic,
       featuredImage: !!blog.featuredImage,
       author: !!blog.author,
       canonical: !!blog.seo?.canonicalUrl,

@@ -67,10 +67,6 @@ export class SeoPreflightService {
       }
     }
 
-    // Entity + Topic Graph Validation
-    if (!blog.primaryTopic && (!blog.topics || blog.topics.length === 0)) {
-      errors.push("Article must have at least one topic associated with it.");
-    }
 
     if (!blog.author) {
       errors.push("Author is missing.");
