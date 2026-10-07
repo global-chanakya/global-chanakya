@@ -28,11 +28,6 @@ const getCachedBlog = unstable_cache(
     const blog = await Blog.findOne({ slug, contentType: { $ne: "platform-seo" } })
       .populate("author", "name authorSlug bio expertise socialLinks avatar")
       .populate("categoryId", "name slug")
-      .populate("topics", "name slug")
-      .populate("countries", "name slug")
-      .populate("regions", "name slug")
-      .populate("leaders", "name slug")
-      .populate("conflicts", "name slug")
       .populate("organizations", "name slug")
       .lean();
     return blog ? JSON.parse(JSON.stringify(blog)) : null;
@@ -44,7 +39,7 @@ const getCachedBlog = unstable_cache(
 const getCachedRelatedBlogs = unstable_cache(
   async (blogId: string) => {
     await dbConnect();
-    const sourceBlog = await Blog.findById(blogId).select("_id category tags topics countries leaders conflicts embedding").lean();
+    const sourceBlog = await Blog.findById(blogId).select("_id category tags embedding").lean();
     if (!sourceBlog) return [];
     const { RelatedArticleService } = await import("@/modules/seo/services/related-article.service");
     const related = await RelatedArticleService.getHighlyRelevantArticles(sourceBlog, 6);
@@ -328,34 +323,14 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
             <InArticleAd slot="auto" />
 
             {/* Entity Hub Links */}
-            {(blog.topics?.length > 0 || blog.countries?.length > 0 || blog.regions?.length > 0 || blog.leaders?.length > 0 || blog.conflicts?.length > 0) && (
+            {(blog.regions?.length > 0) && (
               <div className="mt-16 pt-8 border-t border-[var(--border-dark)] flex flex-wrap gap-3">
                 <div className="w-full flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[var(--slate-200)] mb-2">
                   <Tag className="w-3.5 h-3.5" /> Related Analysis Hubs
                 </div>
-                {blog.topics?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/topics/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
-                    {entity.name} (Topic)
-                  </Link>
-                ))}
-                {blog.countries?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/countries/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
-                    {entity.name} (Country)
-                  </Link>
-                ))}
                 {blog.regions?.map((entity: any) => (
                   <Link key={entity._id || entity.slug} href={`/regions/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
                     {entity.name} (Region)
-                  </Link>
-                ))}
-                {blog.leaders?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/leaders/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
-                    {entity.name} (Leader)
-                  </Link>
-                ))}
-                {blog.conflicts?.map((entity: any) => (
-                  <Link key={entity._id || entity.slug} href={`/conflicts/${entity.slug}`} className="px-4 py-2 rounded-sm border border-[var(--border-dark)] bg-[var(--navy-deep)] text-[var(--slate-200)] text-[12px] font-bold uppercase tracking-widest hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
-                    {entity.name} (Conflict)
                   </Link>
                 ))}
               </div>

@@ -13,8 +13,7 @@ export async function GET(req: NextRequest) {
     
     // 1. Find the FlyDubai article or any published article
     const blog = await Blog.findOne({ slug: { $regex: "flydubai" } })
-      .populate("author", "name")
-      .populate("topics", "name");
+      .populate("author", "name");
 
     if (!blog) {
       return NextResponse.json({ error: "Flydubai article not found" }, { status: 404 });
