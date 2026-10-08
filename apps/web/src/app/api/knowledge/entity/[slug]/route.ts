@@ -7,6 +7,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/lib/mongoose";
 import { Blog } from "@/lib/models/Blog";
+import { escapeRegExp } from "@/lib/utils/regex";
 
 export async function GET(
   request: NextRequest,
@@ -17,10 +18,11 @@ export async function GET(
     const { slug } = await params;
 
     // Fetch related blog content by slug or tag match
+    const safeSlug = escapeRegExp(slug).replace(/-/g, '[\\s-]');
     const relatedContent = await Blog.find({
       $or: [
         { slug },
-        { tags: { $regex: new RegExp(slug.replace(/-/g, '.*'), 'i') } }
+        { tags: { $regex: new RegExp(`^${safeSlug}$`, 'i') } }
       ],
       status: "published",
       contentType: { $ne: "platform-seo" }

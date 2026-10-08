@@ -4,27 +4,36 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Cookie, X } from "lucide-react";
 
+import posthog from "posthog-js";
+
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem("gc_cookie_consent");
     if (!consent) {
+      posthog.opt_out_capturing(); // Ensure default state is opted out if local storage cleared
       // Small delay so it doesn't flash on page load
       const timer = setTimeout(() => setShowBanner(true), 1500);
       return () => clearTimeout(timer);
+    } else if (consent === "accepted") {
+      posthog.opt_in_capturing();
+    } else if (consent === "declined") {
+      posthog.opt_out_capturing();
     }
   }, []);
 
   const acceptCookies = () => {
     localStorage.setItem("gc_cookie_consent", "accepted");
     document.cookie = "gc_cookie_consent=accepted; max-age=31536000; path=/; SameSite=Lax";
+    posthog.opt_in_capturing();
     setShowBanner(false);
   };
 
   const declineCookies = () => {
     localStorage.setItem("gc_cookie_consent", "declined");
     document.cookie = "gc_cookie_consent=declined; max-age=31536000; path=/; SameSite=Lax";
+    posthog.opt_out_capturing();
     setShowBanner(false);
   };
 

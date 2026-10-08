@@ -109,6 +109,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
+import sanitizeHtmlLib from 'sanitize-html';
+
 function sanitizeBlogContent(html: string): string {
   let clean = html || "";
   
@@ -123,11 +125,20 @@ function sanitizeBlogContent(html: string): string {
       .replace(/&nbsp;/g, " ");
   }
 
-  clean = clean.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
-  clean = clean.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "");
-  clean = clean.replace(/\s+on\w+\s*=\s*"[^"]*"/gi, "");
-  clean = clean.replace(/\s+on\w+\s*=\s*'[^']*'/gi, "");
-  return clean;
+  return sanitizeHtmlLib(clean, {
+    allowedTags: [
+      'p', 'br', 'strong', 'em', 'b', 'i', 'u', 'blockquote',
+      'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      'a', 'img', 'code', 'pre', 'table', 'thead', 'tbody', 'tr', 'th', 'td',
+      'figure', 'figcaption', 'span', 'div', 'hr'
+    ],
+    allowedAttributes: {
+      '*': ['class', 'id', 'itemscope', 'itemtype', 'itemprop'],
+      'a': ['href', 'title', 'target', 'rel'],
+      'img': ['src', 'alt', 'title'],
+    },
+    allowedSchemes: ['http', 'https', 'mailto', 'tel'],
+  });
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {

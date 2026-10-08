@@ -3,8 +3,8 @@ import { Redis } from "@upstash/redis";
 
 let ratelimit: Ratelimit | null = null;
 
-// Allow instant rollback via environment variable
-const useLocalQuota = process.env.USE_LOCAL_QUOTA !== "false"; 
+// Require explicit opt-in for local quota to prevent silent fallbacks in production
+const useLocalQuota = process.env.USE_LOCAL_QUOTA === "true"; 
 
 if (!useLocalQuota && process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
   const redis = new Redis({

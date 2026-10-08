@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import NextAuth from 'next-auth';
 import { authConfig } from '@/auth.config';
-import { MemoryRateLimiter } from '@/lib/rate-limit';
+import { MemoryRateLimiter, ratelimit } from '@/lib/rate-limit';
 
 const { auth } = NextAuth(authConfig);
 
@@ -24,16 +24,32 @@ export default auth(async (req) => {
       }
     }
 
-    // Best-effort local Rate Limiting (replaces global Upstash)
     const ip = req.headers.get('x-forwarded-for') ?? '127.0.0.1';
-    // Conservative limit: 300 requests per 60 seconds per IP
-    const { success } = await MemoryRateLimiter.checkLimit(ip, 'global_api', 300, 60000);
+    
+    let success = true;
+    let limitHeaders: Record<string, string> = { 'X-RateLimit-Limit': '300' };
+
+    if (ratelimit) {
+      const result = await ratelimit.limit(`global_api_${ip}`);
+      success = result.success;
+      limitHeaders = {
+        'X-RateLimit-Limit': result.limit.toString(),
+        'X-RateLimit-Remaining': result.remaining.toString(),
+        'X-RateLimit-Reset': result.reset.toString()
+      };
+    } else {
+      if (process.env.NODE_ENV === 'production' && process.env.USE_LOCAL_QUOTA !== 'true') {
+        // Prevent silent fallback to memory rate limiter in production
+        return new NextResponse('Internal Server Error: Distributed Rate Limiter Not Configured', { status: 500 });
+      }
+      const memResult = await MemoryRateLimiter.checkLimit(ip, 'global_api', 300, 60000);
+      success = memResult.success;
+    }
+
     if (!success) {
       return new NextResponse('Too Many Requests', {
         status: 429,
-        headers: {
-          'X-RateLimit-Limit': '300',
-        },
+        headers: limitHeaders,
       });
     }
   }
@@ -78,8 +94,6 @@ export const config = {
     '/gc-control-9x7k/:path*',
     '/dashboard/:path*',
     '/profile/:path*',
-    '/api/admin/:path*',
-    '/api/profile/:path*',
-    '/api/auth/:path*'
+    '/api/:path*',
   ],
 };

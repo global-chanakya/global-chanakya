@@ -2,6 +2,7 @@ import { Blog, IBlog } from "@/lib/models/Blog";
 import dbConnect from "@/lib/mongoose";
 import mongoose from "mongoose";
 import { sanitizeBlogContent } from "@/lib/utils/contentSanitizer";
+import { escapeRegExp } from "@/lib/utils/regex";
 
 export class BlogRepository {
   static async findById(id: string): Promise<any | null> {
@@ -38,15 +39,16 @@ export class BlogRepository {
 
   static async searchBlogs(query: string, limit: number = 5): Promise<IBlog[]> {
     await dbConnect();
+    const escapedQuery = escapeRegExp(query);
     return Blog.find(
       {
         status: "published",
         contentType: { $ne: "platform-seo" },
         visibility: { $in: ["public", "premium", "private"] },
         $or: [
-          { title: { $regex: query, $options: "i" } },
-          { excerpt: { $regex: query, $options: "i" } },
-          { category: { $regex: query, $options: "i" } },
+          { title: { $regex: escapedQuery, $options: "i" } },
+          { excerpt: { $regex: escapedQuery, $options: "i" } },
+          { category: { $regex: escapedQuery, $options: "i" } },
         ]
       },
       {
@@ -110,7 +112,8 @@ export class BlogRepository {
 
   static async getBlogsByCategory(category: string, limit: number = 4): Promise<IBlog[]> {
     await dbConnect();
-    return Blog.find({ status: "published", contentType: { $ne: "platform-seo" }, category: new RegExp(`^${category}$`, 'i') }, {
+    const safeCategory = escapeRegExp(category);
+    return Blog.find({ status: "published", contentType: { $ne: "platform-seo" }, category: new RegExp(`^${safeCategory}$`, 'i') }, {
       title: 1, slug: 1, excerpt: 1, category: 1, visibility: 1,
       featuredImage: 1, isTrending: 1, analytics: 1, publishAt: 1, createdAt: 1
     })

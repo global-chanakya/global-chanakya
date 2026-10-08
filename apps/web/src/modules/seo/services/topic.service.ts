@@ -1,5 +1,6 @@
 import { Blog, IBlog } from "@/lib/models/Blog";
 import dbConnect from "@/lib/mongoose";
+import { escapeRegExp } from "@/lib/utils/regex";
 
 export class TopicService {
   /**
@@ -42,7 +43,8 @@ export class TopicService {
   static async getTopicHubData(slug: string) {
     await dbConnect();
 
-    const slugRegex = new RegExp(slug.replace(/-/g, '.*'), "i");
+    const safeSlug = escapeRegExp(slug).replace(/-/g, '[\\s-]');
+    const slugRegex = new RegExp(`^${safeSlug}$`, "i");
 
     const blogs = await Blog.find({ tags: { $regex: slugRegex }, status: "published" }).lean<IBlog[]>();
 
