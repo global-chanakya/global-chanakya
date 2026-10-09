@@ -197,6 +197,15 @@ export async function POST(req: NextRequest) {
     const blog = await BlogService.createBlog(newBlogData as any);
 
     if (blog.status === "published") {
+      revalidateTag("blogs");
+      revalidatePath("/", "page");
+      revalidatePath("/blogs", "page");
+      if (blog.category) {
+        revalidatePath(`/categories/${blog.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, "page");
+      }
+      revalidatePath("/sitemap.xml", "layout");
+      revalidatePath("/sitemap-index.xml");
+
       waitUntil(
         PublishPipelineService.execute(blog._id.toString()).catch(e =>
           console.error("[PublishPipeline] POST failed:", e)
@@ -274,6 +283,16 @@ export async function PATCH(req: NextRequest) {
     if (!updated) return NextResponse.json({ error: "Blog not found" }, { status: 404 });
 
     if (updated.status === "published") {
+      revalidateTag("blogs");
+      revalidatePath("/", "page");
+      revalidatePath("/blogs", "page");
+      if (updated.category) {
+        revalidatePath(`/categories/${updated.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`, "page");
+      }
+      revalidatePath(`/blogs/${updated.slug}`);
+      revalidatePath("/sitemap.xml", "layout");
+      revalidatePath("/sitemap-index.xml");
+
       waitUntil(
         PublishPipelineService.execute(id).catch(e =>
           console.error("[PublishPipeline] PATCH failed:", e)
